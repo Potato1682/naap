@@ -1,3 +1,14 @@
+local fn, uv, api, log_levels = vim.fn, vim.loop, vim.api, vim.log.levels
+
+local constants = require("core.constants")
+local config_dir = constants.config_dir
+local data_dir = constants.data_dir
+
+local packer_compiled_file = join_paths(config_dir, "lua", "packer_compiled")
+local packer_snapshots_dir = join_paths(config_dir, "snapshots")
+local packer_default_snapshot = join_paths(config_dir, "snapshots", "default.json")
+local packer = nil
+
 local Pack = {}
 Pack.__index = Pack
 
