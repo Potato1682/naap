@@ -1,0 +1,6 @@
+return {
+  appearance = {
+    colorscheme = "tokyonight"
+  }
+}
+
