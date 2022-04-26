@@ -1,5 +1,25 @@
 local M = {}
 
+function M.colorscheme()
+  local colorscheme = require("onedarkpro")
+
+  colorscheme.setup {
+    plugins = {
+      native_lsp = true,
+      polyglot = false,
+      treesitter = true
+    },
+    options = {
+      bold = false,
+      italic = true,
+      undercurl = true,
+      cursorline = O.editor.cursor_highlight.line
+    }
+  }
+
+  colorscheme.load()
+end
+
 function M.notify()
   require("notify").setup {
     background_colour = function()
