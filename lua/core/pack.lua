@@ -79,15 +79,17 @@ end
 
 -- Load the plugin manager, only use for packer's own command or bootstrapping
 function Pack:load_plugin_manager()
-  self.init_opts = vim.tbl_deep_extend("force", self.init_opts or {}, {
-    compile_path = packer_compiled_file,
-    snapshot_path = packer_snapshots_dir,
-    display = {
-      open_fn = function()
-        return require("packer.util").float { border = "rounded" }
-      end
+  if not self.init_opts then
+    self.init_opts = {
+      compile_path = packer_compiled_file,
+      snapshot_path = packer_snapshots_dir,
+      display = {
+        open_fn = function()
+          return require("packer.util").float { border = "rounded" }
+        end
+      }
     }
-  })
+  end
 
   if not packer then
     vim.cmd("packadd " .. plugin_manager_identifier)
@@ -127,6 +129,14 @@ function Pack:bootstrap_plugin_manager()
     fn.system(command)
 
     self.init_opts = {
+      compile_path = packer_compiled_file,
+      snapshot_path = packer_snapshots_dir,
+      display = {
+        open_fn = function()
+          return require("packer.util").float { border = "rounded" }
+        end
+      },
+      -- Add this property
       snapshot = packer_default_snapshot
     }
 
@@ -148,7 +158,7 @@ function Pack:load_snapshot(snapshot_file)
   packer.rollback(snapshot_file, unpack(self.plugins))
 end
 
-local pack = setmetatable(Pack, {
+local pack = setmetatable({}, {
   __index = function(_, key)
     Pack:load_plugin_manager()
 
@@ -178,6 +188,10 @@ pack.disable_builtin_plugins = function()
   vim.g.loaded_netrwPlugin = 1
   vim.g.loaded_netrwSettings = 1
   vim.g.loaded_netrwFileHandlers = 1
+end
+
+pack.bootstrap_plugin_manager = function()
+  return Pack:bootstrap_plugin_manager()
 end
 
 pack.setup = function()
@@ -279,3 +293,4 @@ pack.setup = function()
 end
 
 return pack
+

@@ -67,7 +67,7 @@ local setup = function()
 
   pack.setup()
 
-  if pack:bootstrap_plugin_manager() == "installed" then
+  if pack.bootstrap_plugin_manager() == "installed" then
     require("core.options")
   end
 end
