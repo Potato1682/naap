@@ -46,6 +46,12 @@ local prepare_needed_dirs = function()
 end
 
 local setup = function()
+  local ok, notify = pcall(require, "notify")
+
+  if ok then
+    vim.notify = notify
+  end
+
   require("core.helper")
 
   local pack = require("core.pack")
@@ -55,10 +61,11 @@ local setup = function()
 
   pcall(require, "impatient")
 
+  require("core.options")
+
   pack.setup()
 
-  if pack:ensure_plugin_manager() == "installed" then
-    require("core.options")
+  if pack:bootstrap_plugin_manager() == "installed" then
   end
 end
 
