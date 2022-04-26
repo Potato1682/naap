@@ -63,6 +63,8 @@ local setup = function()
 
   require("core.options-before-pack")
 
+  require("user-config.helper")
+
   pack.setup()
 
   if pack:bootstrap_plugin_manager() == "installed" then
