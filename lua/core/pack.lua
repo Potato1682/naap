@@ -127,10 +127,12 @@ function Pack:bootstrap_plugin_manager()
     fn.system(command)
 
     self.init_opts = {
-      snapshot = default_snapshot_file
+      snapshot = packer_default_snapshot
     }
 
     self:load_plugin_manager()
+
+    self:load_snapshot()
 
     packer.sync()
 
@@ -138,6 +140,12 @@ function Pack:bootstrap_plugin_manager()
   end
 
   return "installed"
+end
+
+function Pack:load_snapshot(snapshot_file)
+  snapshot_file = snapshot_file or packer_default_snapshot
+
+  packer.rollback(snapshot_file, unpack(self.plugins))
 end
 
 local pack = setmetatable(Pack, {
@@ -191,10 +199,7 @@ pack.setup = function()
     function(args)
       require("core.pack").snapshot(unpack(args.fargs))
     end, {
-      nargs = "+",
-      complete = function()
-        return require("packer.snapshot").completion.create()
-      end
+      nargs = "+"
     }
   )
   api.nvim_create_user_command(
@@ -202,10 +207,7 @@ pack.setup = function()
     function(args)
       require("core.pack").rollback(unpack(args.fargs))
     end, {
-      nargs = "+",
-      complete = function()
-        return require("packer.snapshot").completion.rollback()
-      end
+      nargs = "+"
     }
   )
   api.nvim_create_user_command(
@@ -213,10 +215,7 @@ pack.setup = function()
     function(args)
       require("packer.snapshot").delete(unpack(args.fargs))
     end, {
-      nargs = "+",
-      complete = function()
-        return require("packer.snapshot").completion.snapshot()
-      end
+      nargs = "+"
     }
   )
   api.nvim_create_user_command(
@@ -224,10 +223,7 @@ pack.setup = function()
     function(args)
       require("core.pack").install(unpack(args.fargs))
     end, {
-      nargs = "*",
-      complete = function()
-        return packer.plugin_complete()
-      end
+      nargs = "*"
     }
   )
   api.nvim_create_user_command(
@@ -235,10 +231,7 @@ pack.setup = function()
     function(args)
       require("core.pack").update(unpack(args.fargs))
     end, {
-      nargs = "*",
-      complete = function()
-        return packer.plugin_complete()
-      end
+      nargs = "*"
     }
   )
   api.nvim_create_user_command(
@@ -246,10 +239,7 @@ pack.setup = function()
     function(args)
       require("core.pack").sync(unpack(args.fargs))
     end, {
-      nargs = "*",
-      complete = function()
-        return packer.plugin_complete()
-      end
+      nargs = "*"
     }
   )
   api.nvim_create_user_command(
@@ -283,10 +273,7 @@ pack.setup = function()
     function(args)
       require("core.pack").loader(unpack(args.fargs), args.bang == true)
     end, {
-      nargs = "+",
-      complete = function()
-        return packer.loader_complete()
-      end
+      nargs = "+"
     }
   )
 end
