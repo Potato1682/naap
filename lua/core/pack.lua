@@ -12,6 +12,7 @@ local packer = nil
 local Pack = {}
 Pack.__index = Pack
 
+-- Load all plugin loading model from {config_dir}/lua/packs/*/plugins.lua
 function Pack:load_plugins()
   self.plugins = {}
   self.rocks = {}
@@ -25,6 +26,7 @@ function Pack:load_plugins()
       local name, typ = uv.fs_scandir_next(fd)
 
       if not name then
+        -- typ contains an error message
         if typ then
           vim.notify(
             "Cannot get plugins.\n"
@@ -59,7 +61,7 @@ function Pack:load_plugins()
   local plugin_groups = get_plugin_groups()
 
   for _, plugin_group in ipairs(plugin_groups) do
-    local plugins = reqiore(plugin_group)
+    local plugins = require(plugin_group)
 
     for plugin, conf in pairs(plugins) do
       self.plugins[#self.plugins + 1] = vim.tbl_extend("force", { plugin }, conf)
