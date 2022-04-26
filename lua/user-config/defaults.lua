@@ -22,6 +22,10 @@ return {
     },
     textwidth = 120,
     wrap = true,
+  },
+  keymap = {
+    leader = " ",
+    local_leader = ","
   }
 }
 

@@ -53,6 +53,7 @@ local setup = function()
   end
 
   require("core.helper")
+  require("core.keymap")
 
   local pack = require("core.pack")
 
@@ -75,3 +76,4 @@ end
 return {
   setup = setup
 }
+
