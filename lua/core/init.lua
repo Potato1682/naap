@@ -61,11 +61,12 @@ local setup = function()
 
   pcall(require, "impatient")
 
-  require("core.options")
+  require("core.options-before-pack")
 
   pack.setup()
 
   if pack:bootstrap_plugin_manager() == "installed" then
+    require("core.options")
   end
 end
 

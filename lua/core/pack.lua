@@ -79,7 +79,7 @@ end
 
 -- Load the plugin manager, only use for packer's own command or bootstrapping
 function Pack:load_plugin_manager()
-  self.init_opts = {
+  self.init_opts = vim.tbl_deep_extend("force", self.init_opts or {}, {
     compile_path = packer_compiled_file,
     snapshot_path = packer_snapshots_dir,
     display = {
@@ -87,7 +87,7 @@ function Pack:load_plugin_manager()
         return require("packer.util").float { border = "rounded" }
       end
     }
-  }
+  })
 
   if not packer then
     vim.cmd("packadd " .. plugin_manager_identifier)
@@ -125,6 +125,10 @@ function Pack:bootstrap_plugin_manager()
 
     vim.notify("Bootstrapping plugin manager, please wait...", log_levels.INFO, { title = "Pack (core)" })
     fn.system(command)
+
+    self.init_opts = {
+      snapshot = default_snapshot_file
+    }
 
     self:load_plugin_manager()
 
