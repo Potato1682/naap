@@ -38,5 +38,23 @@ function M.notify()
   }
 end
 
+function M.lualine()
+  local char = require("utf8").char
+
+  require("lualine").setup {
+    options = {
+      component_separators = {
+        left = char(0xe0b9),
+        right = char(0xe0bb)
+      },
+      section_separators = {
+        left = char(0xe0b8),
+        right = char(0xe0ba)
+      },
+      globalstatus = true
+    }
+  }
+end
+
 return M
 

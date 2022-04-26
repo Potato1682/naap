@@ -5,6 +5,7 @@ ui["vimpostor/vim-lumen"] = {
   cond = function()
     return not vim.env.TERMUX_VERSION
   end,
+
   setup = function()
     vim.g.lumen_startup_overwrite = 1
   end
@@ -16,6 +17,17 @@ ui["olimorris/onedarkpro.nvim"] = {
 
 ui["rcarriga/nvim-notify"] = {
   config = conf.notify
+}
+
+ui["nvim-lualine/lualine.nvim"] = {
+  requires = {
+    "kyazdani42/nvim-web-devicons",
+
+    opt = true
+  },
+  event = "UIEnter",
+
+  config = conf.lualine
 }
 
 return ui
