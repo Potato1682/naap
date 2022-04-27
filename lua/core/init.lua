@@ -45,6 +45,9 @@ local prepare_needed_dirs = function()
   uv.fs_mkdir(needed_dir, 448)
 end
 
+local finalize = function()
+end
+
 local setup = function()
   local ok, notify = pcall(require, "notify")
 
@@ -54,6 +57,7 @@ local setup = function()
 
   require("core.helper")
   require("core.keymap")
+  require("core.options")
 
   local pack = require("core.pack")
 
@@ -69,11 +73,12 @@ local setup = function()
   pack.setup()
 
   if pack.bootstrap_plugin_manager() == "installed" then
-    require("core.options")
+    finalize()
   end
 end
 
 return {
-  setup = setup
+  setup = setup,
+  finalize = finalize
 }
 

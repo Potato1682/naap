@@ -142,6 +142,12 @@ function Pack:bootstrap_plugin_manager()
 
     self:load_plugin_manager()
 
+    packer.on_complete = vim.schedule_wrap(function()
+      require("core").finalize()
+
+      vim.cmd("doautocmd User PackerComplete")
+    end)
+
     self:load_snapshot()
 
     packer.sync()
