@@ -26,6 +26,9 @@ return {
   keymap = {
     leader = " ",
     local_leader = ","
+  },
+  terminal = {
+    shell = vim.env.SHELL
   }
 }
 

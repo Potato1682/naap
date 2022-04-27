@@ -141,7 +141,7 @@ vim.opt.sessionoptions = {
   "terminal"
 }
 
-vim.opt.sh = O.shell
+vim.opt.sh = O.terminal.shell
 
 vim.opt.errorbells = false
 
