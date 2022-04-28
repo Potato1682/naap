@@ -1,9 +1,10 @@
 local ui = {}
+local helper = require("packs.helper")
 local conf = require("packs.ui.config")
 
 ui["vimpostor/vim-lumen"] = {
   cond = function()
-    return not vim.env.TERMUX_VERSION
+    return not vim.env.TERMUX_VERSION or helper.in_vscode()
   end,
 
   setup = function()
@@ -12,10 +13,12 @@ ui["vimpostor/vim-lumen"] = {
 }
 
 ui["olimorris/onedarkpro.nvim"] = {
+  cond = helper.in_vscode,
   config = conf.colorscheme
 }
 
 ui["rcarriga/nvim-notify"] = {
+  cond = helper.in_vscode,
   config = conf.notify
 }
 
@@ -25,9 +28,12 @@ ui["nvim-lualine/lualine.nvim"] = {
 
     opt = true
   },
-  event = "UIEnter",
 
-  config = conf.lualine
+  cond = helper.in_vscode,
+
+  config = function()
+    require("configs.lualine")
+  end
 }
 
 return ui

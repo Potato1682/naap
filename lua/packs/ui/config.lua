@@ -9,6 +9,9 @@ function M.colorscheme()
       polyglot = false,
       treesitter = true
     },
+    styles = {
+      comments = "italic"
+    },
     options = {
       bold = false,
       italic = true,
@@ -35,24 +38,6 @@ function M.notify()
 
       return group_bg
     end
-  }
-end
-
-function M.lualine()
-  local char = require("utf8").char
-
-  require("lualine").setup {
-    options = {
-      component_separators = {
-        left = char(0xe0b9),
-        right = char(0xe0bb)
-      },
-      section_separators = {
-        left = char(0xe0b8),
-        right = char(0xe0ba)
-      },
-      globalstatus = true
-    }
   }
 end
 
