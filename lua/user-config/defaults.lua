@@ -20,8 +20,12 @@ return {
       scrolloff = 4,
       sidescrolloff = 16
     },
+    spell_check = true,
     textwidth = 120,
     wrap = true,
+  },
+  lang = {
+    insert_comma_after_final_obj = false
   },
   keymap = {
     leader = " ",

@@ -150,3 +150,5 @@ vim.opt.secure = true
 vim.opt.undodir = join_paths(data_dir, "undos")
 vim.opt.undofile = true
 
+vim.opt.spell = O.editor.spell_check
+
