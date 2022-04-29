@@ -9,6 +9,14 @@ end
 vim.g.mapleader = O.keymap.leader
 vim.g.maplocalleader = O.keymap.local_leader
 
+-- buffer movement, will be overidden by bufferline.nvim
+set("n", "<Tab>", function()
+  vim.cmd("bnext")
+end)
+set("n", "<S-Tab>", function()
+  vim.cmd("bprev")
+end)
+
 -- nohlsearch
 set("n", "<Leader>h", function()
   vim.cmd("let @/=''")

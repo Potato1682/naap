@@ -36,5 +36,19 @@ ui["nvim-lualine/lualine.nvim"] = {
   end
 }
 
+ui["akinsho/bufferline.nvim"] = {
+  requires = {
+    "kyazdani42/nvim-web-devicons",
+
+    opt = true
+  },
+
+  tag = "*",
+
+  cond = helper.in_vscode,
+
+  config = conf.bufferline,
+}
+
 return ui
 
