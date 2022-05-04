@@ -1,7 +1,7 @@
 local M = {}
 
 function M.treesitter()
-  require("nvim-treesitter.configs").setup {
+  local options = {
     ensure_installed = "all",
     highlight = { enable = true },
     yati = { enable = true },
@@ -25,8 +25,20 @@ function M.treesitter()
     },
   }
 
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  --[[
+  local lines = vim.api.nvim_buf_line_count(0)
+
+  if lines > 30000 then
+    options.highlight = false
+    options.yati = false
+    options.rainbow = false
+    options.textsubjects = false
+  ]]
+
+  require("nvim-treesitter.configs").setup(options)
+
+  vim.opt_local.foldmethod = "expr"
+  vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
 end
 
 function M.autotag()

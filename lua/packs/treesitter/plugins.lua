@@ -2,51 +2,93 @@ local treesitter = {}
 local conf = require("packs.treesitter.config")
 
 treesitter["nvim-treesitter/nvim-treesitter"] = {
-  run = ":TSUpdate",
+  opt = true,
 
-  config = conf.treesitter
+  run = function()
+    vim.cmd("packadd nvim-treesitter")
+
+    require("packs.treesitter.config").treesitter()
+  end,
+
+  config = function()
+    require("packs.treesitter.config").treesitter()
+  end
 }
 
-treesitter["yioneko/nvim-yati"] = {}
+treesitter["yioneko/nvim-yati"] = {
+  after = "nvim-treesitter"
+}
 
-treesitter["p00f/nvim-ts-rainbow"] = {}
+treesitter["p00f/nvim-ts-rainbow"] = {
+  after = "nvim-treesitter"
+}
 
 treesitter["windwp/nvim-ts-autotag"] = {
-  config = conf.autotag
+  after = "nvim-treesitter",
+
+  config = function()
+    require("packs.treesitter.config").autotag()
+  end
 }
 
-treesitter["JoosepAlviste/nvim-ts-context-commentstring"] = {}
+treesitter["JoosepAlviste/nvim-ts-context-commentstring"] = {
+  after = "nvim-treesitter"
+}
 
 treesitter["m-demare/hlargs.nvim"] = {
-  config = conf.hlargs
+  after = "nvim-treesitter",
+
+  config = function()
+    require("packs.treesitter.config").hlargs()
+  end
 }
 
 treesitter["lewis6991/spellsitter.nvim"] = {
-  config = conf.spellsitter
+  after = "nvim-treesitter",
+
+  config = function()
+    require("packs.treesitter.config").spellsitter()
+  end
 }
 
 treesitter["SmiteshP/nvim-gps"] = {
-  config = conf.gps
+  after = "nvim-treesitter",
+
+  config = function()
+    require("packs.treesitter.config").gps()
+  end
 }
 
 treesitter["lewis6991/nvim-treesitter-context"] = {
-  config = conf.context
+  after = "nvim-treesitter",
+
+  config = function()
+    require("packs.treesitter.config").context()
+  end
 }
 
 treesitter["AckslD/nvim-trevJ.lua"] = {
   module = "trevj",
 
-  setup = conf.trevj_setup,
-  config = conf.trevj
+  setup = function()
+    require("packs.treesitter.config").trevj_setup()
+  end,
+  config = function()
+    require("packs.treesitter.config").trevj()
+  end
 }
 
 treesitter["David-Kunz/treesitter-unit"] = {
   module = "treesitter-unit",
 
-  setup = conf.unit_setup
+  setup = function()
+    require("packs.treesitter.config").unit_setup()
+  end
 }
 
-treesitter["RRethy/nvim-treesitter-textsubjects"] = {}
+treesitter["RRethy/nvim-treesitter-textsubjects"] = {
+  after = "nvim-treesitter"
+}
 
 return treesitter
 

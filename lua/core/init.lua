@@ -46,6 +46,7 @@ local prepare_needed_dirs = function()
 end
 
 local finalize = function()
+  require("core.lazy")
 end
 
 local setup = function()
