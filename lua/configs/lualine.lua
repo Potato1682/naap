@@ -2,10 +2,7 @@ local char = require("utf8").char
 
 local conditions = {
   check_git_workspace = function()
-    local current_path = vim.fn.expand("%:p:h")
-    local git_dir = vim.fn.finddir(".git", current_path .. ";")
-
-    return git_dir and #git_dir > 0 and #git_dir < #current_path
+    return require("core.git").check_git_workspace()
   end,
   hide_in_width = function()
     return vim.api.nvim_win_get_width(0) / 2 >= 50
