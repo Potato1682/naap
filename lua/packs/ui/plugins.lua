@@ -1,29 +1,46 @@
 local ui = {}
 local helper = require("packs.helper")
-local conf = require("packs.ui.config")
 
 ui["vimpostor/vim-lumen"] = {
-  event = "ColorScheme",
+  after = "onedarkpro.nvim",
 
   cond = function()
-    return not vim.env.TERMUX_VERSION or helper.in_vscode()
+    require("packs.ui.config").lumen_cond()
   end,
 
   setup = function()
-    vim.g.lumen_startup_overwrite = 1
+    require("packs.ui.config").lumen_setup()
   end
 }
 
 ui["olimorris/onedarkpro.nvim"] = {
+  event = "UIEnter",
+
+  run = function()
+    vim.cmd("packadd onedarkpro.nvim")
+    require("packs.ui.config").colorscheme()
+
+    if require("packs.ui.config").lumen_cond() then
+      require("packs.ui.config").lumen_setup()
+      vim.cmd("packadd vim-lumen")
+    end
+  end,
+
   cond = helper.in_vscode,
 
-  config = conf.colorscheme
+  config = function()
+    require("packs.ui.config").colorscheme()
+  end
 }
 
 ui["rcarriga/nvim-notify"] = {
+  event = "UIEnter",
+
   cond = helper.in_vscode,
 
-  config = conf.notify
+  config = function()
+    require("packs.ui.config").notify()
+  end
 }
 
 ui["nvim-lualine/lualine.nvim"] = {
@@ -62,12 +79,14 @@ ui["akinsho/bufferline.nvim"] = {
   run = function()
     vim.cmd("packadd bufferline.nvim")
 
-    conf.bufferline()
+    require("packs.ui.config").bufferline()
   end,
 
   cond = helper.in_vscode,
 
-  config = conf.bufferline,
+  config = function()
+    require("packs.ui.config").bufferline()
+  end,
 }
 
 return ui

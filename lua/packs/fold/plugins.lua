@@ -4,14 +4,26 @@ local conf = require("packs.fold.config")
 fold["jghauser/fold-cycle.nvim"] = {
   module = "fold-cycle",
 
-  setup = conf.cycle_setup,
-  config = conf.cycle
+  setup = function()
+    require("packs.fold.config").cycle_setup()
+  end,
+  config = function()
+    require("packs.fold.config").cycle()
+  end
 }
 
 fold["anuvyklack/pretty-fold.nvim"] = {
-  event = "BufReadPre",
+  requires = {
+    "anuvyklack/nvim-keymap-amend",
 
-  config = conf.pretty
+    module = "keymap-amend"
+  },
+
+  event = "BufReadPost",
+
+  config = function()
+    require("packs.fold.config").pretty()
+  end
 }
 
 return fold

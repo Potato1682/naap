@@ -1,5 +1,13 @@
 local M = {}
 
+function M.lumen_cond()
+  return require("packs.helper").in_vscode()
+end
+
+function M.lumen_setup()
+  vim.g.lumen_startup_overwrite = 1
+end
+
 function M.colorscheme()
   local colorscheme = require("onedarkpro")
 
