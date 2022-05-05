@@ -5,14 +5,12 @@ local data_dir = constants.data_dir
 vim.opt.mouse = "a"
 vim.opt.clipboard = { "unnamedplus" }
 
-vim.opt.shada = "!,'300,<50,@100,s10,h"
+vim.opt.shada = { "!", "'300", "<50", "@100", "s10", "h" }
 
 vim.opt.updatetime = 100
 vim.opt.redrawtime = 1500
 vim.opt.timeoutlen = O.behavior.timeoutlen
 vim.opt.ttimeoutlen = 10
-
-vim.opt.complete = ".,w,b,k,i"
 
 vim.opt.showmode = false
 vim.opt.cmdheight = 1
