@@ -89,5 +89,50 @@ ui["akinsho/bufferline.nvim"] = {
   end,
 }
 
+ui["petertriho/nvim-scrollbar"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost"
+  },
+
+  cond = helper.in_vscode,
+
+  run = function()
+    vim.cmd("packadd nvim-scrollbar")
+
+    require("scrollbar").setup()
+  end,
+  
+  config = function()
+    require("scrollbar").setup()
+  end
+}
+
+ui["lukas-reineke/indent-blankline.nvim"] = {
+  event = {
+    "BufNewFile",
+    "BufRead"
+  },
+
+  cond = helper.in_vscode,
+
+  config = function()
+    require("packs.ui.config").indent_blankline()
+  end
+}
+
+ui["lukas-reineke/virt-column.nvim"] = {
+  event = {
+    "BufNewFile",
+    "BufRead"
+  },
+
+  cond = helper.in_vscode,
+
+  config = function()
+    require("virt-column").setup()
+  end
+}
+
 return ui
 
