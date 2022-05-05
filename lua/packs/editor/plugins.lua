@@ -1,5 +1,9 @@
 local editor = {}
 
+editor["RRethy/vim-illuminate"] = {
+  event = "BufEnter"
+}
+
 editor["kevinhwang91/nvim-hlslens"] = {
   event = "CmdlineEnter",
   module = "hlslens",
@@ -29,4 +33,3 @@ editor["gpanders/editorconfig.nvim"] = {
 }
 
 return editor
-
