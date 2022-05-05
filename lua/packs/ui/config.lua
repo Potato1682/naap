@@ -25,6 +25,20 @@ function M.colorscheme()
       italic = true,
       undercurl = true,
       cursorline = O.editor.cursor_highlight.line
+    },
+    hlgroups = {
+      DiagnosticUnderlineError = {
+        fg = "NONE"
+      },
+      DiagnosticUnderlineWarn = {
+        fg = "NONE"
+      },
+      DiagnosticUnderlineInfo = {
+        fg = "NONE"
+      },
+      DiagnosticUnderlineHint = {
+        fg = "NONE"
+      }
     }
   }
 

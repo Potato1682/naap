@@ -1,2 +1,2 @@
-return {}
+return { "lua-toml" }
 

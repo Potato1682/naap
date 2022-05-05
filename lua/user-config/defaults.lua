@@ -25,7 +25,11 @@ return {
     wrap = true,
   },
   lang = {
-    insert_comma_after_final_obj = false
+    insert_comma_after_final_obj = false,
+    json = {
+      -- SchemaStore.nvim custom schemas
+      custom_schemas = {}
+    }
   },
   keymap = {
     leader = " ",

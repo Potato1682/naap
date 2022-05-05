@@ -55,7 +55,7 @@ local lazy_load = function()
     "txt"
   }
 
-  local syntax_on = not vim.tbl_contains(disable_filetypes, vim.bo.filetype)
+  local syntax_on = not vim.tbl_contains(disable_filetypes, vim.opt_local.filetype:get())
 
   if not syntax_on then
     vim.cmd("syntax manual")

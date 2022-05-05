@@ -124,7 +124,23 @@ local mappings = {
     end,
     "Buffer #9"
   },
-  ["h"] = "nohlsearch"
+  ["h"] = "nohlsearch",
+  ["l"] = {
+    name = "+LSP",
+
+    ["a"] = {
+      "<cmd>CodeActionMenu<cr>",
+      "Code Action"
+    },
+    ["f"] = {
+      "<cmd>Format<cr>",
+      "Format"
+    },
+    ["I"] = {
+      "<cmd>LspInfo<cr>",
+      "Information"
+    }
+  }
 }
 
 local mappings_local = {
@@ -142,4 +158,3 @@ local options_local = {
 
 wk.register(mappings, options)
 wk.register(mappings_local, options_local)
-

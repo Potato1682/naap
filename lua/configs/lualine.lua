@@ -46,7 +46,7 @@ local config = {
     lualine_y = {},
     lualine_z = {},
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = {}
   },
   inactive_sections = {
     lualine_a = {},
@@ -54,8 +54,11 @@ local config = {
     lualine_y = {},
     lualine_z = {},
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = {}
   },
+  extensions = {
+    require("lualine.extensions.quickfix")
+  }
 }
 
   -- Inserts a component in lualine_c at left section
@@ -232,15 +235,15 @@ ins_right {
 
     for _, client in ipairs(vim.lsp.buf_get_clients()) do
       if client.name == "pyright" then
-        if CURRENT_VENV ~= nil then
+        if client.config.settings.python["pythonPath"] ~= nil then
           local venv_name = client.config.settings.python.venv_name or "venv"
 
-          if CURRENT_VENV ~= "venv" then
-            venv_name = CURRENT_VENV
-          end
-
           clients[#clients + 1] = client.name .. "(" .. venv_name .. ")"
+        else
+          clients[#clients + 1] = client.name
         end
+      elseif client.name == "null-ls" then
+        clients[#clients + 1] = "nls"
       else
         clients[#clients + 1] = client.name
       end
