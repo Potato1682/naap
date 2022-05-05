@@ -1,7 +1,11 @@
 local editor = {}
 
 editor["RRethy/vim-illuminate"] = {
-  event = "BufEnter"
+  event = "BufEnter",
+
+  config = function()
+    vim.g.Illuminate_delay = 300
+  end
 }
 
 editor["kevinhwang91/nvim-hlslens"] = {
