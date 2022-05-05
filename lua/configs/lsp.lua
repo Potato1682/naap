@@ -541,7 +541,8 @@ local null_ls = require("null-ls")
 local sources = {
   null_ls.builtins.code_actions.gitsigns,
   null_ls.builtins.code_actions.gitrebase,
-  null_ls.builtins.hover.dictionary
+  null_ls.builtins.hover.dictionary,
+  null_ls.builtins.completion.luasnip
 }
 
 null_ls.setup {
