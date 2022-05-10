@@ -216,14 +216,14 @@ local default_opts = vim.tbl_extend(
   "force",
   util.default_config,
   {
-  -- all lsp servers started automatically and server's autostart value is not checked if the default value is true
-  -- so I set autostart=false in default and set autostart=true in servers should be started automatically before
-  -- setup()
-  -- I don't know how does this logic work...
-  autostart = false,
-  capabilities = capabilities,
-  on_attach = common_on_attach
-}
+    -- all lsp servers started automatically and server's autostart value is not checked if the default value is true
+    -- so I set autostart=false in default and set autostart=true in servers should be started automatically before
+    -- setup()
+    -- I don't know how does this logic work...
+    autostart = false,
+    capabilities = capabilities,
+    on_attach = common_on_attach
+  }
 )
 
 for _, server in ipairs(installer.get_installed_servers()) do
