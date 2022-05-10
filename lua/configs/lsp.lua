@@ -315,6 +315,9 @@ for _, server in ipairs(installer.get_installed_servers()) do
           vim.api.nvim_buf_get_name(0),
           vim.api.nvim_get_current_buf()
         ) == nil,
+        root_dir = function(fname)
+          return util.root_pattern(".git")(fname) or vim.loop.cwd()
+        end,
         init_options = {
           enable = true,
           lint = true,
@@ -352,7 +355,12 @@ for _, server in ipairs(installer.get_installed_servers()) do
 
     update_opts {
       on_new_config = lua_dev.on_new_config,
-      settings = lua_dev.settings
+      settings = lua_dev.settings,
+      on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+
+        common_on_attach(client, bufnr)
+      end
     }
   end
 
