@@ -20,5 +20,4 @@ cmdline["winston0410/range-highlight.nvim"] = {
   end
 }
 
-
 return cmdline
