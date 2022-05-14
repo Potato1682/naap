@@ -102,7 +102,11 @@ function M.cmp()
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm({ select = true })
+      ["<CR>"] = cmp.mapping(function()
+        if not cmp.confirm { select = false } then
+          require("pairs.enter").type()
+        end
+      end)
     },
     sources = {
       -- LSP
@@ -121,6 +125,17 @@ function M.cmp()
       ghost_text = true
     }
   }
+
+  local kind = cmp.lsp.CompletionItemKind
+
+  cmp.event:on("confirm_done", function(event)
+    local item = event.entry:get_completion_item()
+    local parensDisabled = item.data and item.data.funcParensDisabled or false
+
+    if not parensDisabled and (item.kind == kind.Method or item.kind == kind.Function) then
+      require("pairs.bracket").type_left("(")
+    end
+  end)
 
   local path_extension
   local cmd_comparators = {

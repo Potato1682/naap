@@ -1,5 +1,17 @@
 local M = {}
 
+function M.smartpairs()
+  require("pairs"):setup {
+    enter = {
+      enable_mapping = false
+    },
+    autojump_strategy = {
+      unbalanced = "all"
+    },
+    enable_smart_space = true
+  }
+end
+
 function M.hlslens_setup()
   local map = function(lhs, rhs)
     vim.keymap.set("n", lhs, rhs)

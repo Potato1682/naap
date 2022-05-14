@@ -1,5 +1,13 @@
 local editor = {}
 
+editor["ZhiyuanLck/smart-pairs"] = {
+  event = "InsertEnter",
+
+  config = function()
+    require("packs.editor.config").smartpairs()
+  end
+}
+
 editor["RRethy/vim-illuminate"] = {
   event = "BufEnter",
 
