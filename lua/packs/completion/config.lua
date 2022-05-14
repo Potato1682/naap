@@ -81,7 +81,7 @@ function M.cmp()
       { name = "luasnip" },
 
       -- Tabnine
-      { name = "tabnine" },
+      { name = "cmp_tabnine" },
 
       -- DAP
       { name = "dap" }
@@ -162,7 +162,9 @@ end
 function M.tabnine()
   local tabnine = require("cmp_tabnine.config")
 
-  tabnine:setup {}
+  tabnine:setup {
+    show_prediction_strength = true
+  }
 end
 
 function M.cmp_git()
