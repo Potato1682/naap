@@ -150,6 +150,12 @@ local mappings = {
 }
 
 local mappings_local = {
+  ["d"] = {
+     function()
+       require("neogen").generate()
+     end,
+    "Generate document"
+  },
   ["j"] = "Join lines"
 }
 
