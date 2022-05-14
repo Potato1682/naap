@@ -1,5 +1,7 @@
 local installer = require "nvim-lsp-installer"
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("cmp_nvim_lsp").update_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 local common_on_attach = function(client, bufnr)
   local buf_keymap = function(mode, key, action)
@@ -549,8 +551,7 @@ local null_ls = require("null-ls")
 local sources = {
   null_ls.builtins.code_actions.gitsigns,
   null_ls.builtins.code_actions.gitrebase,
-  null_ls.builtins.hover.dictionary,
-  null_ls.builtins.completion.luasnip
+  null_ls.builtins.hover.dictionary
 }
 
 null_ls.setup {

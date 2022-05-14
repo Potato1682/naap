@@ -23,8 +23,8 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
       vim.notify(
         "Filesize is too large, disabling syntax highlighting",
         vim.log.levels.WARN, {
-          title = "Lazy (core)"
-        }
+        title = "Lazy (core)"
+      }
       )
 
       vim.cmd("syntax off")
@@ -72,3 +72,12 @@ vim.api.nvim_create_autocmd("User LoadLazyPlugin", {
   end
 })
 
+-- nvim-cmp
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+  once = true,
+  callback = function()
+    loader("nvim-cmp")
+
+    require("packs.completion.config").cmp()
+  end
+})
