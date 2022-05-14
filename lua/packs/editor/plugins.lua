@@ -80,6 +80,26 @@ editor["kevinhwang91/nvim-fFHighlight"] = {
   end
 }
 
+editor["nacro90/numb.nvim"] = {
+  event = "CmdlineEnter",
+
+  config = function()
+    require("packs.editor.config").numb()
+  end
+}
+
+editor["winston0410/cmd-parser.nvim"] = {
+  event = "CmdlineEnter"
+}
+
+editor["winston0410/range-highlight.nvim"] = {
+  after = "cmd-parser.nvim",
+
+  config = function()
+    require("packs.editor.config").range_highlight()
+  end
+}
+
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",

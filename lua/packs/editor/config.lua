@@ -80,6 +80,16 @@ function M.fF_highlight()
   require("fFHighlight").setup()
 end
 
+function M.numb()
+  require("numb"). setup {
+    show_cursorline = false
+  }
+end
+
+function M.range_highlight()
+  require("range-highlight").setup()
+end
+
 function M.comment()
   require("Comment").setup {
     pre_hook = function(context)
