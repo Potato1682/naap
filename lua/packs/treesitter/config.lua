@@ -17,7 +17,8 @@ function M.treesitter()
       enable = true
     },
     context_commentstring = {
-      enable = true
+      enable = true,
+      enable_autocmd = false
     },
     textsubjects = {
       enable = true,

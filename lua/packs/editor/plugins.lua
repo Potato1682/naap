@@ -52,4 +52,14 @@ editor["gpanders/editorconfig.nvim"] = {
   }
 }
 
+editor["numToStr/Comment.nvim"] = {
+  event = {
+    "CursorMoved"
+  },
+
+  config = function()
+    require("packs.editor.config").comment()
+  end
+}
+
 return editor

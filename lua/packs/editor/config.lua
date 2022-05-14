@@ -64,4 +64,27 @@ function M.houdini()
   }
 end
 
+function M.comment()
+  require("Comment").setup {
+    pre_hook = function(context)
+      local utils = require("Comment.utils")
+
+      local type = context.ctype == utils.ctype.line and "__default" or "__multiline"
+
+      local location = nil
+
+      if context.ctype == utils.ctype.block then
+        location = require("ts_context_commentstring.utils").get_cursor_location()
+      elseif context.cmotion == utils.cmotion.v or context.cmotion == utils.cmotion.V then
+        location = require("ts_context_commentstring.utils").get_visual_start_location()
+      end
+
+      return require("ts_context_commentstring.internal").calculate_commentstring {
+        key = type,
+        location = location
+      }
+    end
+  }
+end
+
 return M
