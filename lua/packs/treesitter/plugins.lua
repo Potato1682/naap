@@ -30,6 +30,9 @@ treesitter["windwp/nvim-ts-autotag"] = {
     require("packs.treesitter.config").autotag()
   end
 }
+treesitter["RRethy/nvim-treesitter-endwise"] = {
+  after = "nvim-treesitter"
+}
 
 treesitter["JoosepAlviste/nvim-ts-context-commentstring"] = {
   after = "nvim-treesitter"

@@ -13,6 +13,9 @@ function M.treesitter()
         "vue"
       }
     },
+    endwise = {
+      enable = true
+    },
     context_commentstring = {
       enable = true
     },
