@@ -116,6 +116,9 @@ function M.cmp()
 
       -- DAP
       { name = "dap" }
+    },
+    experimental = {
+      ghost_text = true
     }
   }
 
