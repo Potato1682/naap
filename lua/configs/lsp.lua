@@ -587,5 +587,8 @@ require("fidget").setup {
     ["null-ls"] = {
       ignore = true
     }
+  },
+  text = {
+    spinner = "dots"
   }
 }
