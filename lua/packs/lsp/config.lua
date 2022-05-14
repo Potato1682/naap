@@ -2,6 +2,35 @@ local M = {}
 
 -- minimal configurations, big configurations should be in lua/configs/lsp.lua
 
+function M.lightbulb_setup()
+  local augroup = vim.api.nvim_create_augroup("lightbulb", {})
+
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = augroup,
+    callback = function()
+      require("nvim-lightbulb").update_lightbulb {
+        ignore = {
+          "null-ls"
+        }
+      }
+    end
+  })
+end
+
+function M.lightbulb()
+  require("nvim-lightbulb").setup {
+    ignore = {
+      "null-ls"
+    },
+    sign = {
+      enabled = false
+    },
+    float = {
+      enabled = true,
+    }
+  }
+end
+
 function M.goto_preview_setup()
   vim.keymap.set("n", "gP", function()
     require("goto-preview").close_all_win()

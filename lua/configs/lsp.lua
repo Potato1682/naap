@@ -582,4 +582,10 @@ null_ls.setup {
 }
 
 require("lsp-format").setup()
-require("fidget").setup()
+require("fidget").setup {
+  sources = {
+    ["null-ls"] = {
+      ignore = true
+    }
+  }
+}

@@ -12,6 +12,18 @@ lsp["jose-elias-alvarez/null-ls.nvim"] = {
   after = "nvim-lspconfig"
 }
 
+lsp["kosayoda/nvim-lightbulb"] = {
+  module = "nvim-lightbulb",
+
+  setup = function()
+    require("packs.lsp.config").lightbulb_setup()
+  end,
+
+  config = function()
+    require("packs.lsp.config").lightbulb()
+  end
+}
+
 lsp["rmagatti/goto-preview"] = {
   module = "goto-preview",
 
