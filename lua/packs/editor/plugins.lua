@@ -37,6 +37,25 @@ editor["max397574/which-key.nvim"] = {
   end
 }
 
+editor["rainbowhxch/accelerated-jk.nvim"] = {
+  keys = { "j", "k" },
+
+  config = function()
+    require("packs.editor.config").accelerated_jk()
+  end
+}
+
+editor["declancm/cinnamon.nvim"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost"
+  },
+
+  config = function()
+    require("packs.editor.config").cinnamon()
+  end
+}
+
 editor["TheBlob42/houdini.nvim"] = {
   event = "InsertEnter",
 

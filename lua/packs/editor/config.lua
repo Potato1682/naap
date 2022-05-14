@@ -38,6 +38,18 @@ function M.hlslens()
   require("scrollbar.handlers.search").setup()
 end
 
+function M.accelerated_jk()
+  vim.keymap.set("n", "j", "<Plug>(accelerated_jk_gj)")
+  vim.keymap.set("n", "k", "<Plug>(accelerated_jk_gk)")
+end
+
+function M.cinnamon()
+  require("cinnamon").setup {
+    extra_keymaps = true,
+    scroll_limit = 100
+  }
+end
+
 function M.houdini()
   require("houdini").setup {
     mappings = {
