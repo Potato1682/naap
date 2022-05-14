@@ -64,6 +64,19 @@ editor["TheBlob42/houdini.nvim"] = {
   end
 }
 
+editor["kevinhwang91/nvim-fFHighlight"] = {
+  keys = {
+    { "n", "f" },
+    { "n", "F" },
+    { "x", "f" },
+    { "x", "F" },
+  },
+
+  config = function()
+    require("packs.editor.config").fF_highlight()
+  end
+}
+
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
