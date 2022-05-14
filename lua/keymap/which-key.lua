@@ -127,7 +127,7 @@ local mappings = {
   ["h"] = "nohlsearch",
   ["q"] = {
     function()
-      require("bufdelete").bufdelete()
+      require("bufdelete").bufdelete(0, false)
     end,
     "Close buffer"
   },
