@@ -26,4 +26,30 @@ function M.hlslens()
   require("scrollbar.handlers.search").setup()
 end
 
+function M.houdini()
+  require("houdini").setup {
+    mappings = {
+      "jk",
+      "AA",
+      "II"
+    },
+    escape_sequences = {
+      i = function(first, second)
+        local seq = first .. second
+
+
+        if seq == "AA" then
+          return "<BS><BS><End>"
+        end
+
+        if seq == "II" then
+          return "<BS><BS><Home>"
+        end
+
+        return "<BS><BS><ESC>"
+      end
+    }
+  }
+end
+
 return M

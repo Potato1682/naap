@@ -29,6 +29,14 @@ editor["max397574/which-key.nvim"] = {
   end
 }
 
+editor["TheBlob42/houdini.nvim"] = {
+  event = "InsertEnter",
+
+  config = function()
+    require("packs.editor.config").houdini()
+  end
+}
+
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
