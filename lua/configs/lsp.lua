@@ -581,6 +581,14 @@ null_ls.setup {
   on_attach = common_on_attach
 }
 
+require("lsp_signature").setup {
+  bind = true,
+  handler_opts = {
+    border = "rounded"
+  },
+  fix_pos = true,
+  hint_enable = false
+}
 require("lsp-format").setup()
 require("fidget").setup {
   sources = {

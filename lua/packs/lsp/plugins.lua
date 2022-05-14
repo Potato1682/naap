@@ -72,6 +72,10 @@ lsp["weilbith/nvim-code-action-menu"] = {
   end
 }
 
+lsp["ray-x/lsp_signature.nvim"] = {
+  module = "lsp_signature"
+}
+
 lsp["lukas-reineke/lsp-format.nvim"] = {
   after = "nvim-lspconfig"
 }
