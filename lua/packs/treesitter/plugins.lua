@@ -78,11 +78,11 @@ treesitter["AckslD/nvim-trevJ.lua"] = {
   end
 }
 
-treesitter["David-Kunz/treesitter-unit"] = {
-  module = "treesitter-unit",
+treesitter["ziontee113/syntax-tree-surfer"] = {
+  module = "syntax-tree-surfer",
 
   setup = function()
-    require("packs.treesitter.config").unit_setup()
+    require("packs.treesitter.config").surf_setup()
   end
 }
 

@@ -124,5 +124,67 @@ function M.refactoring()
   require("refactoring").setup {}
 end
 
+function M.surf_setup()
+  vim.keymap.set("n", "<A-j>", function()
+    require("syntax-tree-surfer").move("n", false)
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("n", "<A-k>", function()
+    require("syntax-tree-surfer").move("n", true)
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("n", "vx", function()
+    require("syntax-tree-surfer").select()
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("n", "vn", function()
+    require("syntax-tree-surfer").select_current_node()
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "<A-j>", function()
+    require("syntax-tree-surfer").surf("next", "visual", true)
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "<A-k>", function()
+    require("syntax-tree-surfer").surf("prev", "visual", true)
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "H", function()
+    require("syntax-tree-surfer").surf("parent", "visual")
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "J", function()
+    require("syntax-tree-surfer").surf("next", "visual")
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "K", function()
+    require("syntax-tree-surfer").surf("prev", "visual")
+  end, {
+    silent = true
+  })
+
+  vim.keymap.set("x", "L", function()
+    require("syntax-tree-surfer").surf("child", "visual")
+  end, {
+    silent = true
+  })
+end
+
 return M
 
