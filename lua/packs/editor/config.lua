@@ -80,6 +80,12 @@ function M.fF_highlight()
   require("fFHighlight").setup()
 end
 
+function M.marks()
+  require("marks").setup {
+    force_write_shada = true
+  }
+end
+
 function M.comment()
   require("Comment").setup {
     pre_hook = function(context)

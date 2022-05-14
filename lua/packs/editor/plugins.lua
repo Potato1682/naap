@@ -80,6 +80,17 @@ editor["kevinhwang91/nvim-fFHighlight"] = {
   end
 }
 
+editor["chentoast/marks.nvim"] = {
+  keys = {
+    { "n", "m" },
+    { "n", "dm" }
+  },
+
+  config = function()
+    require("packs.editor.config").marks()
+  end
+}
+
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
