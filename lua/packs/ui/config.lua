@@ -88,6 +88,10 @@ function M.bufferline()
 
         return ""
       end,
+      close_command = function(bufnr)
+        require("bufdelete").bufdelete(bufnr, true)
+      end,
+      right_mouse_command = "vertical sbuffer %d",
       custom_filter = function(bufnr)
         if vim.bo[bufnr].buftype == "terminal" then
           return false

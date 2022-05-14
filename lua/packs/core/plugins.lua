@@ -16,5 +16,9 @@ core["antoinemadec/FixCursorHold.nvim"] = {
   end
 }
 
+core["famiu/bufdelete.nvim"] = {
+  module = "bufdelete"
+}
+
 return core
 
