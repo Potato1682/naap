@@ -9,6 +9,17 @@ win.default_opts = function(options)
   return opts
 end
 
+local message_severity = {
+  "error",
+  "warn",
+  "info",
+  "info"
+}
+
+vim.lsp.handlers["window/showMessage"] = function(_, method, params)
+  vim.notify(method.message, message_severity[params.type])
+end
+
 local installer = require "nvim-lsp-installer"
 local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
