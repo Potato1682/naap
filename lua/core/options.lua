@@ -128,12 +128,10 @@ vim.opt.autowrite = true
 vim.opt.writeany = true
 
 vim.opt.sessionoptions = {
-  "blank",
   "buffers",
   "curdir",
   "folds",
   "help",
-  "tabpages",
   "winsize",
   "winpos",
   "terminal"

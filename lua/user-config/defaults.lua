@@ -35,6 +35,12 @@ return {
     leader = " ",
     local_leader = ","
   },
+  sessions = {
+    autosave = true,
+    autoload = false,
+    allowed_dirs = {},
+    ignored_dirs = {}
+  },
   terminal = {
     shell = vim.env.SHELL
   }
