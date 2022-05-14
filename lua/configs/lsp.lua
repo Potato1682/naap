@@ -1,3 +1,14 @@
+local win = require("lspconfig.ui.windows")
+local _default_opts = win.default_opts
+
+win.default_opts = function(options)
+  local opts = _default_opts(options)
+
+  opts.border = "rounded"
+
+  return opts
+end
+
 local installer = require "nvim-lsp-installer"
 local capabilities = require("cmp_nvim_lsp").update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
