@@ -38,7 +38,10 @@ editor["max397574/which-key.nvim"] = {
 }
 
 editor["rainbowhxch/accelerated-jk.nvim"] = {
-  keys = { "j", "k" },
+  keys = {
+    { "n", "j" },
+    { "n", "k" }
+  },
 
   config = function()
     require("packs.editor.config").accelerated_jk()
