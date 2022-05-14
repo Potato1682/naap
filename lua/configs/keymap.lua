@@ -125,6 +125,12 @@ local mappings = {
     "Buffer #9"
   },
   ["h"] = "nohlsearch",
+  ["q"] = {
+    function()
+      require("bufdelete").bufdelete()
+    end,
+    "Close buffer"
+  },
   ["l"] = {
     name = "+LSP",
 
