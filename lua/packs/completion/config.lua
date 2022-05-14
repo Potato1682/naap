@@ -1,8 +1,18 @@
 local M = {}
 
+local utf8 = require("utf8").utf8
+
 function M.cmp()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
+  local lspkind = require("lspkind")
+
+  local source_mapping = {
+    buffer = "[Buf]",
+    nvim_lsp = "[LSP]",
+    cmp_tabnine = "[TN]",
+    path = "[Path]"
+  }
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -11,6 +21,27 @@ function M.cmp()
   end
 
   cmp.setup {
+    formatting = {
+      foramt = lspkind.cmp_format {
+        mode = "symbol",
+
+        before = function(entry, vim_item)
+          local menu = source_mapping[entry.source_name]
+
+          if entry.source_name == "cmp_tabnine" then
+            if entry.completion_item.data and entry.completion_item.data.detail then
+              menu = entry.completion_item.data.detail .. " " .. menu
+            end
+
+            vim_item.kind = utf8(0xe315)
+          end
+
+          vim_item.menu = menu
+
+          return vim_item
+        end
+      }
+    },
     enabled = function()
       local context = require("cmp.config.context")
 

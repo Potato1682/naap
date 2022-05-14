@@ -39,6 +39,9 @@ completion["hrsh7th/cmp-nvim-lsp"] = {
 completion["hrsh7th/cmp-nvim-lsp-document-symbol"] = {
   after = "nvim-cmp"
 }
+completion["onsails/lspkind.nvim"] = {
+  after = "nvim-cmp"
+}
 
 -- Snippets
 completion["saadparwaiz1/cmp_luasnip"] = {
