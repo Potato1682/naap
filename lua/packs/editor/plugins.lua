@@ -9,7 +9,7 @@ editor["ZhiyuanLck/smart-pairs"] = {
 }
 
 editor["RRethy/vim-illuminate"] = {
-  event = "BufEnter",
+  event = "CursorHold",
 
   config = function()
     vim.g.Illuminate_delay = 300
@@ -94,7 +94,7 @@ editor["chentoast/marks.nvim"] = {
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
-    "BufRead"
+    "BufReadPost"
   }
 }
 

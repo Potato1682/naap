@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd("User LoadLazyPlugin", {
 })
 
 -- nvim-cmp
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   once = true,
   callback = function()
     loader("nvim-cmp")
