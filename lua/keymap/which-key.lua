@@ -183,28 +183,27 @@ local mappings = {
       "Open REPL"
     }
   },
+  ["l"] = {
+    name = "+LSP",
+
+    ["c"] = {
+      name = "+Calls"
+    },
+
+    ["w"] = {
+      name = "+Workspace"
+    },
+
+    ["s"] = {
+      name = "+Symbol"
+    }
+  },
   ["h"] = "nohlsearch",
   ["q"] = {
     function()
       require("bufdelete").bufdelete(0, false)
     end,
     "Close buffer"
-  },
-  ["l"] = {
-    name = "+LSP",
-
-    ["a"] = {
-      "<cmd>CodeActionMenu<cr>",
-      "Code Action"
-    },
-    ["f"] = {
-      "<cmd>Format<cr>",
-      "Format"
-    },
-    ["I"] = {
-      "<cmd>LspInfo<cr>",
-      "Information"
-    }
   }
 }
 

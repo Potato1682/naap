@@ -1,3 +1,4 @@
+local api = vim.api
 local win = require("lspconfig.ui.windows")
 local _default_opts = win.default_opts
 
@@ -20,235 +21,36 @@ vim.lsp.handlers["window/showMessage"] = function(_, method, params)
   vim.notify(method.message, message_severity[params.type])
 end
 
+vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { silent = true, desc = "Information" })
+
 local installer = require "nvim-lsp-installer"
-local capabilities = require("cmp_nvim_lsp").update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
-
-local common_on_attach = function(client, bufnr)
-  local buf_keymap = function(mode, key, action)
-    vim.keymap.set(mode, key, action, { buffer = true })
-  end
-
-  local command = function(name, command, opts)
-    vim.api.nvim_buf_create_user_command(0, name, command, opts or {})
-  end
-
-  local cap = client.resolved_capabilities
-
-  if cap.declaration then
-    command("LspDeclaration", function()
-      vim.lsp.buf.declaration()
-    end)
-
-    buf_keymap("n", "gC", function()
-      vim.lsp.buf.declaration()
-    end)
-  end
-
-  if cap.goto_definition then
-    command("LspDefinition", function()
-      vim.lsp.buf.definition()
-    end)
-    command("LspPreviewDefinition", function()
-      require("goto-preview").goto_preview_definition()
-    end)
-
-    buf_keymap("n", "gD", function()
-      vim.lsp.buf.definition()
-    end)
-    buf_keymap("n", "gpD", function()
-      require("goto-preview").goto_preview_definition()
-    end)
-  end
-
-  if cap.type_definition then
-    command("LspTypeDefinition", function()
-      vim.lsp.buf.type_definition()
-    end)
-  end
-
-  if cap.implementation then
-    command("LspImplementation", function()
-      vim.lsp.buf.implementation()
-    end)
-    command("LspPreviewImplementation", function()
-      require("goto-preview").goto_preview_implementation()
-    end)
-
-    buf_keymap("n", "gI", function()
-      vim.lsp.buf.implementation()
-    end)
-    buf_keymap("n", "gpI", function()
-      require("goto-preview").goto_preview_implementation()
-    end)
-  end
-
-  if cap.code_action then
-    command("LspCodeAction", function()
-      vim.cmd("CodeActionMenu")
-    end)
-  end
-
-  if cap.rename then
-    -- TODO
-    --[[
-    command(
-      "LspRename",
-      "lua require'lsp.rename'.rename(<f-args>)",
-      { buffer = true, nargs = "?", complete = "custom,v:lua.require'lsp.completion'.rename" }
-    )
-    buf_keymap("n", "gr", "<cmd>LspRename<cr>")
-    ]]
-  end
-
-  if cap.find_references then
-    command("LspReferences", function()
-      vim.lsp.buf.references()
-    end)
-    command("LspPreviewReferences", function()
-      require("goto-preview").goto_preview_references()
-    end)
-
-    buf_keymap("n", "gR", function()
-      vim.lsp.buf.references()
-    end)
-    buf_keymap("n", "gpR", function()
-      require("goto-preview").goto_preview_references()
-    end)
-
-    buf_keymap("n", "<a-n>", function()
-      require("illuminate").next_reference({ wrap = true })
-    end)
-    buf_keymap("n", "<a-p>", function()
-      require("illuminate").next_reference({ wrap = true, reverse = true })
-    end)
-  end
-
-  if cap.document_symbol then
-    command("LspDocumentSymbol", function()
-      vim.lsp.buf.document_symbol()
-    end)
-  end
-
-  if cap.workspace_symbol then
-    command("LspWorkspaceSymbol", function(args)
-      vim.lsp.buf.workspace_symbol(args.args)
-    end)
-  end
-
-  if cap.call_hierarchy then
-    command("LspIncomingCalls", function()
-      vim.lsp.buf.incoming_calls()
-    end)
-
-    command("LspOutgoingCalls", function()
-      vim.lsp.buf.outgoing_calls()
-    end)
-  end
-
-  if cap.code_lens then
-    -- TODO
-    --[[
-    augroup {
-      code_lens = {
-        { "CursorMoved,CursorMovedI", "<buffer>", "lua vim.lsp.codelens.refresh()" },
-      },
-    }
-
-    command("LspCodeLensRun", "lua vim.lsp.codelens.run()", { buffer = true })
-    ]]
-  end
-
-  command("LspWorkspaceFolders", function()
-    print(table.concat(vim.lsp.buf.list_workspace_folders(), "\n"))
-  end)
-
-  if cap.workspace_folder_properties.supported then
-    command("LspAddWorkspaceFolder", function(args)
-      vim.lsp.buf.add_workspace_folder(args.args ~= "" and vim.fn.fnamemodify(args.args, ":p"))
-    end, { nargs = "?", complete = "dir" })
-
-    command("LspRemoveWorkspaceFolder", function(args)
-      vim.lsp.buf.remove_workspace_folder(unpack(args.fargs))
-    end, {
-      nargs = "?",
-      complete = function()
-        return vim.lsp.buf.list_workspace_folders()
-      end
-    })
-  end
-
-  command("LspDiagnosticsNext", function()
-    vim.diagnostic.goto_next()
-  end)
-  command("LspDiagNext", function()
-    vim.diagnostic.goto_next()
-  end)
-
-  command("LspDiagnosticsPrev", function()
-    vim.diagnostic.goto_prev()
-  end)
-  command("LspDiagPrev", function()
-    vim.diagnostic.goto_prev()
-  end)
-
-  command("LspDiagnosticsLine", function()
-    vim.diagnostic.show_line_diagnostics()
-  end)
-  command("LspDiagLine", function()
-    vim.diagnostic.show_line_diagnostics()
-  end)
-
-  buf_keymap("n", "gla", function()
-    vim.diagnostic.show_line_diagnostics()
-  end)
-  buf_keymap("n", "[a", function()
-    vim.diagnostic.goto_prev()
-  end)
-  buf_keymap("n", "]a", function()
-    vim.diagnostic.goto_next()
-  end)
-
-  command("LspLog", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()", {})
-
-  if cap.signature_help then
-    command("LspSignatureHelp", function()
-      vim.lsp.buf.signature_help()
-    end)
-
-    buf_keymap("i", "<C-k>", function()
-      vim.lsp.buf.signature_help()
-    end)
-  end
-
-  require("lsp-format").on_attach(client)
-
-  vim.cmd("cabbrev wq execute 'Format sync' <bar> wq")
-
-  require("inlay-hints").on_attach(client, bufnr)
-
-  require("illuminate").on_attach(client)
-end
+local capabilities = require("configs.lsp.capabilities")
 
 installer.setup {}
 
 local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
+local on_attach = require("configs.lsp.on_attach")
+local is_nodejs_project = require("utils.nodejs")
 
 local default_opts = vim.tbl_extend(
   "force",
-  util.default_config,
-  {
-    -- all lsp servers started automatically and server's autostart value is not checked if the default value is true
-    -- so I set autostart=false in default and set autostart=true in servers should be started automatically before
-    -- setup()
-    -- I don't know how does this logic work...
-    autostart = false,
-    capabilities = capabilities,
-    on_attach = common_on_attach
-  }
-)
+  util.default_config, {
+  -- all lsp servers started automatically and server's autostart value is not checked if the default value is true
+  -- so I set autostart=false in default and set autostart=true in servers should be started automatically before
+  -- setup()
+  -- I don't know how does this logic work...
+  autostart = false,
+  capabilities = capabilities,
+  on_attach = on_attach.common_on_attach
+})
+
+local nodejs_augroup = api.nvim_create_augroup("nodejs", {
+  clear = true
+})
+local denols_augroup = api.nvim_create_augroup("denols", {
+  clear = true
+})
 
 for _, server in ipairs(installer.get_installed_servers()) do
   local opts = default_opts
@@ -311,17 +113,15 @@ for _, server in ipairs(installer.get_installed_servers()) do
 
     local nodejs_cb = function()
       update_opts {
-        autostart = util.root_pattern("package.json", "node_modules")(
-          vim.api.nvim_buf_get_name(0),
-          vim.api.nvim_get_current_buf()
-        ) ~= nil
+        autostart = is_nodejs_project()
       }
 
       lspconfig[name].setup(opts)
     end
 
-    vim.api.nvim_create_autocmd("FileType", {
+    api.nvim_create_autocmd("FileType", {
       pattern = nodejs_ft,
+      group = nodejs_augroup,
       callback = nodejs_cb
     })
 
@@ -335,10 +135,7 @@ for _, server in ipairs(installer.get_installed_servers()) do
   if schedule_skip_autostart(name, "denols") then
     local denols_cb = function()
       update_opts {
-        autostart = util.root_pattern("package.json", "node_modules")(
-          vim.api.nvim_buf_get_name(0),
-          vim.api.nvim_get_current_buf()
-        ) == nil,
+        autostart = not is_nodejs_project(),
         root_dir = function(fname)
           return util.root_pattern(".git")(fname) or vim.loop.cwd()
         end,
@@ -353,17 +150,18 @@ for _, server in ipairs(installer.get_installed_servers()) do
         }
       }
 
-      local ok = vim.loop.fs_stat("./import_map.json")
+      local import_map_path = join_paths(".", "import_map.json")
 
-      if ok then
-        opts.init_options.importMap = "./import_map.json"
+      if vim.loop.fs_stat(import_map_path) then
+        opts.init_options.importMap = import_map_path
       end
 
       lspconfig.denols.setup(opts)
     end
 
-    vim.api.nvim_create_autocmd("FileType", {
+    api.nvim_create_autocmd("FileType", {
       pattern = "typescript",
+      group = denols_augroup,
       callback = denols_cb
     })
 
@@ -380,11 +178,7 @@ for _, server in ipairs(installer.get_installed_servers()) do
     update_opts {
       on_new_config = lua_dev.on_new_config,
       settings = lua_dev.settings,
-      on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-
-        common_on_attach(client, bufnr)
-      end
+      on_attach = on_attach.without_server_formatting
     }
   end
 
@@ -544,7 +338,7 @@ for _, server in ipairs(installer.get_installed_servers()) do
       find_python_bin()
     end
 
-    vim.api.nvim_create_autocmd("FileType", {
+    api.nvim_create_autocmd("FileType", {
       pattern = "python",
       callback = python_cb
     })
@@ -568,18 +362,7 @@ for _, server in ipairs(installer.get_installed_servers()) do
   ::continue::
 end
 
-local null_ls = require("null-ls")
-
-local sources = {
-  null_ls.builtins.code_actions.gitsigns,
-  null_ls.builtins.code_actions.gitrebase,
-  null_ls.builtins.hover.dictionary
-}
-
-null_ls.setup {
-  sources = sources,
-  on_attach = common_on_attach
-}
+require("configs.lsp.null-ls").setup()
 
 require("lsp_signature").setup {
   bind = true,
