@@ -24,6 +24,11 @@ return {
     textwidth = 120,
     wrap = true,
   },
+  debug = {
+    virtual_text = {
+      commented = false
+    }
+  },
   lang = {
     insert_comma_after_final_obj = false,
     json = {

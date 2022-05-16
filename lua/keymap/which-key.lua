@@ -124,6 +124,65 @@ local mappings = {
     end,
     "Buffer #9"
   },
+  ["d"] = {
+    name = "+DAP",
+
+    ["b"] = {
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      "Toggle Breakpoint"
+    },
+    -- TODO B: Telescope breakpoints
+    ["c"] = {
+      function()
+        require("dap").run_to_cursor()
+      end,
+      "Run To Cursor"
+    },
+    ["d"] = {
+      function()
+        require("dap").continue()
+      end,
+      "Continue"
+    },
+    ["e"] = {
+      function()
+        require("dapui").eval()
+      end,
+      "Eval Current Expression"
+    },
+    ["E"] = {
+      function()
+        require("dapui").float_element()
+      end,
+      "Current Elements"
+    },
+    ["i"] = {
+      function()
+        require("dap").step_into()
+      end,
+      "Step Into"
+    },
+    ["o"] = {
+      function()
+        require("dap").step_over()
+      end,
+      "Step Over"
+    },
+    ["O"] = {
+      function()
+        require("dap").step_out()
+      end,
+      "Step Out"
+    },
+    ["r"] = {
+      function()
+        require("dap.repl").open()
+      end,
+      "Open REPL"
+    }
+  },
   ["h"] = "nohlsearch",
   ["q"] = {
     function()
