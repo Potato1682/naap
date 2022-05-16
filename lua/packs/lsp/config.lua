@@ -68,7 +68,14 @@ function M.hover_setup()
   vim.keymap.set("n", "gK", function()
     require("hover").hover_select()
   end, {
-    desc = "hover.nvim (select)"
+    desc = "hover.nvim (select provider)"
+  })
+
+  vim.api.nvim_create_user_command("Hover", function(args)
+    require("hover").hover()
+  end, {
+    nargs = "*",
+    desc = "hover.nvim"
   })
 end
 
