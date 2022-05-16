@@ -1,5 +1,51 @@
 local M = {}
 
+function M.dap_setup()
+  local set = function(lhs, rhs, desc)
+    vim.keymap.set("n", "<leader>d" .. lhs, rhs, {
+      desc = desc
+    })
+  end
+
+  set("b", function()
+    require("dap").toggle_breakpoint()
+  end, "Toggle Breakpoint")
+
+  -- TODO B: Telescope breakpoints
+
+  set("c", function()
+    require("dap").run_to_cursor()
+  end, "Run To Cursor")
+
+  set("d", function()
+    require("dap").continue()
+  end, "Continue")
+
+  set("e", function()
+    require("dapui").eval()
+  end, "Eval Current Expression")
+
+  set("E", function()
+    require("dapui").float_element()
+  end, "Current Elements")
+
+  set("i", function()
+    require("dap").step_into()
+  end, "Step Into")
+
+  set("o", function()
+    require("dap").step_over()
+  end, "Step Over")
+
+  set("O", function()
+    require("dap").step_out()
+  end, "Step Out")
+
+  set("r", function()
+    require("dap.repl").open()
+  end, "Open REPL")
+end
+
 function M.dap()
   local dap = require("dap")
 
@@ -37,7 +83,7 @@ function M.dap()
 
     notif_data.notification.spinner = 1,
 
-    progress.update_spinner("dap", body.progressId)
+        progress.update_spinner("dap", body.progressId)
   end
 
   dap.listeners.before["event_progressUpdate"]["progress-notifications"] = function(session, body)

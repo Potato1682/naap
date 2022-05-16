@@ -3,13 +3,19 @@ local M = {}
 function M.cycle_setup()
   vim.keymap.set("n", "<CR>", function()
     require("fold-cycle").open()
-  end)
+  end, {
+    desc = "Open Folding"
+  })
   vim.keymap.set("n", "<BS>", function()
     require("fold-cycle").close()
-  end)
+  end, {
+    desc = "Close Folding"
+  })
   vim.keymap.set("n", "zC", function()
     require("fold-cycle").close_all()
-  end)
+  end, {
+    desc = "Close All Folding"
+  })
 end
 
 function M.cycle()

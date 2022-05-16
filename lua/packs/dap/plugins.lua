@@ -3,6 +3,10 @@ local dap = {}
 dap["mfussenegger/nvim-dap"] = {
   module = "dap",
 
+  setup = function()
+    require("packs.dap.config").dap_setup()
+  end,
+
   config = function()
     require("packs.dap.config").dap()
   end

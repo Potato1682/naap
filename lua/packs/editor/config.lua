@@ -13,25 +13,39 @@ function M.smartpairs()
 end
 
 function M.hlslens_setup()
-  local map = function(lhs, rhs)
-    vim.keymap.set("n", lhs, rhs)
+  local map = function(lhs, rhs, options)
+    vim.keymap.set("n", lhs, rhs, options or {})
   end
 
-  map("n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>")
-  map("N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>")
+  map("n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>", {
+    silent = true,
+    desc = "Next search hit"
+  })
+  map("N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>", {
+    silent = true,
+    desc = "Previous search hit"
+  })
 
   map("*", function()
     require("hlslens").start()
-  end)
+  end, {
+    desc = "Search"
+  })
   map("#", function()
     require("hlslens").start()
-  end)
+  end, {
+    desc = "Search"
+  })
   map("g*", function()
     require("hlslens").start()
-  end)
+  end, {
+    desc = "Search"
+  })
   map("g#", function()
     require("hlslens").start()
-  end)
+  end, {
+    desc = "Search"
+  })
 end
 
 function M.hlslens()
@@ -39,8 +53,12 @@ function M.hlslens()
 end
 
 function M.accelerated_jk()
-  vim.keymap.set("n", "j", "<Plug>(accelerated_jk_gj)")
-  vim.keymap.set("n", "k", "<Plug>(accelerated_jk_gk)")
+  vim.keymap.set("n", "j", "<Plug>(accelerated_jk_gj)", {
+    desc = "Down"
+  })
+  vim.keymap.set("n", "k", "<Plug>(accelerated_jk_gk)", {
+    desc = "Up"
+  })
 end
 
 function M.cinnamon()

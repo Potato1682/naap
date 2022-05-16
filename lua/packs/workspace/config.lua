@@ -7,13 +7,19 @@ end
 function M.other_setup()
   vim.keymap.set("n", "soo", function()
     require("other-nvim").open()
-  end)
+  end, {
+    desc = "Open Other File"
+  })
   vim.keymap.set("n", "sos", function()
     require("other-nvim").openSplit()
-  end)
+  end, {
+    desc = "Open Other File with Split"
+  })
   vim.keymap.set("n", "sov", function()
     require("other-nvim").openVSplit()
-  end)
+  end, {
+    desc = "Open Other File with VSplit"
+  })
 end
 
 function M.other()

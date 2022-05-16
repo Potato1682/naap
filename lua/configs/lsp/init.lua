@@ -21,7 +21,7 @@ vim.lsp.handlers["window/showMessage"] = function(_, method, params)
   vim.notify(method.message, message_severity[params.type])
 end
 
-vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { silent = true, desc = "Information" })
+vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP Information" })
 
 local installer = require "nvim-lsp-installer"
 local capabilities = require("configs.lsp.capabilities")

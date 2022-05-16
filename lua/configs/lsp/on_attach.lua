@@ -256,6 +256,7 @@ function M.common_on_attach(client, bufnr)
     end, "Format")
   end
 
+  command("IlluminationDisable", "", "'command not found' workaround", { nargs = 0, bang = true })
   require("illuminate").on_attach(client)
 
   require("inlay-hints").on_attach(client, bufnr)
