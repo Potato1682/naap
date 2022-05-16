@@ -94,34 +94,15 @@ end
 function M.trevj_setup()
   vim.keymap.set("n", "<localleader>j", function()
     require("trevj").format_at_cursor()
-  end)
-  -- TODO
-  --[[
-  vim.keymap.set("n", "<localleader>j", function()
-    require("trevj").format_at_cursor()
-  end)
-  ]]
+  end, {
+    desc = "Join Lines"
+  })
 end
 
 function M.trevj()
   require("trevj").setup {
     final_separator = O.lang.insert_comma_after_obj
   }
-end
-
-function M.unit_setup()
-  vim.keymap.set("x", "iu", function()
-    require("treesitter-unit").select()
-  end)
-  vim.keymap.set("x", "au", function()
-    require("treesitter-unit").select(true)
-  end)
-  vim.keymap.set("o", "iu", function()
-    require("treesitter-unit").select()
-  end)
-  vim.keymap.set("o", "au", function()
-    require("treesitter-unit").select(true)
-  end)
 end
 
 function M.refactoring()
@@ -191,4 +172,3 @@ function M.surf_setup()
 end
 
 return M
-
