@@ -39,10 +39,8 @@ local prepare_needed_dirs = function()
       return
     end
 
-    return
+    uv.fs_mkdir(needed_dir, 448)
   end
-
-  uv.fs_mkdir(needed_dir, 448)
 end
 
 local finalize = function()
@@ -82,4 +80,3 @@ return {
   setup = setup,
   finalize = finalize
 }
-
