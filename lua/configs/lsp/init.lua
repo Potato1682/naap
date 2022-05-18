@@ -82,7 +82,10 @@ for _, server in ipairs(installer.get_installed_servers()) do
         schemas = vim.list_extend(
           O.lang.json.custom_schemas,
           require("schemastore").json.schemas()
-        )
+        ),
+        validate = {
+          enable = true
+        }
       }
     }
   end
