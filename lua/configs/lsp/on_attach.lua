@@ -263,18 +263,10 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.without_server_formatting(client, bufnr)
-  local cap
-
-  if vim.fn.has("nvim-0.8.0") then
-    cap = client.server_capabilities
-  else
-    cap = client.resolved_capabilities
-  end
-
-  cap.document_formatting = false
-  cap.document_range_formatting = false
-  cap.documentFormattingProvider = false
-  cap.documentRangeFormattingProvider = false
+  (client.server_capabilities or client.resolved_capabilities).document_formatting = false
+  (client.server_capabilities or client.resolved_capabilities).document_range_formatting = false
+  (client.server_capabilities or client.resolved_capabilities).documentFormattingProvider = false
+  (client.server_capabilities or client.resolved_capabilities).documentRangeFormattingProvider = false
 
   M.common_on_attach(client, bufnr)
 end
