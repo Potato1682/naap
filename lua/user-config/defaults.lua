@@ -29,6 +29,11 @@ return {
       commented = false
     }
   },
+  git = {
+    current_line_blame = true,
+    magit_keybindings = false,
+    word_diff = false
+  },
   lang = {
     insert_comma_after_final_obj = false,
     json = {
@@ -50,4 +55,3 @@ return {
     shell = vim.env.SHELL
   }
 }
-

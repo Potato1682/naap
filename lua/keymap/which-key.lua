@@ -74,7 +74,11 @@ local mappings = {
     name = "+DAP"
   },
   ["g"] = {
-    name = "+Git"
+    name = "+Git",
+
+    ["c"] = {
+      name = "+Conflict"
+    }
   },
   ["l"] = {
     name = "+LSP",

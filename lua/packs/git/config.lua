@@ -12,7 +12,7 @@ function M.gitsigns()
     signcolumn = true,
     numhl = false,
     linehl = false,
-    word_diff = false,
+    word_diff = O.git.word_diff,
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
@@ -96,7 +96,7 @@ function M.gitsigns()
       internal = true
     },
     attach_to_untracked = true,
-    current_line_blame = true,
+    current_line_blame = O.git.current_line_blame,
     current_line_blame_opts = {
       virt_text = true,
       delay = 400
@@ -116,6 +116,61 @@ function M.gitsigns()
       vim.cmd("hi link GitSignsCurrentLineBlame Comment")
     end
   end, 200)
+end
+
+function M.diffview()
+  require("diffview").setup {
+    enhanced_diff_hl = true
+  }
+end
+
+function M.neogit_setup()
+  vim.keymap.set("n", "<leader>gg", function()
+    require("neogit").open()
+  end, {
+    desc = "Open Neogit"
+  })
+end
+
+function M.neogit()
+  require("neogit").setup {
+    use_magit_keybindings = O.git.magit_keybindings,
+    integrations = {
+      diffview = true
+    }
+  }
+end
+
+function M.conflict_setup()
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "GitConflictDetected",
+    callback = function()
+      vim.defer_fn(function()
+        vim.notify("Conflict detected, need to resolve conflicts.", vim.log.levels.WARN, { title = "Git" })
+      end, 50)
+
+      local set = function(lhs, rhs, opts)
+        vim.keymap.set("n", lhs, rhs, vim.tbl_extend("force", opts, { buffer = true }))
+      end
+
+      set("<leader>gco", "<Plug>(git-conflict-ours)", { desc = "Choose Ours" })
+      set("<leader>gcb", "<Plug>(git-conflict-both)", { desc = "Choose Both" })
+      set("<leader>gc0", "<Plug>(git-conflict-none)", { desc = "Choose None" })
+      set("<leader>gct", "<Plug>(git-conflict-theirs)", { desc = "Choose Theirs" })
+      set("<leader>[x", "<Plug>(git-conflict-next-conflict)", { desc = "Next Git Conflict" })
+      set("<leader>]x", "<Plug>(git-conflict-prev-conflict)", { desc = "Previous Git Conflict" })
+    end
+  })
+end
+
+function M.conflict()
+  require("git-conflict").setup {
+    default_mappings = false,
+    highlights = {
+      incoming = "Visual",
+      current = "DiffAdd"
+    }
+  }
 end
 
 return M
