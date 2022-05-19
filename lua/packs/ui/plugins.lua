@@ -34,10 +34,6 @@ ui["olimorris/onedarkpro.nvim"] = {
 }
 
 ui["rcarriga/nvim-notify"] = {
-  event = "UIEnter",
-
-  cond = helper.in_vscode,
-
   config = function()
     require("packs.ui.config").notify()
   end
@@ -102,7 +98,7 @@ ui["petertriho/nvim-scrollbar"] = {
 
     require("scrollbar").setup()
   end,
-  
+
   config = function()
     require("scrollbar").setup()
   end
@@ -135,4 +131,3 @@ ui["lukas-reineke/virt-column.nvim"] = {
 }
 
 return ui
-
