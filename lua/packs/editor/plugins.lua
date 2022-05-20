@@ -33,7 +33,7 @@ editor["max397574/which-key.nvim"] = {
   event = "UIEnter",
 
   config = function()
-    require("keymap.which-key")
+    require("editor.keymap.which-key")
   end
 }
 

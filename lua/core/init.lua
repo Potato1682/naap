@@ -55,7 +55,7 @@ local setup = function()
   end
 
   require("core.helper")
-  require("keymap.before")
+  require("editor.keymap.before")
   require("core.options")
 
   local pack = require("core.pack")
