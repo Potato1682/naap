@@ -48,10 +48,6 @@ function M.hlslens_setup()
   })
 end
 
-function M.hlslens()
-  require("scrollbar.handlers.search").setup()
-end
-
 function M.accelerated_jk()
   vim.keymap.set("n", "j", "<Plug>(accelerated_jk_gj)", {
     desc = "Down"

@@ -97,7 +97,7 @@ ui["akinsho/bufferline.nvim"] = {
   end,
 }
 
-ui["petertriho/nvim-scrollbar"] = {
+ui["lewis6991/satellite.nvim"] = {
   event = {
     "BufNewFile",
     "BufReadPost"
@@ -106,13 +106,13 @@ ui["petertriho/nvim-scrollbar"] = {
   cond = helper.in_vscode,
 
   run = function()
-    vim.cmd("packadd nvim-scrollbar")
+    vim.cmd("packadd satellite.nvim")
 
-    require("scrollbar").setup()
+    require("satellite").setup()
   end,
 
   config = function()
-    require("scrollbar").setup()
+    require("satellite").setup()
   end
 }
 

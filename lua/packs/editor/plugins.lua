@@ -22,11 +22,11 @@ editor["kevinhwang91/nvim-hlslens"] = {
 
   setup = function()
     require("packs.editor.config").hlslens_setup()
-  end,
-
-  config = function()
-    require("packs.editor.config").hlslens()
   end
+
+  -- config = function()
+  --   require("packs.editor.config").hlslens()
+  -- end
 }
 
 editor["max397574/which-key.nvim"] = {
