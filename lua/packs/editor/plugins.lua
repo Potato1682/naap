@@ -108,4 +108,15 @@ editor["numToStr/Comment.nvim"] = {
   end
 }
 
+editor["kevinhwang91/nvim-hclipboard"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost"
+  },
+
+  config = function()
+    require("packs.editor.config").hclipboard()
+  end
+}
+
 return editor

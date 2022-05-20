@@ -127,4 +127,8 @@ function M.comment()
   }
 end
 
+function M.hclipboard()
+  require("hclipboard").start()
+end
+
 return M
