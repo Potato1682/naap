@@ -80,6 +80,18 @@ set("n", "<C-k>", "<C-w>k", {
 set("n", "<C-l>", "<C-w>l", {
   desc = "Right Window"
 })
+set("t", "<C-h>", [[<C-\><C-n><C-w>h]], {
+  desc = "Left Window (in Terminal)"
+})
+set("t", "<C-j>", [[<C-\><C-n><C-w>j]], {
+  desc = "Down Window (in Terminal)"
+})
+set("t", "<C-k>", [[<C-\><C-n><C-w>k]], {
+  desc = "Up Window (in Terminal)"
+})
+set("t", "<C-l>", [[<C-\><C-n><C-w>l]], {
+  desc = "Right Window (in Terminal)"
+})
 
 -- beter indenting
 set("v", "<", "<gv", {
@@ -87,6 +99,11 @@ set("v", "<", "<gv", {
 })
 set("v", ">", ">gv", {
   desc = "Indent Right"
+})
+
+-- better terminal esc
+set("t", "<Esc>", [[<C-\><C-n>]], {
+  desc = "Escape from Terminal"
 })
 
 for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
