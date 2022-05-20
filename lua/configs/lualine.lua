@@ -220,6 +220,10 @@ ins_right {
 -- lsp no any diagnostics
 ins_right {
   function()
+    if #vim.opt_local.buftype:get() ~= 0 then
+      return ""
+    end
+
     return char(0xf633)
   end,
   cond = function()
@@ -231,6 +235,10 @@ ins_right {
 -- lsp servers
 ins_right {
   function()
+    if #vim.opt_local.buftype:get() ~= 0 then
+      return ""
+    end
+
     local clients = {}
 
     for _, client in ipairs(vim.lsp.buf_get_clients()) do
@@ -291,4 +299,3 @@ ins_right {
 }
 
 require("lualine").setup(config)
-
