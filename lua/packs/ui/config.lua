@@ -45,6 +45,27 @@ function M.colorscheme()
   colorscheme.load()
 end
 
+function M.dressing()
+  require("dressing").setup {
+    input = {
+      enabled = true,
+
+      border = "rounded"
+    },
+    select = {
+      enabled = true,
+
+      backend = "nui",
+
+      nui = {
+        border = {
+          style = "rounded"
+        }
+      }
+    }
+  }
+end
+
 function M.notify()
   require("notify").setup {
     background_colour = function()

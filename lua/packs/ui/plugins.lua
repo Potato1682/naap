@@ -1,6 +1,10 @@
 local ui = {}
 local helper = require("packs.helper")
 
+ui["MunifTanjim/nui.nvim"] = {
+  module = "nui"
+}
+
 ui["vimpostor/vim-lumen"] = {
   after = "onedarkpro.nvim",
 
@@ -30,6 +34,14 @@ ui["olimorris/onedarkpro.nvim"] = {
 
   config = function()
     require("packs.ui.config").colorscheme()
+  end
+}
+
+ui["stevearc/dressing.nvim"] = {
+  event = "UIEnter",
+
+  config = function()
+    require("packs.ui.config").dressing()
   end
 }
 
