@@ -127,6 +127,10 @@ function M.comment()
   }
 end
 
+function M.abbreinder()
+  require("abbreinder").setup()
+end
+
 function M.hclipboard()
   require("hclipboard").start()
 end

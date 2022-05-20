@@ -108,6 +108,23 @@ editor["numToStr/Comment.nvim"] = {
   end
 }
 
+editor["0styx0/abbreinder.nvim"] = {
+  requires = {
+    "0styx0/abbremand.nvim",
+
+    module = "abbremand"
+  },
+
+  event = {
+    "InsertEnter",
+    "CmdlineEnter"
+  },
+
+  config = function()
+    require("packs.editor.config").abbreinder()
+  end
+}
+
 editor["kevinhwang91/nvim-hclipboard"] = {
   event = {
     "BufNewFile",
