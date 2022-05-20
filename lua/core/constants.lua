@@ -20,8 +20,12 @@ local cache_dir = vim.fn.stdpath("cache")
 local data_dir = vim.fn.stdpath("data")
 
 local quit_with_q = {
-  buftypes = {},
-  filetypes = { "lspinfo" }
+  buftypes = {
+    "quickfix"
+  },
+  filetypes = {
+    "lspinfo"
+  }
 }
 
 return {

@@ -136,4 +136,8 @@ editor["kevinhwang91/nvim-hclipboard"] = {
   end
 }
 
+editor["kevinhwang91/nvim-bqf"] = {
+  ft = "qf"
+}
+
 return editor
