@@ -121,15 +121,17 @@ for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
 end
 
 for _, buftype in ipairs(constants.window.quit_with_q.buftypes) do
-  vim.api.nvim_create_autocmd("BufType", {
-    pattern = buftype,
+  vim.api.nvim_create_autocmd("BufRead", {
+    pattern = "*",
     callback = function()
-      set("n", "q", function()
-        vim.cmd("q")
-      end, {
-        buffer = true,
-        desc = "Quit"
-      })
+      if vim.opt_local.buftype:get() == buftype then
+        set("n", "q", function()
+          vim.cmd("q")
+        end, {
+          buffer = true,
+          desc = "Quit"
+        })
+      end
     end
   })
 end
