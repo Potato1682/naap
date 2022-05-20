@@ -6,7 +6,7 @@ completion["hrsh7th/nvim-cmp"] = {
 
 -- General
 completion["tzachar/cmp-fuzzy-buffer"] = {
-  requires = {{
+  requires = { {
     "romgrk/fzy-lua-native",
 
     module = "fzy-lua-native",
@@ -16,7 +16,7 @@ completion["tzachar/cmp-fuzzy-buffer"] = {
     "tzachar/fuzzy.nvim",
 
     module = "fuzzy_nvim"
-  }},
+  } },
 
   after = "nvim-cmp"
 }
@@ -91,6 +91,23 @@ completion["petertriho/cmp-git"] = {
 
 -- DAP
 completion["rcarriga/cmp-dap"] = {
+  after = "nvim-cmp"
+}
+
+completion["github/copilot.vim"] = {
+  cmd = "Copilot"
+}
+
+-- Copilot
+completion["zbirenbaum/copilot.lua"] = {
+  module = "copilot",
+
+  config = function()
+    require("packs.completion.config").copilot()
+  end
+}
+
+completion["zbirenbaum/copilot-cmp"] = {
   after = "nvim-cmp"
 }
 

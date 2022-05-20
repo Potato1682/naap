@@ -10,6 +10,7 @@ function M.cmp()
   local source_mapping = {
     buffer = "[Buf]",
     nvim_lsp = "[LSP]",
+    copilot = "[CP]",
     cmp_tabnine = "[TN]",
     path = "[Path]"
   }
@@ -49,9 +50,9 @@ function M.cmp()
         return true
       else
         return not context.in_treesitter_capture("comment")
-          and not context.in_syntax_group("Comment")
-          and (vim.opt_local.buftype:get() ~= "prompt"
-          or require("cmp_dap").is_dap_buffer())
+            and not context.in_syntax_group("Comment")
+            and (vim.opt_local.buftype:get() ~= "prompt"
+                or require("cmp_dap").is_dap_buffer())
       end
     end,
     snippet = {
@@ -109,6 +110,9 @@ function M.cmp()
       end)
     },
     sources = {
+      -- Copilot
+      { name = "copilot" },
+
       -- LSP
       { name = "nvim_lsp" },
 
@@ -209,6 +213,12 @@ end
 
 function M.cmp_git()
   require("cmp_git").setup {}
+end
+
+function M.copilot()
+  vim.schedule(function()
+    require("copilot").setup()
+  end)
 end
 
 return M
