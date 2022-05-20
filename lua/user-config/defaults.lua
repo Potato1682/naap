@@ -6,6 +6,7 @@ return {
     timeoutlen = 350
   },
   editor = {
+    abbreviations = {},
     cursor_highlight = {
       line = true,
       column = false

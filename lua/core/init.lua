@@ -22,8 +22,8 @@ local prepare_needed_dirs = function()
         .. "\n"
         .. err,
         log_levels.ERROR, {
-          title = "core"
-        }
+        title = "core"
+      }
       )
     elseif err == nil and needed_dir_stat.type ~= "directory" then
       vim.notify(
@@ -32,8 +32,8 @@ local prepare_needed_dirs = function()
         .. ": This is a "
         .. needed_dir_stat.type,
         log_levels.ERROR, {
-          title = "core"
-        }
+        title = "core"
+      }
       )
 
       return
@@ -56,6 +56,7 @@ local setup = function()
 
   require("core.helper")
   require("editor.keymap.before")
+  require("editor.abbreviations")
   require("core.options")
 
   local pack = require("core.pack")
