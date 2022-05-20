@@ -19,6 +19,11 @@ local config_dir = vim.fn.stdpath("config")
 local cache_dir = vim.fn.stdpath("cache")
 local data_dir = vim.fn.stdpath("data")
 
+local quit_with_q = {
+  buftypes = {},
+  filetypes = { "lspinfo" }
+}
+
 return {
   os_name = os_name,
   is_windows = is_windows,
@@ -26,6 +31,8 @@ return {
   path_sep = path_sep,
   config_dir = config_dir,
   cache_dir = cache_dir,
-  data_dir = data_dir
+  data_dir = data_dir,
+  window = {
+    quit_with_q = quit_with_q
+  }
 }
-

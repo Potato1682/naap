@@ -1,6 +1,7 @@
 -- Non-plugin-related keymaps
 
 local set = vim.keymap.set
+local constants = require("core.constants")
 
 if O.keymap.leader == " " then
   set("n", "<Space>", "")
@@ -87,3 +88,31 @@ set("v", "<", "<gv", {
 set("v", ">", ">gv", {
   desc = "Indent Right"
 })
+
+for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = filetype,
+    callback = function()
+      set("n", "q", function()
+        vim.cmd("q")
+      end, {
+        buffer = true,
+        desc = "Quit"
+      })
+    end
+  })
+end
+
+for _, buftype in ipairs(constants.window.quit_with_q.buftypes) do
+  vim.api.nvim_create_autocmd("BufType", {
+    pattern = buftype,
+    callback = function()
+      set("n", "q", function()
+        vim.cmd("q")
+      end, {
+        buffer = true,
+        desc = "Quit"
+      })
+    end
+  })
+end
