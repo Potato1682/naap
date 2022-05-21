@@ -61,7 +61,7 @@ local config = {
   }
 }
 
-  -- Inserts a component in lualine_c at left section
+-- Inserts a component in lualine_c at left section
 local ins_left = function(component)
   table.insert(config.sections.lualine_c, component)
 end
@@ -104,6 +104,7 @@ ins_left {
   padding = { left = 2, right = 2 }
 }
 
+-- TODO migrate to nvim-dev-container
 -- devcontainers icon
 ins_left {
   function()

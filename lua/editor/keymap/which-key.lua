@@ -70,6 +70,17 @@ local b_goto = function(bufnr)
 end
 
 local mappings = {
+  ["c"] = {
+    name = "+Containers",
+
+    ["c"] = {
+      name = "+Compose"
+    },
+
+    ["C"] = {
+      name = "+devcontainer.json"
+    }
+  },
   ["d"] = {
     name = "+DAP"
   },
