@@ -39,7 +39,7 @@ function M.setup_servers()
   local lspconfig = require("lspconfig")
   local util = require("lspconfig.util")
   local on_attach = require("configs.lsp.on_attach")
-  local is_nodejs_project = require("utils.nodejs")
+  local is_nodejs_project = require("utils.nodejs").is_nodejs_project
 
   local default_opts = vim.tbl_extend(
     "force",
