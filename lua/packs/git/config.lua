@@ -173,4 +173,121 @@ function M.conflict()
   }
 end
 
+function M.octo()
+  require("octo").setup {
+    github_hostname = O.git.github_hostname,
+    mappings = {
+      issue = {
+        close_issue = "<localleader>ic", -- close issue
+        reopen_issue = "<localleader>io", -- reopen issue
+        list_issues = "<localleader>il", -- list open issues on same repo
+        reload = "<C-r>", -- reload issue
+        open_in_browser = "<C-b>", -- open issue in browser
+        copy_url = "<C-y>", -- copy url to system clipboard
+        add_assignee = "<localleader>aa", -- add assignee
+        remove_assignee = "<localleader>ad", -- remove assignee
+        create_label = "<localleader>lc", -- create label
+        add_label = "<localleader>la", -- add label
+        remove_label = "<localleader>ld", -- remove label
+        goto_issue = "<localleader>gi", -- navigate to a local repo issue
+        add_comment = "<localleader>ca", -- add comment
+        delete_comment = "<localleader>cd", -- delete comment
+        next_comment = "]c", -- go to next comment
+        prev_comment = "[c", -- go to previous comment
+        react_hooray = "<localleader>rp", -- add/remove 🎉 reaction
+        react_heart = "<localleader>rh", -- add/remove ❤️ reaction
+        react_eyes = "<localleader>re", -- add/remove 👀 reaction
+        react_thumbs_up = "<localleader>r+", -- add/remove 👍 reaction
+        react_thumbs_down = "<localleader>r-", -- add/remove 👎 reaction
+        react_rocket = "<localleader>rr", -- add/remove 🚀 reaction
+        react_laugh = "<localleader>rl", -- add/remove 😄 reaction
+        react_confused = "<localleader>rc", -- add/remove 😕 reaction
+      },
+      pull_request = {
+        checkout_pr = "<localleader>po", -- checkout PR
+        merge_pr = "<localleader>pm", -- merge commit PR
+        squash_and_merge_pr = "<localleader>psm", -- squash and merge PR
+        list_commits = "<localleader>pc", -- list PR commits
+        list_changed_files = "<localleader>pf", -- list PR changed files
+        show_pr_diff = "<localleader>pd", -- show PR diff
+        add_reviewer = "<localleader>va", -- add reviewer
+        remove_reviewer = "<localleader>vd", -- remove reviewer request
+        close_issue = "<localleader>ic", -- close PR
+        reopen_issue = "<localleader>io", -- reopen PR
+        list_issues = "<localleader>il", -- list open issues on same repo
+        reload = "<C-r>", -- reload PR
+        open_in_browser = "<C-b>", -- open PR in browser
+        copy_url = "<C-y>", -- copy url to system clipboard
+        add_assignee = "<localleader>aa", -- add assignee
+        remove_assignee = "<localleader>ad", -- remove assignee
+        create_label = "<localleader>lc", -- create label
+        add_label = "<localleader>la", -- add label
+        remove_label = "<localleader>ld", -- remove label
+        goto_issue = "<localleader>gi", -- navigate to a local repo issue
+        add_comment = "<localleader>ca", -- add comment
+        delete_comment = "<localleader>cd", -- delete comment
+        next_comment = "]c", -- go to next comment
+        prev_comment = "[c", -- go to previous comment
+        react_hooray = "<localleader>rp", -- add/remove 🎉 reaction
+        react_heart = "<localleader>rh", -- add/remove ❤️ reaction
+        react_eyes = "<localleader>re", -- add/remove 👀 reaction
+        react_thumbs_up = "<localleader>r+", -- add/remove 👍 reaction
+        react_thumbs_down = "<localleader>r-", -- add/remove 👎 reaction
+        react_rocket = "<localleader>rr", -- add/remove 🚀 reaction
+        react_laugh = "<localleader>rl", -- add/remove 😄 reaction
+        react_confused = "<localleader>rc", -- add/remove 😕 reaction
+      },
+      review_thread = {
+        goto_issue = "<localleader>gi", -- navigate to a local repo issue
+        add_comment = "<localleader>ca", -- add comment
+        add_suggestion = "<localleader>sa", -- add suggestion
+        delete_comment = "<localleader>cd", -- delete comment
+        next_comment = "]c", -- go to next comment
+        prev_comment = "[c", -- go to previous comment
+        select_next_entry = "]q", -- move to previous changed file
+        select_prev_entry = "[q", -- move to next changed file
+        close_review_tab = "<C-c>", -- close review tab
+        react_hooray = "<localleader>rp", -- add/remove 🎉 reaction
+        react_heart = "<localleader>rh", -- add/remove ❤️ reaction
+        react_eyes = "<localleader>re", -- add/remove 👀 reaction
+        react_thumbs_up = "<localleader>r+", -- add/remove 👍 reaction
+        react_thumbs_down = "<localleader>r-", -- add/remove 👎 reaction
+        react_rocket = "<localleader>rr", -- add/remove 🚀 reaction
+        react_laugh = "<localleader>rl", -- add/remove 😄 reaction
+        react_confused = "<localleader>rc", -- add/remove 😕 reaction
+      },
+      submit_win = {
+        approve_review = "<C-a>", -- approve review
+        comment_review = "<C-m>", -- comment review
+        request_changes = "<C-r>", -- request changes review
+        close_review_tab = "<C-c>", -- close review tab
+      },
+      review_diff = {
+        add_review_comment = "<localleader>ca", -- add a new review comment
+        add_review_suggestion = "<localleader>sa", -- add a new review suggestion
+        focus_files = "<leader>e", -- move focus to changed file panel
+        toggle_files = "<leader>b", -- hide/show changed files panel
+        next_thread = "]t", -- move to next thread
+        prev_thread = "[t", -- move to previous thread
+        select_next_entry = "]q", -- move to previous changed file
+        select_prev_entry = "[q", -- move to next changed file
+        close_review_tab = "<C-c>", -- close review tab
+        toggle_viewed = "<leader><space>", -- toggle viewer viewed state
+      },
+      file_panel = {
+        next_entry = "j", -- move to next changed file
+        prev_entry = "k", -- move to previous changed file
+        select_entry = "<cr>", -- show selected changed file diffs
+        refresh_files = "R", -- refresh changed files panel
+        focus_files = "<leader>e", -- move focus to changed file panel
+        toggle_files = "<leader>b", -- hide/show changed files panel
+        select_next_entry = "]q", -- move to previous changed file
+        select_prev_entry = "[q", -- move to next changed file
+        close_review_tab = "<C-c>", -- close review tab
+        toggle_viewed = "<leader><space>", -- toggle viewer viewed state
+      }
+    }
+  }
+end
+
 return M

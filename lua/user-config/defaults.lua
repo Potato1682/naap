@@ -40,6 +40,7 @@ return {
   git = {
     current_line_blame = true,
     magit_keybindings = false,
+    github_hostname = "",
     word_diff = false
   },
   lang = {

@@ -46,4 +46,14 @@ git["akinsho/git-conflict.nvim"] = {
   end
 }
 
+git["pwntester/octo.nvim"] = {
+  disable = vim.fn.executable("gh") == 0,
+
+  cmd = "Octo",
+
+  config = function()
+    require("packs.git.config").octo()
+  end
+}
+
 return git
