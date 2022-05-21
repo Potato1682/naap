@@ -12,7 +12,8 @@ function M.cmp()
     nvim_lsp = "[LSP]",
     copilot = "[CP]",
     cmp_tabnine = "[TN]",
-    path = "[Path]"
+    path = "[Path]",
+    ["vim-dadbod-completion"] = "[DB]"
   }
 
   local has_words_before = function()
@@ -219,6 +220,22 @@ function M.copilot()
   vim.schedule(function()
     require("copilot").setup()
   end)
+end
+
+function M.dadbod()
+  local augroup = vim.api.nvim_create_augroup("dadbod-completion", {})
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = augroup,
+    pattern = "sql,mysql,plsql",
+    callback = function()
+      require("cmp").setup_buffer {
+        sources = { {
+          name = "vim-dadbod-completion"
+        } }
+      }
+    end
+  })
 end
 
 return M

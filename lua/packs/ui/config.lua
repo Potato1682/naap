@@ -115,14 +115,6 @@ function M.bufferline()
       end,
       offsets = {
         {
-          filetype = "NvimTree",
-          text = function()
-            return "Explorer" .. " - " .. vim.loop.cwd()
-          end,
-          highlight = "Function",
-          text_align = "center"
-        },
-        {
           filetype = "DiffviewFiles",
           text = "Diff",
           highlight = "Function",

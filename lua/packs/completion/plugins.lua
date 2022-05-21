@@ -94,11 +94,11 @@ completion["rcarriga/cmp-dap"] = {
   after = "nvim-cmp"
 }
 
+-- Copilot
 completion["github/copilot.vim"] = {
   cmd = "Copilot"
 }
 
--- Copilot
 completion["zbirenbaum/copilot.lua"] = {
   module = "copilot",
 
@@ -109,6 +109,14 @@ completion["zbirenbaum/copilot.lua"] = {
 
 completion["zbirenbaum/copilot-cmp"] = {
   after = "nvim-cmp"
+}
+
+completion["kristijanhusak/vim-dadbod-completion"] = {
+  after = "nvim-cmp",
+
+  config = function()
+    require("packs.completion.config").dadbod()
+  end
 }
 
 return completion

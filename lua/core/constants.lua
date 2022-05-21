@@ -24,6 +24,10 @@ local quit_with_q = {
     "quickfix"
   },
   filetypes = {
+    -- vim-dadbod
+    "dbout",
+
+    -- lsp
     "lspinfo"
   }
 }

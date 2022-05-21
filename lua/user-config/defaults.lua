@@ -25,6 +25,9 @@ return {
     textwidth = 120,
     wrap = true,
   },
+  database = {
+    servers = {}
+  },
   debug = {
     virtual_text = {
       commented = false
