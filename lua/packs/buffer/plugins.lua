@@ -8,6 +8,14 @@ buffer["famiu/bufdelete.nvim"] = {
   end
 }
 
+buffer["b0o/incline.nvim"] = {
+  event = "BufEnter",
+
+  config = function()
+    require("packs.buffer.config").incline()
+  end
+}
+
 buffer["ghillb/cybu.nvim"] = {
   module = "cybu",
 
