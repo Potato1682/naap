@@ -31,4 +31,10 @@ workspace["olimorris/persisted.nvim"] = {
   end
 }
 
+workspace["jedrzejboczar/toggletasks.nvim"] = {
+  config = function()
+    require("packs.workspace.config").toggletasks()
+  end
+}
+
 return workspace

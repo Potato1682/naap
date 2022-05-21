@@ -93,4 +93,30 @@ function M.persisted()
   require("utils.telescope").register_extension("persisted")
 end
 
+function M.toggletasks()
+  require("toggletasks").setup()
+
+  require("toggletasks").auto_spawn({ "VimEnter", "SessionLoadPost" }, "auto")
+
+  require("utils.telescope").register_extension("toggletasks")
+
+  vim.keymap.set("n", "<leader>sts", function()
+    require("telescope").extensions.toggletasks.spawn()
+  end, {
+    desc = "Spawn Task"
+  })
+
+  vim.keymap.set("n", "<leader>stS", function()
+    require("telescope").extensions.toggletasks.select()
+  end, {
+    desc = "Select Running Task"
+  })
+
+  vim.keymap.set("n", "<leader>ste", function()
+    require("telescope").extensions.toggletasks.edit()
+  end, {
+    desc = "Edit Config"
+  })
+end
+
 return M

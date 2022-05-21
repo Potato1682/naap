@@ -107,7 +107,11 @@ local mappings = {
     }
   },
   ["s"] = {
-    name = "+Search"
+    name = "+Search",
+
+    ["t"] = {
+      name = "+Tasks"
+    }
   },
   ["S"] = {
     name = "+Session"
