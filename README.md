@@ -5,6 +5,7 @@
 - [ ] User Config validation
 - [ ] Move `utf8.char` references to icon mappings
 - [ ] More nice UI for nvim-cmp
+- [ ] Util function to omit `<leader>*` keymaps
 
 ## Credits
 
