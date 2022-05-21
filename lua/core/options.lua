@@ -128,14 +128,14 @@ vim.opt.virtualedit = "onemore"
 vim.opt.formatoptions = {
   ["1"] = true,
   M = true,
-  c = true,
+  c = false,
   j = true,
   l = true,
   m = true,
   n = true,
-  o = true,
+  o = false,
   q = true,
-  r = true
+  r = false
 }
 
 vim.opt.matchpairs = {
