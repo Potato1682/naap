@@ -110,9 +110,7 @@ function M.common_on_attach(client, bufnr)
       require("goto-preview").goto_preview_references()
     end, "Preview References")
 
-    buf_keymap("n", "gR", function()
-      vim.lsp.buf.references()
-    end, "References")
+    buf_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", "References")
     buf_keymap("n", "gpR", function()
       require("goto-preview").goto_preview_references()
     end, "Preview References")
@@ -243,6 +241,10 @@ function M.common_on_attach(client, bufnr)
   buf_keymap("n", "[a", function()
     vim.diagnostic.goto_prev()
   end, "Previous Diagnostics")
+
+  buf_keymap("n", "<leader>ld", "<cmd>TroubleToggle<cr>", {
+    desc = "Workspace Diagnostics"
+  })
 
   command("LspLog", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()", "LSP Log")
 

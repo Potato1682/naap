@@ -131,4 +131,17 @@ function M.hclipboard()
   require("hclipboard").start()
 end
 
+function M.trouble()
+  require("trouble").setup {
+    auto_close = true
+  }
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "Trouble",
+    callback = function()
+      vim.opt_local.colorcolumn = ""
+    end
+  })
+end
+
 return M

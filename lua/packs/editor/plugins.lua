@@ -136,6 +136,17 @@ editor["kevinhwang91/nvim-hclipboard"] = {
   end
 }
 
+editor["folke/trouble.nvim"] = {
+  cmd = {
+    "Trouble",
+    "TroubleToggle"
+  },
+
+  config = function()
+    require("packs.editor.config").trouble()
+  end
+}
+
 editor["kevinhwang91/nvim-bqf"] = {
   ft = "qf"
 }
