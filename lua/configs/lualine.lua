@@ -9,6 +9,21 @@ local conditions = {
   end
 }
 
+local refreshable_color = function(fg, bg)
+  return function()
+    local bg
+
+    if vim.g.colors_name == "onedarkpro" then
+      local colors = require("onedarkpro").get_colors()
+
+      fg = fg or colors.fg_gutter
+      bg = bg or colors.bg_statusline
+    end
+
+    return { fg = fg, bg = bg }
+  end
+end
+
 local colors = {
   yellow = "#e5c07b",
   orange = "#e6a370",
@@ -24,25 +39,20 @@ local colors = {
 
 local config = {
   options = {
-    --[[
-    component_separators = {
-      left = char(0xe0b9),
-      right = char(0xe0bb)
-    },
-    ]]
     component_separators = {
       left = "",
       right = ""
     },
     section_separators = {
-      left = char(0xe0b8),
-      right = char(0xe0ba)
+      left = "",
+      right = ""
     },
     globalstatus = true
   },
   sections = {
     lualine_a = {},
     lualine_b = {},
+    lualine_d = {},
     lualine_y = {},
     lualine_z = {},
     lualine_c = {},
@@ -62,6 +72,10 @@ local config = {
 }
 
 -- Inserts a component in lualine_c at left section
+local ins_left_a = function(component)
+  table.insert(config.sections.lualine_a, component)
+end
+
 local ins_left = function(component)
   table.insert(config.sections.lualine_c, component)
 end
@@ -71,7 +85,7 @@ local ins_right = function(component)
   table.insert(config.sections.lualine_x, component)
 end
 
-ins_left {
+ins_left_a {
   "mode",
   fmt = function(mode)
     return mode:sub(1, 1)
@@ -106,58 +120,61 @@ ins_left {
 
 -- TODO migrate to nvim-dev-container
 -- devcontainers icon
-ins_left {
+ins_left_a {
   function()
     return char(0xf636)
   end,
   cond = function()
     return not not vim.g.currentContainer
   end,
-  color = { fg = colors.blue },
+  color = refreshable_color(colors.blue),
   padding = { left = 2 }
 }
 
 -- devcontainers
-ins_left {
+ins_left_a {
   function()
     return vim.g.currentContainer
   end,
   cond = function()
     return not not vim.g.currentContainer
   end,
+  color = refreshable_color(),
   padding = { left = 1, right = 0 }
 }
 
 -- current working directory icon
-ins_left {
+ins_left_a {
   function()
     return char(0xf74a)
   end,
-  color = { fg = colors.blue },
+  color = refreshable_color(colors.blue),
   padding = { left = 2, right = 1 }
 }
 
 -- current working directory
-ins_left {
+ins_left_a {
   function()
     return vim.fn.fnamemodify(vim.loop.cwd(), ":t")
-  end
+  end,
+  color = refreshable_color()
 }
 
 -- git branch icon
-ins_left {
+ins_left_a {
   function()
     return char(0xfb2b)
   end,
-  color = { fg = colors.orange },
+  color = refreshable_color(colors.orange),
   cond = conditions.check_git_workspace,
   padding = { left = 1, right = 0 }
 }
 
 -- git branch
-ins_left {
+ins_left_a {
   "branch",
   icon = "",
+  color = refreshable_color(),
   padding = { left = 0 }
 }
 
