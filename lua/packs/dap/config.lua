@@ -81,9 +81,9 @@ function M.dap()
       hide_from_history = false,
     })
 
-    notif_data.notification.spinner = 1,
+    notif_data.notification.spinner = 1
 
-        progress.update_spinner("dap", body.progressId)
+    progress.update_spinner("dap", body.progressId)
   end
 
   dap.listeners.before["event_progressUpdate"]["progress-notifications"] = function(session, body)
