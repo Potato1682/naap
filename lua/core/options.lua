@@ -120,6 +120,7 @@ vim.opt.viewoptions = { "cursor", "folds", "curdir", "slash", "unix" }
 
 vim.opt.synmaxcol = 2500
 
+-- backup is executed by other plugin
 vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.writebackup = false
