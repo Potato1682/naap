@@ -9,7 +9,6 @@ local plugin_manager_name = "packer"
 local plugin_manager_identifier = "packer.nvim"
 local plugin_manager_path = join_paths(data_dir, "site", "pack", plugin_manager_name, "opt", plugin_manager_identifier)
 
-
 local packer_compiled_file = join_paths(config_dir, "lua", "packer_compiled.lua")
 local packer_snapshots_dir = join_paths(config_dir, "snapshots")
 local packer_default_snapshot = join_paths(config_dir, "snapshots", "default.json")
@@ -271,7 +270,7 @@ pack.setup = function()
   api.nvim_create_user_command(
     "PackerCompile",
     function(args)
-        require("core.pack").compile(args.args)
+      require("core.pack").compile(args.args)
     end, {
       nargs = "*"
     }
@@ -299,4 +298,3 @@ pack.setup = function()
 end
 
 return pack
-
