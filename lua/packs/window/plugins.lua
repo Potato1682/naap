@@ -15,6 +15,18 @@ window["luukvbaal/stabilize.nvim"] = {
   end
 }
 
+window["yochem/autosplit.nvim"] = {
+  cmd = "Split",
+
+  setup = function()
+    require("packs.window.config").split_setup()
+  end,
+
+  config = function()
+    require("packs.window.config").split()
+  end
+}
+
 window["tenxsoydev/size-matters.nvim"] = {
   keys = {
     "<C-+>",
