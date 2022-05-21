@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require("utils.lsp")
+
 function M.common_on_attach(client, bufnr)
   local buf_keymap = function(mode, key, action, desc)
     require("utils.keymap").keymap(mode, key, action, desc, {
@@ -175,7 +177,7 @@ function M.common_on_attach(client, bufnr)
   end
 
   command("LspWorkspaceFolders", function()
-    print(table.concat(vim.lsp.buf.list_workspace_folders(), "\n"))
+    utils.list_workspace_folders()
   end, "Workspace Folders")
 
   if cap.workspace_folder_properties.supported then
@@ -193,7 +195,7 @@ function M.common_on_attach(client, bufnr)
     })
 
     buf_keymap("n", "<leader>lwf", function()
-      print(table.concat(vim.lsp.buf.list_workspace_folders(), "\n"))
+      utils.list_workspace_folders()
     end, "Workspace Folders")
 
     buf_keymap("n", "<leader>lwa", function()
