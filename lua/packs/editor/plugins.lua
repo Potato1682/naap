@@ -162,6 +162,14 @@ editor["folke/todo-comments.nvim"] = {
   end
 }
 
+editor["https://gitlab.com/yorickpeterse/nvim-pqf"] = {
+  ft = "qf",
+
+  config = function()
+    require("packs.editor.config").pqf()
+  end
+}
+
 editor["kevinhwang91/nvim-bqf"] = {
   ft = "qf"
 }

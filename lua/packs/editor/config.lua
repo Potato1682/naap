@@ -154,4 +154,17 @@ function M.todo()
   require("todo-comments").setup()
 end
 
+function M.pqf()
+  local char = require("utf8").char
+
+  require("pqf").setup {
+    signs = {
+      error = char(0xf659),
+      warn = char(0xf529),
+      info = char(0xf7fc),
+      hint = char(0xf835)
+    }
+  }
+end
+
 return M
