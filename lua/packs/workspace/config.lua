@@ -40,12 +40,13 @@ function M.other()
   }
 end
 
-function M.auto_session()
-  require("auto-session").setup {
-    auto_session_enable_last_session = true,
-    auto_session_use_git_branch = true,
-    auto_save_enabled = O.sessions.auto_save,
-    auto_restore_enabled = O.sessions.auto_load
+function M.persisted()
+  require("persisted").setup {
+    autosave = O.sessions.autosave,
+    autoload = O.sessions.autoload,
+    allowed_dirs = O.sessions.allowed_dirs,
+    ignored_dirs = O.sessions.ignored_dirs,
+    use_git_branch = true
   }
 end
 

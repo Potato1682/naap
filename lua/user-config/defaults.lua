@@ -54,8 +54,8 @@ return {
     local_leader = ","
   },
   sessions = {
-    auto_save = true,
-    auto_load = true,
+    autosave = true,
+    autoload = false,
     allowed_dirs = {},
     ignored_dirs = {}
   },
