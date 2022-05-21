@@ -11,6 +11,15 @@ lsp["williamboman/nvim-lsp-installer"] = {
 lsp["jose-elias-alvarez/null-ls.nvim"] = {
   after = "nvim-lspconfig"
 }
+lsp["PlatyPew/format-installer.nvim"] = {
+  module = "format-installer",
+
+  cmd = {
+    "FInstall",
+    "FUninstall",
+    "FList"
+  }
+}
 
 lsp["kosayoda/nvim-lightbulb"] = {
   module = "nvim-lightbulb",
