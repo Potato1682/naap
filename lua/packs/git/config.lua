@@ -63,12 +63,12 @@ function M.gitsigns()
       map("n", "<leader>gp", gs.preview_hunk, {
         desc = "Preview Hunk"
       })
-      map("n", "<leader>gb", function()
+      map("n", "<leader>gB", function()
         gs.blame_line { full = true }
       end, {
         desc = "Blame Line"
       })
-      map("n", "<leader>gb", gs.toggle_current_line_blame, {
+      map("n", "<leader>gT", gs.toggle_current_line_blame, {
         desc = "Toggle Current-line Blame"
       })
       map("n", "<leader>gd", gs.diffthis, {

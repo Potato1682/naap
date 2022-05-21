@@ -48,14 +48,14 @@ function M.common_on_attach(client, bufnr)
 
   if cap.goto_definition or cap.definitionProvider then
     command("LspDefinition", function()
-      vim.lsp.buf.definition()
+      require("telescope.builtin").lsp_definitions()
     end, "Defenition")
     command("LspPreviewDefinition", function()
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
 
     buf_keymap("n", "gD", function()
-      vim.lsp.buf.definition()
+      require("telescope.builtin").lsp_definitions()
     end, "Definition")
     buf_keymap("n", "gpD", function()
       require("goto-preview").goto_preview_definition()
@@ -74,24 +74,24 @@ function M.common_on_attach(client, bufnr)
 
   if cap.type_definition or cap.typeDefinitionProvider then
     command("LspTypeDefinition", function()
-      vim.lsp.buf.type_definition()
+      require("telescope.builtin").lsp_type_definitions()
     end, "Type Definition")
 
     buf_keymap("n", "go", function()
-      vim.lsp.buf.type_definition()
+      require("telescope.builtin").lsp_type_definitions()
     end, "Type Definition")
   end
 
   if cap.implementation or cap.implementationProvider then
     command("LspImplementation", function()
-      vim.lsp.buf.implementation()
+      require("telescope.builtin").lsp_implementations()
     end, "Implementation")
     command("LspPreviewImplementation", function()
       require("goto-preview").goto_preview_implementation()
     end, "Preview Implementation")
 
     buf_keymap("n", "gI", function()
-      vim.lsp.buf.implementation()
+      require("telescope.builtin").lsp_implementations()
     end, "Implementation")
     buf_keymap("n", "gpI", function()
       require("goto-preview").goto_preview_implementation()
@@ -100,13 +100,15 @@ function M.common_on_attach(client, bufnr)
 
   if cap.find_references or cap.referencesProvider then
     command("LspReferences", function()
-      vim.lsp.buf.references()
+      require("telescope.builtin").lsp_references()
     end, "References")
     command("LspPreviewReferences", function()
       require("goto-preview").goto_preview_references()
     end, "Preview References")
 
-    buf_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", "References")
+    buf_keymap("n", "gR", function()
+      require("telescope.builtin").lsp_references()
+    end, "References")
     buf_keymap("n", "gpR", function()
       require("goto-preview").goto_preview_references()
     end, "Preview References")
@@ -121,24 +123,36 @@ function M.common_on_attach(client, bufnr)
 
   if cap.document_symbol or cap.documentSymbolProvider then
     command("LspDocumentSymbol", function()
-      vim.lsp.buf.document_symbol()
+      require("telescope.builtin").lsp_document_symbols()
     end, "Document Symbol")
 
     buf_keymap("n", "<leader>lsd", function()
-      vim.lsp.buf.document_symbol()
+      require("telescope.builtin").lsp_document_symbols()
     end, "Document Symbol")
   end
 
   if cap.workspace_symbol or cap.workspaceSymbolProvider then
     command("LspWorkspaceSymbol", function(args)
-      vim.lsp.buf.workspace_symbol(args.args)
+      if args.args == "" then
+        require("telescope.builtin").lsp_workspace_symbols()
+      else
+        vim.lsp.buf.workspace_symbol(args.args)
+      end
     end, "Workspace Symbol", {
       nargs = "*"
     })
 
+    command("LspAllWorkspaceSymbol", function()
+      require("telescope.builtin").lsp_dynamic_workspace_symbols()
+    end, "All Workspace Symbol")
+
     buf_keymap("n", "<leader>lsw", function()
-      vim.lsp.buf.workspace_symbol()
+      require("telescope.builtin").lsp_workspace_symbols()
     end, "Workspace Symbol")
+
+    buf_keymap("n", "<leader>lsW", function()
+      require("telescope.builtin").lsp_dynamic_workspace_symbols()
+    end, "All Workspace Symbol")
   end
 
   if cap.call_hierarchy or cap.callHierarchyProvider then

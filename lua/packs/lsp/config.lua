@@ -45,6 +45,8 @@ function M.goto_preview()
       })
     end
   }
+
+  require("utils.telescope").register_extension("gotopreview")
 end
 
 function M.hover_setup()

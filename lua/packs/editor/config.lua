@@ -145,13 +145,15 @@ function M.trouble()
 end
 
 function M.todo_setup()
-  vim.keymap.set("n", "<leader>t", "<cmd>TodoTrouble<cr>", {
+  vim.keymap.set("n", "<leader>t", "<cmd>TodoTelescope<cr>", {
     desc = "Todos"
   })
 end
 
 function M.todo()
   require("todo-comments").setup()
+
+  require("utils.telescope").register_extension("todo-comments")
 end
 
 function M.pqf()

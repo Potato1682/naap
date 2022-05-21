@@ -106,6 +106,9 @@ local mappings = {
       name = "+Symbol"
     }
   },
+  ["s"] = {
+    name = "+Search"
+  },
   ["S"] = {
     name = "+Session"
   }

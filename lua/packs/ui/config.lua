@@ -82,6 +82,8 @@ function M.notify()
       return group_bg
     end
   }
+
+  require("utils.telescope").register_extension("notify")
 end
 
 function M.bufferline()
