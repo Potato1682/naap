@@ -41,6 +41,7 @@ function M.incline()
     },
     window = {
       margin = {
+        horizontal = 3,
         vertical = 0
       },
       winhighlight = {
