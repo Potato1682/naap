@@ -3,9 +3,18 @@ local constants = require("core.constants")
 local data_dir = constants.data_dir
 
 vim.opt.mouse = "a"
-vim.opt.clipboard = { "unnamedplus" }
+vim.opt.clipboard = {
+  "unnamedplus"
+}
 
-vim.opt.shada = { "!", "'300", "<50", "@100", "s10", "h" }
+vim.opt.shada = {
+  "!",
+  "'300",
+  "<50",
+  "@100",
+  "s10",
+  "h"
+}
 
 vim.opt.updatetime = 100
 vim.opt.redrawtime = 1500
@@ -76,7 +85,24 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = -1
 
-vim.opt.shortmess = vim.opt.shortmess + "mcSW"
+vim.opt.shortmess = {
+  F = true,
+  O = true,
+  S = true,
+  T = true,
+  W = true,
+  c = true,
+  f = true,
+  i = true,
+  l = true,
+  m = true,
+  n = true,
+  o = true,
+  s = true,
+  t = true,
+  x = true
+}
+
 vim.opt.terse = true
 
 vim.opt.pumheight = 10
@@ -99,9 +125,28 @@ vim.opt.cursorcolumn = O.editor.cursor_highlight.column
 vim.opt.concealcursor = "nc"
 vim.opt.signcolumn = "yes:3"
 vim.opt.virtualedit = "onemore"
-vim.opt.formatoptions = vim.opt.formatoptions + "1mMn"
-vim.opt.matchpairs = vim.opt.matchpairs
-    + "「:」,（:）,【:】,『:』,［:］,｛:｝,《:》,〈:〉,‘:’,“:”"
+vim.opt.formatoptions = {
+  ["1"] = true,
+  M = true,
+  c = true,
+  j = true,
+  l = true,
+  m = true,
+  n = true,
+  o = true,
+  q = true,
+  r = true
+}
+
+vim.opt.matchpairs = {
+  "(:)", "{:}",
+  "[:]", "「:」",
+  "（:）", "【:】",
+  "『:』", "［:］",
+  "｛:｝", "《:》",
+  "〈:〉", "‘:’",
+  "“:”"
+}
 
 vim.opt.foldlevelstart = O.editor.folding.starting_level
 
@@ -109,14 +154,19 @@ vim.opt.jumpoptions = "stack"
 
 vim.opt.list = O.editor.listchars
 vim.opt.listchars = {
-  trail = "•",
   eol = "¬",
   precedes = "<",
   extends = ">",
-  nbsp = "•",
+  nbsp = "•"
 }
 
-vim.opt.viewoptions = { "cursor", "folds", "curdir", "slash", "unix" }
+vim.opt.viewoptions = {
+  "cursor",
+  "folds",
+  "curdir",
+  "slash",
+  "unix"
+}
 
 vim.opt.synmaxcol = 2500
 
