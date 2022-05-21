@@ -25,9 +25,9 @@ workspace["rgroli/other.nvim"] = {
   end
 }
 
-workspace["olimorris/persisted.nvim"] = {
+workspace["rmagatti/auto-session"] = {
   config = function()
-    require("packs.workspace.config").persisted()
+    require("packs.workspace.config").auto_session()
   end
 }
 
