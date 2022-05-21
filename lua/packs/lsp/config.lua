@@ -39,7 +39,11 @@ end
 
 function M.goto_preview()
   require("goto-preview").setup {
-    default_mappings = true
+    post_open_hook = function()
+      vim.keymap.set("n", "q", "<cmd>q!<cr>", {
+        buffer = true
+      })
+    end
   }
 end
 
