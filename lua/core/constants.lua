@@ -28,7 +28,10 @@ local quit_with_q = {
     "dbout",
 
     -- lsp
-    "lspinfo"
+    "lspinfo",
+
+    -- vim-startuptime
+    "startuptime"
   }
 }
 
