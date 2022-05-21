@@ -2,6 +2,7 @@ local api = vim.api
 local win = require("lspconfig.ui.windows")
 local _default_opts = win.default_opts
 
+-- change lsp popup window border
 win.default_opts = function(options)
   local opts = _default_opts(options)
 
@@ -10,6 +11,7 @@ win.default_opts = function(options)
   return opts
 end
 
+-- use nvim-notify to show lsp server messages
 local message_severity = {
   "error",
   "warn",

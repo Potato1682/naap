@@ -2,18 +2,12 @@ local M = {}
 
 function M.common_on_attach(client, bufnr)
   local buf_keymap = function(mode, key, action, desc)
-    vim.keymap.set(mode, key, action, {
-      buffer = true,
-      desc = desc
+    require("utils.keymap").keymap(mode, key, action, desc, {
+      buffer = true
     })
   end
 
-  local command = function(name, command, desc, options)
-    desc = desc or ""
-    options = vim.tbl_deep_extend("force", options or {}, { desc = desc })
-
-    vim.api.nvim_buf_create_user_command(0, name, command, options)
-  end
+  local command = require("utils.command").current_buf_command
 
   local cap
 
@@ -210,41 +204,6 @@ function M.common_on_attach(client, bufnr)
       vim.lsp.buf.remove_workspace_folder()
     end, "Remove Workspace Folder")
   end
-
-  command("LspDiagnosticsNext", function()
-    vim.diagnostic.goto_next()
-  end, "Next Diagnostics")
-  command("LspDiagNext", function()
-    vim.diagnostic.goto_next()
-  end, "Next Diagnostics")
-
-  command("LspDiagnosticsPrev", function()
-    vim.diagnostic.goto_prev()
-  end, "Previous Diagnostics")
-  command("LspDiagPrev", function()
-    vim.diagnostic.goto_prev()
-  end, "Previous Diagnostics")
-
-  command("LspDiagnosticsLine", function()
-    vim.diagnostic.show_line_diagnostics()
-  end, "Show Line Diagnostics")
-  command("LspDiagLine", function()
-    vim.diagnostic.show_line_diagnostics()
-  end, "Show Line Diagnostics")
-
-  buf_keymap("n", "gla", function()
-    vim.diagnostic.show_line_diagnostics()
-  end, "Show Line Diagnostics")
-  buf_keymap("n", "]a", function()
-    vim.diagnostic.goto_next()
-  end, "Next Diagnostics")
-  buf_keymap("n", "[a", function()
-    vim.diagnostic.goto_prev()
-  end, "Previous Diagnostics")
-
-  buf_keymap("n", "<leader>ld", "<cmd>TroubleToggle<cr>", {
-    desc = "Workspace Diagnostics"
-  })
 
   command("LspLog", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()", "LSP Log")
 

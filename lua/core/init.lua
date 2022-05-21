@@ -59,6 +59,8 @@ local setup = function()
   require("editor.abbreviations")
   require("core.options")
 
+  require("configs.diagnostic")
+
   local pack = require("core.pack")
 
   prepare_needed_dirs()
