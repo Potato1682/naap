@@ -13,12 +13,6 @@ lsp["jose-elias-alvarez/null-ls.nvim"] = {
 }
 lsp["PlatyPew/format-installer.nvim"] = {
   module = "format-installer",
-
-  cmd = {
-    "FInstall",
-    "FUninstall",
-    "FList"
-  }
 }
 
 lsp["kosayoda/nvim-lightbulb"] = {
