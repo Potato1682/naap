@@ -7,11 +7,29 @@ function M.dap_setup()
     })
   end
 
-  set("b", function()
+  set("bb", function()
     require("dap").toggle_breakpoint()
   end, "Toggle Breakpoint")
 
-  -- TODO B: Telescope breakpoints
+  set("bc", function()
+    vim.ui.input("Breakpoint condition", function(input)
+      if not input then
+        return
+      end
+
+      require("dap").set_breakpoint(input)
+    end)
+  end, "Conditional Breakpoint")
+
+  set("bl", function()
+    vim.ui.input("Log point message", function(input)
+      if not input then
+        return
+      end
+
+      require("dap").set_breakpoint(nil, nil, input)
+    end)
+  end, "Log Breakpoint")
 
   set("c", function()
     require("dap").run_to_cursor()
@@ -47,7 +65,36 @@ function M.dap_setup()
 end
 
 function M.dap()
+  local char = require("utf8").char
   local dap = require("dap")
+
+  vim.fn.sign_define("DapBreakpoint", {
+    text = char(0xf62e) .. " ",
+    texthl = "Error",
+    linehl = "",
+    numhl = ""
+  })
+
+  vim.fn.sign_define("DapBreakpointCondition", {
+    text = char(0xf62e) .. " ",
+    texthl = "WarningMsg",
+    linehl = "",
+    numhl = ""
+  })
+
+  vim.fn.sign_define("DapLogPoint", {
+    text = char(0xf62e) .. " ",
+    texthl = "DiagnosticSignInfo",
+    linehl = "",
+    numhl = ""
+  })
+
+  vim.fn.sign_define("DapStopped", {
+    text = char(0x2588) .. char(0xe0b0),
+    texthl = "WarningMsg",
+    linehl = "",
+    numhl = ""
+  })
 
   dap.listeners.after.event_initialized["dapui_config"] = function()
     require("dapui").open()
@@ -58,13 +105,6 @@ function M.dap()
   dap.listeners.before.event_exited["dapui_config"] = function()
     require("dapui").close()
   end
-
-  vim.fn.sign_define("DapBreakpoint", {
-    tect = "🛑",
-    texthl = "",
-    linehl = "",
-    numhl = ""
-  })
 
   require("dap.ext.vscode").load_launchjs()
 
