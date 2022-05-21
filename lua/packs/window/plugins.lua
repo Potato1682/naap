@@ -15,4 +15,15 @@ window["luukvbaal/stabilize.nvim"] = {
   end
 }
 
+window["tenxsoydev/size-matters.nvim"] = {
+  keys = {
+    "<C-+>",
+    "<C-S-+>",
+    "<C-->",
+    "<C-ScrollWheelUp>",
+    "<C-ScrollWheelDown>",
+    "<A-C-=>"
+  }
+}
+
 return window

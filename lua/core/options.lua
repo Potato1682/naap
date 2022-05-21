@@ -101,7 +101,7 @@ vim.opt.signcolumn = "yes:3"
 vim.opt.virtualedit = "onemore"
 vim.opt.formatoptions = vim.opt.formatoptions + "1mMn"
 vim.opt.matchpairs = vim.opt.matchpairs
-  + "「:」,（:）,【:】,『:』,［:］,｛:｝,《:》,〈:〉,‘:’,“:”"
+    + "「:」,（:）,【:】,『:』,［:］,｛:｝,《:》,〈:〉,‘:’,“:”"
 
 vim.opt.foldlevelstart = O.editor.folding.starting_level
 
@@ -149,3 +149,4 @@ vim.opt.undofile = true
 
 vim.opt.spell = O.editor.spell_check
 
+vim.opt.guifont = string.format("%s %d", O.editor.gui.font_family, O.editor.gui.font_size)

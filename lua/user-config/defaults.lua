@@ -14,6 +14,10 @@ return {
     folding = {
       starting_level = 4
     },
+    gui = {
+      font_family = "Monospace",
+      font_size = 13
+    },
     listchars = false,
     number = true,
     relative_number = true,
