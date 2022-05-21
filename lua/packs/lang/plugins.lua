@@ -6,7 +6,7 @@ lang["b0o/SchemaStore.nvim"] = {
 }
 
 -- Lua
-lang["folke/lua-dev.nvim"] = {
+lang["max397574/lua-dev.nvim"] = {
   module = "lua-dev"
 }
 
@@ -16,4 +16,3 @@ lang["HallerPatrick/py_lsp.nvim"] = {
 }
 
 return lang
-
