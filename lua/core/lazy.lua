@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
       vim.cmd("syntax off")
     end
 
-    if require("core.git").check_git_workspace() then
+    if require("utils.git").check_git_workspace() then
       loader("gitsigns.nvim")
     end
 

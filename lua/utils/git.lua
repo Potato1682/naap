@@ -8,4 +8,3 @@ function M.check_git_workspace()
 end
 
 return M
-

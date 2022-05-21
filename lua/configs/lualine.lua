@@ -2,7 +2,7 @@ local char = require("utf8").char
 
 local conditions = {
   check_git_workspace = function()
-    return require("core.git").check_git_workspace()
+    return require("utils.git").check_git_workspace()
   end,
   hide_in_width = function()
     return vim.api.nvim_win_get_width(0) / 2 >= 50
