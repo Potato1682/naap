@@ -91,6 +91,17 @@ editor["chentoast/marks.nvim"] = {
   end
 }
 
+editor["NvChad/nvim-colorizer.lua"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost"
+  },
+
+  config = function()
+    require("packs.editor.config").colorizer()
+  end
+}
+
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",

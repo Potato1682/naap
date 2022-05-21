@@ -100,6 +100,10 @@ function M.marks()
   }
 end
 
+function M.colorizer()
+  require("colorizer").setup()
+end
+
 function M.comment()
   require("Comment").setup {
     pre_hook = function(context)
