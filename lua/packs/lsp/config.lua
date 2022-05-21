@@ -43,22 +43,6 @@ function M.goto_preview()
   }
 end
 
-function M.trld()
-  vim.diagnostic.config {
-    virtual_text = false,
-    underline = {
-      severity = {
-        min = vim.diagnostic.severity.INFO
-      }
-    },
-    signs = false
-  }
-
-  require("trld").setup {
-    position = "bottom"
-  }
-end
-
 function M.hover_setup()
   vim.keymap.set("n", "K", function()
     require("hover").hover()

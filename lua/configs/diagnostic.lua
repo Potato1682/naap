@@ -2,6 +2,18 @@ local M = {}
 
 local char = require("utf8").char
 
+function M.config()
+  vim.diagnostic.config {
+    virtual_text = false,
+    underline = {
+      severity = {
+        min = vim.diagnostic.severity.INFO
+      }
+    },
+    signs = true
+  }
+end
+
 function M.define_signs()
   vim.fn.sign_define("DiagnosticSignError", {
     text = char(0xf659),
@@ -54,6 +66,7 @@ function M.set_keymaps()
   })
 end
 
+M.config()
 M.define_signs()
 M.set_keymaps()
 

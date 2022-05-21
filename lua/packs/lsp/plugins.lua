@@ -36,14 +36,6 @@ lsp["rmagatti/goto-preview"] = {
   end
 }
 
-lsp["Mofiqul/trld.nvim"] = {
-  after = "nvim-lspconfig",
-
-  config = function()
-    require("packs.lsp.config").trld()
-  end
-}
-
 lsp["j-hui/fidget.nvim"] = {
   module = "fidget"
 }
