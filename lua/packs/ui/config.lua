@@ -115,6 +115,12 @@ function M.bufferline()
       end,
       offsets = {
         {
+          filetype = "neo-tree",
+          text = "Neo Tree",
+          highlight = "Keyword",
+          text_align = "center"
+        },
+        {
           filetype = "DiffviewFiles",
           text = "Diff",
           highlight = "Function",
