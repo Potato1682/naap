@@ -138,6 +138,17 @@ function M.surf_setup()
     desc = "Select Current Node"
   })
 
+  vim.keymap.set("n", "p", function()
+    require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, {
+      "normal! O",
+      "normal! O",
+      "startinsert"
+    })
+  end, {
+    silent = true,
+    desc = "Let's brain power'"
+  })
+
   vim.keymap.set("x", "<A-j>", function()
     require("syntax-tree-surfer").surf("next", "visual", true)
   end, {
