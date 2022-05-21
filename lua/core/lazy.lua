@@ -60,6 +60,8 @@ local lazy_load = function()
   if not syntax_on then
     vim.cmd("syntax manual")
   end
+
+  loader("presence.nvim")
 end
 
 vim.defer_fn(function()
