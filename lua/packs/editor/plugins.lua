@@ -147,6 +147,21 @@ editor["folke/trouble.nvim"] = {
   end
 }
 
+editor["folke/todo-comments.nvim"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost"
+  },
+
+  setup = function()
+    require("packs.editor.config").todo_setup()
+  end,
+
+  config = function()
+    require("packs.editor.config").todo()
+  end
+}
+
 editor["kevinhwang91/nvim-bqf"] = {
   ft = "qf"
 }
