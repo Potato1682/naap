@@ -28,7 +28,7 @@ function M.incline()
 
       local result = {
         { icon .. " ", guifg = hl },
-        { name, guifg = "black" },
+        { name, group = "Normal" },
         vim.bo[props.buf].modified
             and { " " .. char(0x25cf), guifg = "green" }
             or { "  " }
