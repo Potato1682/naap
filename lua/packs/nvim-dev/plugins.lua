@@ -18,5 +18,7 @@ nvim_dev["tamton-aquib/keys.nvim"] = {
   end
 }
 
-return nvim_dev
+nvim_dev["milisims/nvim-luaref"] = {}
+nvim_dev["nanotee/luv-vimdocs"] = {}
 
+return nvim_dev
