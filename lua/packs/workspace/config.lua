@@ -48,6 +48,49 @@ function M.persisted()
     ignored_dirs = O.sessions.ignored_dirs,
     use_git_branch = true
   }
+
+  vim.keymap.set("n", "<leader>sS", function()
+    require("telescope").extensions.persisted.persisted {}
+  end, {
+    desc = "Sessions"
+  })
+
+  vim.keymap.set("n", "<leader>SS", function()
+    require("persisted").toggle()
+  end, {
+    desc = "Toggle Session"
+  })
+
+  vim.keymap.set("n", "<leader>Ss", function()
+    require("persisted").save()
+  end, {
+    desc = "Save Session"
+  })
+
+  vim.keymap.set("n", "<leader>Sl", function()
+    vim.ui.input({
+      prompt = "Session name",
+      completion = function()
+        return require("persisted").list()
+      end
+    }, function(input)
+      if not input then
+        return
+      end
+
+      require("persisted").load(input)
+    end)
+  end, {
+    desc = "Load Session"
+  })
+
+  vim.keymap.set("n", "<leader>Sd", function()
+    require("persisted").delete()
+  end, {
+    desc = "Delete Session"
+  })
+
+  require("utils.telescope").register_extension("persisted")
 end
 
 return M
