@@ -160,18 +160,6 @@ function M.bufferline()
     }
   }
 
-  vim.keymap.set("n", "<Tab>", function()
-    require("bufferline").cycle(1)
-  end, {
-    desc = "Next Buffer"
-  })
-
-  vim.keymap.set("n", "<S-Tab>", function()
-    require("bufferline").cycle(-1)
-  end, {
-    desc = "Previous Buffer"
-  })
-
   vim.keymap.set("n", "gb", function()
     require("bufferline").pick_buffer()
   end, {

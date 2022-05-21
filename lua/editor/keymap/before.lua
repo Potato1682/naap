@@ -32,12 +32,24 @@ end
 
 -- buffer movement, will be overidden by bufferline.nvim
 set("n", "<Tab>", function()
+  local filetype = vim.opt_local.filetype:get()
+
+  if vim.tbl_contains(require("core.constants").window.ignore_buf_change_filetypes, filetype) then
+    return
+  end
+
   vim.cmd("bnext")
 end, {
   desc = "Next Buffer"
 })
 
 set("n", "<S-Tab>", function()
+  local filetype = vim.opt_local.filetype:get()
+
+  if vim.tbl_contains(require("core.constants").window.ignore_buf_change_filetypes, filetype) then
+    return
+  end
+
   vim.cmd("bprev")
 end, {
   desc = "Previous Buffer"

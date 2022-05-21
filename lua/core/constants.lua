@@ -35,6 +35,17 @@ local quit_with_q = {
   }
 }
 
+local ignore_buf_change_filetypes = vim.tbl_extend("force", quit_with_q, {
+  -- nvim-dap
+  "dbui",
+
+  -- neo-tree.nvim
+  "neo-tree",
+
+  -- quickfix
+  "qf"
+})
+
 return {
   os_name = os_name,
   is_windows = is_windows,
@@ -44,6 +55,7 @@ return {
   cache_dir = cache_dir,
   data_dir = data_dir,
   window = {
-    quit_with_q = quit_with_q
+    quit_with_q = quit_with_q,
+    ignore_buf_change_filetypes = ignore_buf_change_filetypes
   }
 }
