@@ -93,6 +93,15 @@ set("t", "<C-l>", [[<C-\><C-n><C-w>l]], {
   desc = "Right Window (in Terminal)"
 })
 
+set("n", "Y", "yg$", {
+  desc = "Yank after cursor"
+})
+
+-- join lines without moving cursor
+set("n", "J", "mzJ`z", {
+  desc = "Join lines"
+})
+
 -- beter indenting
 set("v", "<", "<gv", {
   desc = "Indent Left"
