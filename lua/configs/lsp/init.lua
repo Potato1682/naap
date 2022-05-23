@@ -26,7 +26,9 @@ function M.change_message_handler(handler)
   }
 
   vim.lsp.handlers["window/showMessage"] = function(_, method, params)
-    handler(method.message, message_severity[params.type])
+    handler(method.message, message_severity[params.type], {
+      title = "LSP"
+    })
   end
 end
 
