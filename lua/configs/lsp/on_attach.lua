@@ -174,7 +174,7 @@ function M.common_on_attach(client, bufnr)
   end
 
   if cap.code_lens or cap.codeLensProvider then
-    vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
+    vim.api.nvim_create_autocmd({ "TextChanged" }, {
       buffer = 0,
       callback = function()
         vim.lsp.codelens.refresh()
