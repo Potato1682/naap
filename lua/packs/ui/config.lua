@@ -43,6 +43,8 @@ function M.colorscheme()
   }
 
   colorscheme.load()
+
+  require("utils.colors").setup()
 end
 
 function M.dressing()
@@ -90,6 +92,13 @@ function M.bufferline()
   local bufferline = require("bufferline")
   local groups = require("bufferline.groups")
   local char = require("utf8").char
+  local colors = require("utils.colors")
+
+  vim.cmd [[
+    function! Toggle_light_dark(a, b, c, d)
+      lua require("utils.colors").toggle_light_dark()
+    endfunction
+  ]]
 
   bufferline.setup {
     options = {
@@ -136,6 +145,23 @@ function M.bufferline()
         }
       },
       show_close_icon = false,
+      custom_areas = {
+        right = function()
+          local result = {}
+
+          table.insert(result, {
+            text = "%@Toggle_light_dark@ " .. vim.g.symbol_icon .. " %X",
+            guifg = vim.g.symbol_icon_fg
+          })
+
+          table.insert(result, {
+            text = "%@Toggle_light_dark@" .. vim.g.toggle_icon .. " %X ",
+            guifg = vim.g.toggle_icon_fg
+          })
+
+          return result
+        end
+      },
       groups = {
         options = {
           toggle_hidden_on_enter = true
@@ -154,7 +180,13 @@ function M.bufferline()
             name = "docs",
             icon = char(0xf831) .. " ",
             matcher = function(buf)
-              return buf.filename:match "%.md" or buf.filename:match "%.txt" or buf.filename:match "%.rst"
+              return vim.tbl_contains({
+                "md",
+                "mdx",
+                "rst",
+                "txt",
+                "wiki"
+              }, vim.fn.fnamemodify(buf.path, ":e"))
             end
           }
         }
