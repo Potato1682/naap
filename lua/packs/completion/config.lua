@@ -1,19 +1,39 @@
 local M = {}
 
-local utf8 = require("utf8").utf8
-
 function M.cmp()
   local cmp = require("cmp")
+  local types = require("cmp.types")
+  local str = require("cmp.utils.str")
+  local context = require("cmp.config.context")
   local luasnip = require("luasnip")
-  local lspkind = require("lspkind")
+  local char = require("utf8").char
 
-  local source_mapping = {
-    buffer = "[Buf]",
-    nvim_lsp = "[LSP]",
-    copilot = "[CP]",
-    cmp_tabnine = "[TN]",
-    path = "[Path]",
-    ["vim-dadbod-completion"] = "[DB]"
+  local kind_mapping = {
+    Class = "   ",
+    Color = "   ",
+    Constant = "   ",
+    Constructor = "   ",
+    Enum = "   ",
+    EnumMember = "   ",
+    Event = "   ",
+    Field = " ﰠ  ",
+    File = "   ",
+    Folder = "   ",
+    Function = "   ",
+    Interface = "ﰮ  ",
+    Keyword = "   ",
+    Method = "   ",
+    Module = " {} ",
+    Operator = "   ",
+    Property = "   ",
+    Reference = "  ",
+    Snippet = "  ",
+    Struct = "  ",
+    Text = "   ",
+    TypeParameter = "<T>",
+    Unit = " 塞 ",
+    Value = "   ",
+    Variable = "   ",
   }
 
   local has_words_before = function()
@@ -24,37 +44,74 @@ function M.cmp()
 
   cmp.setup {
     formatting = {
-      foramt = lspkind.cmp_format {
-        mode = "symbol",
+      fields = {
+        cmp.ItemField.Kind,
+        cmp.ItemField.Abbr,
+        cmp.ItemField.Menu
+      },
+      format = function(entry, vim_item)
+        vim_item.kind = kind_mapping[vim_item.kind] or vim_item.kind
 
-        before = function(entry, vim_item)
-          local menu = source_mapping[entry.source_name]
+        -- Code from max397574/ignis-nvim
+        local word = entry:get_insert_text()
 
-          if entry.source_name == "cmp_tabnine" then
-            if entry.completion_item.data and entry.completion_item.data.detail then
-              menu = entry.completion_item.data.detail .. " " .. menu
-            end
-
-            vim_item.kind = utf8(0xe315)
-          end
-
-          vim_item.menu = menu
-
-          return vim_item
+        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+          word = vim.lsp.util.parse_snippet(word)
         end
-      }
+
+        word = str.oneline(word)
+
+        local max = 50
+
+        if string.len(word) >= max then
+          local before = string.sub(
+            word,
+            1,
+            math.floor((max - 3) / 2)
+          )
+
+          word = before .. "..."
+        end
+
+        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+            and vim_item.abbr:sub(-1, -1) == "~" then
+          word = word .. "~"
+        end
+
+        vim_item.abbr = word
+
+        -- Source-specific formatting
+        vim_item.dup = ({
+          buffer = 1,
+          path = 1,
+          nvim_lsp = 0
+        })[entry.source.name] or 0
+
+        if entry.source.name == "cmp_tabnine" then
+          vim_item.kind = " " .. char(0xe315) .. " "
+        end
+
+        return vim_item
+      end
     },
     enabled = function()
-      local context = require("cmp.config.context")
+      if require("cmp_dap").is_dap_buffer() then
+        return true
+      end
+
+      if vim.opt_local.buftype:get() == "prompt" then
+        return false
+      end
 
       if vim.api.nvim_get_mode().mode == "c" then
         return true
-      else
-        return not context.in_treesitter_capture("comment")
-            and not context.in_syntax_group("Comment")
-            and (vim.opt_local.buftype:get() ~= "prompt"
-                or require("cmp_dap").is_dap_buffer())
       end
+
+      if context.in_treesitter_capture("Comment") or context.in_syntax_group("Comment") then
+        return false
+      end
+
+      return true
     end,
     snippet = {
       expand = function(args)
@@ -203,7 +260,10 @@ function M.cmp()
       }, {
         { name = "fuzzy_buffer" },
         { name = "cmdline_history" }
-      })
+      }),
+      view = {
+        entries = { name = "wildmenu", separator = " · " }
+      },
     })
   end
 
