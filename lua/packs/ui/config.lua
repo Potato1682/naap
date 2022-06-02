@@ -92,7 +92,6 @@ function M.bufferline()
   local bufferline = require("bufferline")
   local groups = require("bufferline.groups")
   local char = require("utf8").char
-  local colors = require("utils.colors")
 
   vim.cmd [[
     function! Toggle_light_dark(a, b, c, d)
