@@ -1,9 +1,36 @@
 local M = {}
 
+local severity = vim.diagnostic.severity
 local char = require("utf8").char
 
 function M.config()
   vim.diagnostic.config {
+    float = {
+      focusable = false,
+      border = require("utils.border").get_border_char_and_hl(),
+      scape = "cursor",
+      header = { "Cursor Diagnostics:", "Special" },
+      prefix = function(diagnostic, i, total)
+        local icon, highlight
+
+        if diagnostic.severity == severity.ERROR then
+          icon = char(0xf659)
+          highlight = "DiagnosticError"
+        elseif diagnostic.severity == severity.WARN then
+          icon = char(0xf529)
+          highlight = "DiagnosticWarn"
+        elseif diagnostic.severity == severity.INFO then
+          icon = char(0xf7fc)
+          highlight = "DiagnosticInfo"
+        elseif diagnostic.severity == severity.HINT then
+          icon = char(0xf835)
+          highlight = "DiagnosticHint"
+        end
+
+        return i .. "/" .. total .. " " .. icon .. "  ", highlight
+      end
+    },
+    severity_sort = true,
     virtual_text = false,
     underline = {
       severity = {
