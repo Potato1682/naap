@@ -5,21 +5,17 @@ function M.remember()
 end
 
 function M.other_setup()
-  vim.keymap.set("n", "soo", function()
+  local keymap = require("utils.keymap").omit("append", "n", "so")
+
+  keymap("o", function()
     require("other-nvim").open()
-  end, {
-    desc = "Open Other File"
-  })
-  vim.keymap.set("n", "sos", function()
+  end, "Open Other File")
+  keymap("s", function()
     require("other-nvim").openSplit()
-  end, {
-    desc = "Open Other File with Split"
-  })
-  vim.keymap.set("n", "sov", function()
+  end, "Open Other File with Split")
+  keymap("v", function()
     require("other-nvim").openVSplit()
-  end, {
-    desc = "Open Other File with VSplit"
-  })
+  end, "Open Other File with VSplit")
 end
 
 function M.other()
@@ -49,25 +45,22 @@ function M.persisted()
     use_git_branch = true
   }
 
-  vim.keymap.set("n", "<leader>sS", function()
+  local keymap_search = require("utils.keymap.presets").leader("n", "s")
+  local keymap = require("utils.keymap.presets").leader("n", "S")
+
+  keymap_search("S", function()
     require("telescope").extensions.persisted.persisted {}
-  end, {
-    desc = "Sessions"
-  })
+  end, "Sessions")
 
-  vim.keymap.set("n", "<leader>SS", function()
+  keymap("S", function()
     require("persisted").toggle()
-  end, {
-    desc = "Toggle Session"
-  })
+  end, "Toggle Session")
 
-  vim.keymap.set("n", "<leader>Ss", function()
+  keymap("s", function()
     require("persisted").save()
-  end, {
-    desc = "Save Session"
-  })
+  end, "Save Session")
 
-  vim.keymap.set("n", "<leader>Sl", function()
+  keymap("l", function()
     vim.ui.input({
       prompt = "Session name",
       completion = function()
@@ -80,15 +73,11 @@ function M.persisted()
 
       require("persisted").load(input)
     end)
-  end, {
-    desc = "Load Session"
-  })
+  end, "Load Session")
 
-  vim.keymap.set("n", "<leader>Sd", function()
+  keymap("d", function()
     require("persisted").delete()
-  end, {
-    desc = "Delete Session"
-  })
+  end, "Delete Session")
 
   require("utils.telescope").register_extension("persisted")
 end
@@ -100,23 +89,19 @@ function M.toggletasks()
 
   require("utils.telescope").register_extension("toggletasks")
 
-  vim.keymap.set("n", "<leader>sts", function()
+  local keymap = require("utils.keymap.presets").leader("n", "st")
+
+  keymap("s", function()
     require("telescope").extensions.toggletasks.spawn()
-  end, {
-    desc = "Spawn Task"
-  })
+  end, "Spawn Task")
 
-  vim.keymap.set("n", "<leader>stS", function()
+  keymap("S", function()
     require("telescope").extensions.toggletasks.select()
-  end, {
-    desc = "Select Running Task"
-  })
+  end, "Select Running Task")
 
-  vim.keymap.set("n", "<leader>ste", function()
+  keymap("e", function()
     require("telescope").extensions.toggletasks.edit()
-  end, {
-    desc = "Edit Config"
-  })
+  end, "Edit Config")
 end
 
 return M

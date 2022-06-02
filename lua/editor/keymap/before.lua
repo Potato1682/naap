@@ -1,17 +1,17 @@
 -- Non-plugin-related keymaps
 
-local set = vim.keymap.set
+local keymap = require("utils.keymap").keymap
 local constants = require("core.constants")
 
 if O.keymap.leader == " " then
-  set("n", "<Space>", "")
+  keymap("n", "<Space>", "")
 end
 
 vim.g.mapleader = O.keymap.leader
 vim.g.maplocalleader = O.keymap.local_leader
 
 local bufnr_keymap = function(bufnr)
-  set("n", "<leader>" .. bufnr, function()
+  keymap("n", "<leader>" .. bufnr, function()
     local ok, bufferline = pcall(require, "bufferline")
 
     if not ok then
@@ -21,17 +21,15 @@ local bufnr_keymap = function(bufnr)
     end
 
     bufferline.go_to_buffer(bufnr)
-  end, {
-    desc = "Buffer #" .. bufnr
-  })
+  end, "Buffer #" .. bufnr)
 end
 
 for i = 1, 9 do
   bufnr_keymap(i)
 end
 
--- buffer movement, will be overidden by bufferline.nvim
-set("n", "<Tab>", function()
+-- buffer movement, will be overidden by cybu.nvim
+keymap("n", "<Tab>", function()
   local filetype = vim.opt_local.filetype:get()
 
   if vim.tbl_contains(require("core.constants").window.ignore_buf_change_filetypes, filetype) then
@@ -39,11 +37,9 @@ set("n", "<Tab>", function()
   end
 
   vim.cmd("bnext")
-end, {
-  desc = "Next Buffer"
-})
+end, "Next Buffer")
 
-set("n", "<S-Tab>", function()
+keymap("n", "<S-Tab>", function()
   local filetype = vim.opt_local.filetype:get()
 
   if vim.tbl_contains(require("core.constants").window.ignore_buf_change_filetypes, filetype) then
@@ -51,81 +47,44 @@ set("n", "<S-Tab>", function()
   end
 
   vim.cmd("bprev")
-end, {
-  desc = "Previous Buffer"
-})
+end, "Previous Buffer")
 
 -- nohlsearch
-set("n", "<Leader>h", function()
+keymap("n", "<Leader>h", function()
   vim.cmd("let @/=''")
-end, {
-  desc = "nohlsearch"
-})
+end, "nohlsearch")
 
 -- split
-set("n", "s", "")
-set("n", "ss", function()
+keymap("n", "s", "")
+keymap("n", "ss", function()
   vim.cmd("split")
-end, {
-  desc = "Horizontal Split"
-})
+end, "Horizontal Split")
 
-set("n", "sv", function()
+keymap("n", "sv", function()
   vim.cmd("vsplit")
-end, {
-  desc = "Vertical Split"
-})
+end, "Vertical Split")
 
 -- window movement
-set("n", "<C-h>", "<C-w>h", {
-  desc = "Left Window"
-})
+keymap("n", "<C-h>", "<C-w>h", "Left Window")
+keymap("n", "<C-j>", "<C-w>j", "Down Window")
+keymap("n", "<C-k>", "<C-w>k", "Up Window")
+keymap("n", "<C-l>", "<C-w>l", "Right Window")
+keymap("t", "<C-h>", [[<C-\><C-n><C-w>h]], "Left Window (in Terminal)")
+keymap("t", "<C-j>", [[<C-\><C-n><C-w>j]], "Down Window (in Terminal)")
+keymap("t", "<C-k>", [[<C-\><C-n><C-w>k]], "Up Window (in Terminal)")
+keymap("t", "<C-l>", [[<C-\><C-n><C-w>l]], "Right Window (in Terminal)")
 
-set("n", "<C-j>", "<C-w>j", {
-  desc = "Down Window"
-})
-
-set("n", "<C-k>", "<C-w>k", {
-  desc = "Up Window"
-})
-
-set("n", "<C-l>", "<C-w>l", {
-  desc = "Right Window"
-})
-set("t", "<C-h>", [[<C-\><C-n><C-w>h]], {
-  desc = "Left Window (in Terminal)"
-})
-set("t", "<C-j>", [[<C-\><C-n><C-w>j]], {
-  desc = "Down Window (in Terminal)"
-})
-set("t", "<C-k>", [[<C-\><C-n><C-w>k]], {
-  desc = "Up Window (in Terminal)"
-})
-set("t", "<C-l>", [[<C-\><C-n><C-w>l]], {
-  desc = "Right Window (in Terminal)"
-})
-
-set("n", "Y", "yg$", {
-  desc = "Yank after cursor"
-})
+keymap("n", "Y", "yg$", "Yank after cursor")
 
 -- join lines without moving cursor
-set("n", "J", "mzJ`z", {
-  desc = "Join lines"
-})
+keymap("n", "J", "mzJ`z", "Join lines")
 
 -- beter indenting
-set("v", "<", "<gv", {
-  desc = "Indent Left"
-})
-set("v", ">", ">gv", {
-  desc = "Indent Right"
-})
+keymap("v", "<", "<gv", "Indent Left")
+keymap("v", ">", ">gv", "Indent Right")
 
 -- better terminal esc
-set("t", "<Esc>", [[<C-\><C-n>]], {
-  desc = "Escape from Terminal"
-})
+keymap("t", "<Esc>", [[<C-\><C-n>]], "Escape from Terminal")
 
 for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
   vim.api.nvim_create_autocmd("FileType", {

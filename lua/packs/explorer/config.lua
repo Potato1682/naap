@@ -3,9 +3,11 @@ local M = {}
 local constants = require("core.constants")
 
 function M.neotree_setup()
-  vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle position=float<cr>", {
-    desc = "Open Explorer"
-  })
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<leader>e", function()
+    vim.cmd("Neotree toggle position=float")
+  end, "Open Explorer")
 end
 
 function M.neotree()

@@ -6,9 +6,9 @@ function M.bakaup_setup()
 end
 
 function M.undotree_setup()
-  vim.keymap.set("n", "<localleader>u", "<cmd>UndotreeToggle<cr>", {
-    desc = "Toggle undo tree"
-  })
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<localleader>u", "<cmd>UndotreeToggle<cr>", "Toggle undo tree")
 end
 
 return M

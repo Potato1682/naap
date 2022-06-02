@@ -1,11 +1,12 @@
 local M = {}
 
 function M.toggleterm_setup()
-  vim.keymap.set("n", "<C-t>", function(opts)
-    vim.cmd [[execute v:count1 . "ToggleTerm"]]
-  end, {
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<C-t>", function()
+    vim.cmd("ToggleTerm")
+  end, "Open Terminal", {
     silent = true,
-    desc = "Open Terminal"
   })
 end
 

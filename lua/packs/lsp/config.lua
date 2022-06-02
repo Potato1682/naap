@@ -32,15 +32,19 @@ function M.lightbulb()
 end
 
 function M.goto_preview_setup()
-  vim.keymap.set("n", "gP", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "gP", function()
     require("goto-preview").close_all_win()
-  end)
+  end, "Close All Preview Windows")
 end
 
 function M.goto_preview()
+  local keymap = require("utils.keymap").keymap
+
   require("goto-preview").setup {
     post_open_hook = function()
-      vim.keymap.set("n", "q", "<cmd>q!<cr>", {
+      keymap("n", "q", "<cmd>q!<cr>", {
         buffer = true
       })
     end
@@ -50,16 +54,14 @@ function M.goto_preview()
 end
 
 function M.hover_setup()
-  vim.keymap.set("n", "K", function()
+  local keymap = require("utils.keymap.presets").mode_only("n")
+
+  keymap("K", function()
     require("hover").hover()
-  end, {
-    desc = "hover.nvim"
-  })
-  vim.keymap.set("n", "gK", function()
+  end, "hover.nvim")
+  keymap("gK", function()
     require("hover").hover_select()
-  end, {
-    desc = "hover.nvim (select provider)"
-  })
+  end, "hover.nvim (select provider)")
 
   vim.api.nvim_create_user_command("Hover", function(args)
     require("hover").hover()

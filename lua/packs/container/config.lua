@@ -1,53 +1,39 @@
 local M = {}
 
 function M.devcontainer_setup()
-  vim.keymap.set("n", "<leader>cCo", function()
+  local keymap = require("utils.keymap").omit("append", "n", "<leader>c")
+
+  keymap("Co", function()
     require("devcontainer.commands").open_nearest_devcontainer_config()
-  end, {
-    desc = "Open devcontainer.json"
-  })
+  end, "Open devcontainer.json")
 
-  vim.keymap.set("n", "<leader>cCe", function()
+  keymap("Ce", function()
     require("devcontainer.commands").edit_devcontainer_config()
-  end, {
-    desc = "Edit devcontainer.json"
-  })
+  end, "Edit devcontainer.json")
 
-  vim.keymap.set("n", "<leader>ccu", function()
+  keymap("cu", function()
     require("devcontainer.commands").compose_up()
-  end, {
-    desc = "Compose Up"
-  })
+  end, "Compose Up")
 
-  vim.keymap.set("n", "<leader>ccd", function()
+  keymap("cd", function()
     require("devcontainer.commands").compose_down()
-  end, {
-    desc = "Compose Down"
-  })
+  end, "Compose Down")
 
-  vim.keymap.set("n", "<leader>ccr", function()
+  keymap("cr", function()
     require("devcontainer.commands").compose_rm()
-  end, {
-    desc = "Remove Compose"
-  })
+  end, "Remove Compose")
 
-  vim.keymap.set("n", "<leader>cb", function()
+  keymap("b", function()
     require("devcontainer.commands").docker_build_run_and_attach()
-  end, {
-    desc = "Build, Run, and Attach to Image"
-  })
+  end, "Build, Run, and Attach to Image")
 
-  vim.keymap.set("n", "<leader>cs", function()
+  keymap("s", function()
     require("devcontainer.commands").stop_auto()
-  end, {
-    desc = "Stop"
-  })
+  end, "Stop")
 
-  vim.keymap.set("n", "<leader>cr", function()
+  keymap("r", function()
     require("devcontainer.commands").remove_all()
-  end, {
-    desc = "Remove All Images"
-  })
+  end, "Remove All Images")
 end
 
 function M.devcontainer()

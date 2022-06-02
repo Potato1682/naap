@@ -3,11 +3,7 @@ local M = {}
 local utils = require("utils.lsp")
 
 function M.common_on_attach(client, bufnr)
-  local buf_keymap = function(mode, key, action, desc)
-    require("utils.keymap").keymap(mode, key, action, desc, {
-      buffer = true
-    })
-  end
+  local keymap = require("utils.keymap").omit("append", "n", "", { buffer = bufnr })
 
   local command = require("utils.command").current_buf_command
 
@@ -20,7 +16,7 @@ function M.common_on_attach(client, bufnr)
   end
 
   if cap.code_action or cap.codeActionProvider then
-    buf_keymap("n", "<leader>la", function()
+    keymap("<leader>la", function()
       vim.cmd("CodeActionMenu")
     end, "Code Action")
   end
@@ -35,7 +31,7 @@ function M.common_on_attach(client, bufnr)
       end
     })
 
-    buf_keymap("n", "gr", function()
+    keymap("gr", function()
       vim.lsp.buf.rename()
     end, "Rename")
   end
@@ -54,10 +50,10 @@ function M.common_on_attach(client, bufnr)
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
 
-    buf_keymap("n", "gD", function()
+    keymap("gD", function()
       require("telescope.builtin").lsp_definitions()
     end, "Definition")
-    buf_keymap("n", "gpD", function()
+    keymap("gpD", function()
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
   end
@@ -67,7 +63,7 @@ function M.common_on_attach(client, bufnr)
       vim.lsp.buf.declaration()
     end, "Declaration")
 
-    buf_keymap("n", "gC", function()
+    keymap("gC", function()
       vim.lsp.buf.declaration()
     end, "Declaration")
   end
@@ -77,7 +73,7 @@ function M.common_on_attach(client, bufnr)
       require("telescope.builtin").lsp_type_definitions()
     end, "Type Definition")
 
-    buf_keymap("n", "go", function()
+    keymap("go", function()
       require("telescope.builtin").lsp_type_definitions()
     end, "Type Definition")
   end
@@ -90,10 +86,10 @@ function M.common_on_attach(client, bufnr)
       require("goto-preview").goto_preview_implementation()
     end, "Preview Implementation")
 
-    buf_keymap("n", "gI", function()
+    keymap("gI", function()
       require("telescope.builtin").lsp_implementations()
     end, "Implementation")
-    buf_keymap("n", "gpI", function()
+    keymap("gpI", function()
       require("goto-preview").goto_preview_implementation()
     end, "Preview Implementation")
   end
@@ -106,17 +102,17 @@ function M.common_on_attach(client, bufnr)
       require("goto-preview").goto_preview_references()
     end, "Preview References")
 
-    buf_keymap("n", "gR", function()
+    keymap("gR", function()
       require("telescope.builtin").lsp_references()
     end, "References")
-    buf_keymap("n", "gpR", function()
+    keymap("gpR", function()
       require("goto-preview").goto_preview_references()
     end, "Preview References")
 
-    buf_keymap("n", "<a-n>", function()
+    keymap("<a-n>", function()
       require("illuminate").next_reference({ wrap = true })
     end, "Next Reference")
-    buf_keymap("n", "<a-p>", function()
+    keymap("<a-p>", function()
       require("illuminate").next_reference({ wrap = true, reverse = true })
     end, "Previous Reference")
   end
@@ -126,7 +122,7 @@ function M.common_on_attach(client, bufnr)
       require("telescope.builtin").lsp_document_symbols()
     end, "Document Symbol")
 
-    buf_keymap("n", "<leader>lsd", function()
+    keymap("<leader>lsd", function()
       require("telescope.builtin").lsp_document_symbols()
     end, "Document Symbol")
   end
@@ -146,11 +142,11 @@ function M.common_on_attach(client, bufnr)
       require("telescope.builtin").lsp_dynamic_workspace_symbols()
     end, "All Workspace Symbol")
 
-    buf_keymap("n", "<leader>lsw", function()
+    keymap("<leader>lsw", function()
       require("telescope.builtin").lsp_workspace_symbols()
     end, "Workspace Symbol")
 
-    buf_keymap("n", "<leader>lsW", function()
+    keymap("<leader>lsW", function()
       require("telescope.builtin").lsp_dynamic_workspace_symbols()
     end, "All Workspace Symbol")
   end
@@ -164,11 +160,11 @@ function M.common_on_attach(client, bufnr)
       vim.lsp.buf.outgoing_calls()
     end, "Outgoing Calls")
 
-    buf_keymap("n", "<leader>lci", function()
+    keymap("<leader>lci", function()
       vim.lsp.buf.incoming_calls()
     end, "Incoming Calls")
 
-    buf_keymap("n", "<leader>lco", function()
+    keymap("<leader>lco", function()
       vim.lsp.buf.outgoing_calls()
     end, "Outgoing Calls")
   end
@@ -185,7 +181,7 @@ function M.common_on_attach(client, bufnr)
       vim.lsp.codelens.run()
     end, "Run CodeLens")
 
-    buf_keymap("n", "<leader>ll", function()
+    keymap("<leader>ll", function()
       vim.lsp.codelens.run()
     end, "Run CodeLens")
   end
@@ -208,15 +204,15 @@ function M.common_on_attach(client, bufnr)
       end
     })
 
-    buf_keymap("n", "<leader>lwf", function()
+    keymap("<leader>lwf", function()
       utils.list_workspace_folders()
     end, "Workspace Folders")
 
-    buf_keymap("n", "<leader>lwa", function()
+    keymap("<leader>lwa", function()
       vim.lsp.buf.add_workspace_folder()
     end, "Add Workspace Folder")
 
-    buf_keymap("n", "<leader>lwr", function()
+    keymap("<leader>lwr", function()
       vim.lsp.buf.remove_workspace_folder()
     end, "Remove Workspace Folder")
   end
@@ -228,7 +224,7 @@ function M.common_on_attach(client, bufnr)
 
     vim.cmd("cabbrev wq execute 'Format sync' <bar> wq")
 
-    buf_keymap("n", "<leader>lf", function()
+    keymap("<leader>lf", function()
       require("lsp-format").format()
     end, "Format")
   end

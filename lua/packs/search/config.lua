@@ -1,35 +1,27 @@
 local M = {}
 
 function M.telescope_setup()
-  vim.keymap.set("n", "<leader>f", function()
+  local keymap = require("utils.keymap.presets").leader("n", "")
+
+  keymap("f", function()
     require("telescope.builtin").find_files()
-  end, {
-    desc = "Find file"
-  })
+  end, "Find file")
 
-  vim.keymap.set("n", "<leader>sC", function()
+  keymap("sC", function()
     require("telescope.builtin").colorscheme()
-  end, {
-    desc = "Colorscheme"
-  })
+  end, "Colorscheme")
 
-  vim.keymap.set("n", "<leader>ga", function()
+  keymap("ga", function()
     require("telescope.builtin").git_stash()
-  end, {
-    desc = "Stashes"
-  })
+  end, "Stashes")
 
-  vim.keymap.set("n", "<leader>gb", function()
+  keymap("gb", function()
     require("telescope.builtin").git_branches()
-  end, {
-    desc = "Branches"
-  })
+  end, "Branches")
 
-  vim.keymap.set("n", "<leader>gc", function()
+  keymap("gc", function()
     require("telescope.builtin").git_commits()
-  end, {
-    desc = "Commits"
-  })
+  end, "Commits")
 end
 
 function M.telescope()
@@ -91,11 +83,11 @@ function M.telescope_fzf_native()
 end
 
 function M.telescope_media_files_setup()
-  vim.keymap.set("n", "<leader>F", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<leader>F", function()
     require("telescope").extensions.media_files.media_files()
-  end, {
-    desc = "Find file"
-  })
+  end, "Find file")
 end
 
 function M.telescope_media_files()
@@ -103,29 +95,23 @@ function M.telescope_media_files()
 end
 
 function M.telescope_dap_setup()
-  vim.keymap.set("n", "<leader>sb", function()
+  local keymap = require("utils.keymap.presets").leader("n", "")
+
+  keymap("sb", function()
     require("telescope").extensions.dap.list_breakpoints {}
-  end, {
-    desc = "Breakpoints"
-  })
+  end, "Breakpoints")
 
-  vim.keymap.set("n", "<leader>dC", function()
+  keymap("dC", function()
     require("telescope").extensions.dap.configurations {}
-  end, {
-    desc = "Configurations"
-  })
+  end, "Configurations")
 
-  vim.keymap.set("n", "<leader>dv", function()
+  keymap("dv", function()
     require("telescope").extensions.dap.variables {}
-  end, {
-    desc = "Variables"
-  })
+  end, "Variables")
 
-  vim.keymap.set("n", "<leader>df", function()
+  keymap("df", function()
     require("telescope").extensions.dap.frames {}
-  end, {
-    desc = "Frames"
-  })
+  end, "Frames")
 end
 
 function M.telescope_dap()

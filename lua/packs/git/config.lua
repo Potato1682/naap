@@ -15,76 +15,70 @@ function M.gitsigns()
     word_diff = O.git.word_diff,
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
+      local presets = require("utils.keymap.presets")
 
-      local map = function(mode, l, r, opts)
-        opts = opts or {}
-        opts.buffer = bufnr
+      local leader_visual_keymap = presets.leader({ "n", "v" }, "g", {
+        buffer = bufnr,
+        silent = true
+      })
 
-        vim.keymap.set(mode, l, r, opts)
-      end
+      local leader_keymap = presets.leader("n", "g", { buffer = bufnr })
+      local keymap = presets.mode_only("n", { buffer = bufnr, expr = true })
 
       -- Navigation
-      map("n", "]c", function()
-        if vim.wo.diff then return "]c" end
-        vim.schedule(function() gs.next_hunk() end)
-        return "<Ignore>"
-      end, {
-        expr = true,
-        desc = "Next Hunk"
-      })
+      keymap("]c", function()
+        if vim.wo.diff then
+          return "]c"
+        end
 
-      map("n", "[c", function()
-        if vim.wo.diff then return "[c" end
-        vim.schedule(function() gs.prev_hunk() end)
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+
         return "<Ignore>"
-      end, {
-        expr = true,
-        desc = "Previous Hunk"
-      })
+      end, "Next Hunk")
+
+      keymap("[c", function()
+        if vim.wo.diff then
+          return "[c"
+        end
+
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+
+        return "<Ignore>"
+      end, "Previous Hunk")
 
       -- Actions
-      map({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", {
-        silent = true,
-        desc = "Stage Hunk"
-      })
-      map({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", {
-        silent = true,
-        desc = "Unstage Hunk"
-      })
-      map("n", "<leader>gS", gs.stage_buffer, {
-        desc = "Stage Buffer"
-      })
-      map("n", "<leader>gu", gs.undo_stage_hunk, {
-        desc = "Undo Stage Hunk"
-      })
-      map("n", "<leader>gR", gs.reset_buffer, {
-        desc = "Reset Buffer"
-      })
-      map("n", "<leader>gp", gs.preview_hunk, {
-        desc = "Preview Hunk"
-      })
-      map("n", "<leader>gB", function()
-        gs.blame_line { full = true }
-      end, {
-        desc = "Blame Line"
-      })
-      map("n", "<leader>gT", gs.toggle_current_line_blame, {
-        desc = "Toggle Current-line Blame"
-      })
-      map("n", "<leader>gd", gs.diffthis, {
-        desc = "Diff This"
-      })
-      map("n", "<leader>gD", function() gs.diffthis("~") end, {
-        desc = "Diff Current Buffer"
-      })
-      map("n", "<leader>gt", gs.toggle_deleted, {
-        desc = "Toggle Deleted"
-      })
+      leader_visual_keymap("s", function()
+        vim.cmd("Gitsigns stage_hunk")
+      end, "Stage Hunk")
+      leader_visual_keymap("r", function()
+        vim.cmd("Gitsigns reset_hunk")
+      end, "Unstage Hunk")
+
+      leader_keymap("S", gs.stage_buffer, "Stage Buffer")
+      leader_keymap("u", gs.undo_stage_hunk, "Undo Stage Hunk")
+      leader_keymap("R", gs.reset_buffer, "Unstage Buffer")
+      leader_keymap("p", gs.preview_hunk, "Preview Hunk")
+      leader_keymap("B", function()
+        gs.blame_line {
+          full = true
+        }
+      end, "Blame Line")
+      leader_keymap("T", gs.toggle_current_line_blame, "Toggle Current Line Blame")
+      leader_keymap("d", gs.diffthis, "Diff This")
+      leader_keymap("D", function()
+        gs.diffthis("~")
+      end, "Diff Current Buffer")
+      leader_keymap("t", gs.toggle_deleted, "Toggle Deleted")
 
       -- Text object
-      map({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", {
-        silent = true,
-        desc = "Select Hunk"
+      require("utils.keymap").keymap({ "o", "x" }, "ih", function()
+        vim.cmd("Gitsigns select_hunk")
+      end, "Select Hunk", {
+        silent = true
       })
     end,
     watch_gitdir = {
@@ -125,11 +119,11 @@ function M.diffview()
 end
 
 function M.neogit_setup()
-  vim.keymap.set("n", "<leader>gg", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<leader>gg", function()
     require("neogit").open()
-  end, {
-    desc = "Open Neogit"
-  })
+  end, "Open Neogit")
 end
 
 function M.neogit()
@@ -149,16 +143,16 @@ function M.conflict_setup()
         vim.notify("Conflict detected, need to resolve conflicts.", vim.log.levels.WARN, { title = "Git" })
       end, 50)
 
-      local set = function(lhs, rhs, opts)
-        vim.keymap.set("n", lhs, rhs, vim.tbl_extend("force", opts, { buffer = true }))
-      end
+      local leader_keymap = require("utils.keymap.presets").leader("n", "gc", { buffer = true })
+      local keymap = require("utils.keymap.presets").mode_only("n", { buffer = true })
 
-      set("<leader>gco", "<Plug>(git-conflict-ours)", { desc = "Choose Ours" })
-      set("<leader>gcb", "<Plug>(git-conflict-both)", { desc = "Choose Both" })
-      set("<leader>gc0", "<Plug>(git-conflict-none)", { desc = "Choose None" })
-      set("<leader>gct", "<Plug>(git-conflict-theirs)", { desc = "Choose Theirs" })
-      set("<leader>[x", "<Plug>(git-conflict-next-conflict)", { desc = "Next Git Conflict" })
-      set("<leader>]x", "<Plug>(git-conflict-prev-conflict)", { desc = "Previous Git Conflict" })
+      leader_keymap("o", "<Plug>(git-conflict-ours)", "Choose Ours")
+      leader_keymap("b", "<Plug>(git-conflict-both)", "Choose Both")
+      leader_keymap("0", "<Plug>(git-conflict-none)", "Choose None")
+      leader_keymap("t", "<Plug>(git-conflict-theirs)", "Choose Theirs")
+
+      keymap("[x", "<Plug>(git-conflict-next-conflict)", "Next Git Conflict")
+      keymap("]x", "<Plug>(git-conflict-prev-conflict)", "Previous Git Conflict")
     end
   })
 end

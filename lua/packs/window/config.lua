@@ -5,9 +5,9 @@ function M.stabilize()
 end
 
 function M.split_setup()
-  vim.keymap.set("n", "ss", "<cmd>Split<cr>", {
-    desc = "Split Window"
-  })
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "ss", "<cmd>Split<cr>", "Split Window")
 end
 
 function M.split()

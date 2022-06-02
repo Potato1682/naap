@@ -1,2 +1,6 @@
+local keymap = require("utils.keymap").keymap
+
 -- LSP keymap can be used BEFORE attach
-vim.keymap.set("n", "<leader>lI", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP Information" })
+keymap("n", "<leader>lI", function()
+  vim.cmd("LspInfo")
+end, "LSP Information", { silent = true })

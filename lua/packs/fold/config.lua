@@ -1,21 +1,17 @@
 local M = {}
 
 function M.cycle_setup()
-  vim.keymap.set("n", "<CR>", function()
+  local keymap = require("utils.keymap.presets").mode_only("n")
+
+  keymap("<CR>", function()
     require("fold-cycle").open()
-  end, {
-    desc = "Open Folding"
-  })
-  vim.keymap.set("n", "<BS>", function()
+  end, "Open Folding")
+  keymap("<BS>", function()
     require("fold-cycle").close()
-  end, {
-    desc = "Close Folding"
-  })
-  vim.keymap.set("n", "zC", function()
+  end, "Close Folding")
+  keymap("zC", function()
     require("fold-cycle").close_all()
-  end, {
-    desc = "Close All Folding"
-  })
+  end, "Close All Folding")
 end
 
 function M.cycle()
@@ -23,8 +19,8 @@ function M.cycle()
 end
 
 function M.pretty()
-  require("pretty-fold").setup()
-  require("pretty-fold.preview").setup()
+  require("pretty-fold").setup {}
+  require("pretty-fold.preview").setup {}
 end
 
 return M

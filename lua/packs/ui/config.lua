@@ -194,11 +194,11 @@ function M.bufferline()
     }
   }
 
-  vim.keymap.set("n", "gb", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "gb", function()
     require("bufferline").pick_buffer()
-  end, {
-    desc = "Pick Buffer"
-  })
+  end, "Pick Buffer")
 end
 
 function M.indent_blankline()

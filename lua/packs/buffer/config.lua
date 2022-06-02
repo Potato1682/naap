@@ -1,11 +1,11 @@
 local M = {}
 
 function M.bufdelete_setup()
-  vim.keymap.set("n", "<leader>q", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<leader>q", function()
     require("bufdelete").bufdelete(0, false)
-  end, {
-    desc = "Close Buffer"
-  })
+  end, "Close Buffer")
 end
 
 function M.incline()
@@ -53,18 +53,15 @@ function M.incline()
 end
 
 function M.cybu_setup()
-  vim.keymap.set("n", "<Tab>", function()
+  local keymap = require("utils.keymap").omit("insert", "n", "<^%Tab>", { silent = true })
+
+  keymap("", function()
     require("cybu").cycle("next")
-  end, {
-    silent = true,
-    desc = "Next buffer"
-  })
-  vim.keymap.set("n", "<S-Tab>", function()
+  end, "Next buffer")
+
+  keymap("S-", function()
     require("cybu").cycle("prev")
-  end, {
-    silent = true,
-    desc = "Previous buffer"
-  })
+  end, "Previous buffer")
 end
 
 function M.cybu()

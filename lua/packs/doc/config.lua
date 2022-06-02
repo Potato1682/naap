@@ -1,11 +1,11 @@
 local M = {}
 
 function M.neogen_setup()
-  vim.keymap.set("n", "<localleader>d", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<localleader>d", function()
     require("neogen").generate()
-  end, {
-    desc = "Generate Document"
-  })
+  end, "Generate Document")
 end
 
 function M.neogen()

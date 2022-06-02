@@ -1,17 +1,13 @@
 local M = {}
 
 function M.dap_setup()
-  local set = function(lhs, rhs, desc)
-    vim.keymap.set("n", "<leader>d" .. lhs, rhs, {
-      desc = desc
-    })
-  end
+  local keymap = require("utils.keymap.presets").leader("n", "d")
 
-  set("bb", function()
+  keymap("bb", function()
     require("dap").toggle_breakpoint()
   end, "Toggle Breakpoint")
 
-  set("bc", function()
+  keymap("bc", function()
     vim.ui.input("Breakpoint condition", function(input)
       if not input then
         return
@@ -21,7 +17,7 @@ function M.dap_setup()
     end)
   end, "Conditional Breakpoint")
 
-  set("bl", function()
+  keymap("bl", function()
     vim.ui.input("Log point message", function(input)
       if not input then
         return
@@ -31,35 +27,35 @@ function M.dap_setup()
     end)
   end, "Log Breakpoint")
 
-  set("c", function()
+  keymap("c", function()
     require("dap").run_to_cursor()
   end, "Run To Cursor")
 
-  set("d", function()
+  keymap("d", function()
     require("dap").continue()
   end, "Continue")
 
-  set("e", function()
+  keymap("e", function()
     require("dapui").eval()
   end, "Eval Current Expression")
 
-  set("E", function()
+  keymap("E", function()
     require("dapui").float_element()
   end, "Current Elements")
 
-  set("i", function()
+  keymap("i", function()
     require("dap").step_into()
   end, "Step Into")
 
-  set("o", function()
+  keymap("o", function()
     require("dap").step_over()
   end, "Step Over")
 
-  set("O", function()
+  keymap("O", function()
     require("dap").step_out()
   end, "Step Out")
 
-  set("r", function()
+  keymap("r", function()
     require("dap.repl").open()
   end, "Open REPL")
 end
@@ -126,7 +122,7 @@ function M.dap()
     progress.update_spinner("dap", body.progressId)
   end
 
-  dap.listeners.before["event_progressUpdate"]["progress-notifications"] = function(session, body)
+  dap.listeners.before["event_progressUpdate"]["progress-notifications"] = function(_, body)
     local notif_data = progress.get_notif_data("dap", body.progressId)
 
     notif_data.notification = vim.notify(progress.format_message(body.message, body.percentage), "info", {
@@ -135,7 +131,7 @@ function M.dap()
     })
   end
 
-  dap.listeners.before["event_progressEnd"]["progress-notifications"] = function(session, body)
+  dap.listeners.before["event_progressEnd"]["progress-notifications"] = function(_, body)
     local notif_data = progress.client_notifs["dap"][body.progressId]
 
     notif_data.notification = vim.notify(body.message and progress.format_message(body.message) or "Complete", "info", {

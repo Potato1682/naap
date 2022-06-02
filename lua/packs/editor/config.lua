@@ -13,48 +13,38 @@ function M.smartpairs()
 end
 
 function M.hlslens_setup()
-  local map = function(lhs, rhs, options)
-    vim.keymap.set("n", lhs, rhs, options or {})
-  end
+  local keymap = require("utils.keymap.presets").mode_only("n", { silent = true })
 
-  map("n", "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>", {
-    silent = true,
-    desc = "Next search hit"
-  })
-  map("N", "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>", {
-    silent = true,
-    desc = "Previous search hit"
-  })
+  keymap(
+    "n",
+    "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>",
+    "Next search hit"
+  )
+  keymap(
+    "N",
+    "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>",
+    "Previous search hit"
+  )
 
-  map("*", function()
+  keymap("*", function()
     require("hlslens").start()
-  end, {
-    desc = "Search"
-  })
-  map("#", function()
+  end, "Search")
+  keymap("#", function()
     require("hlslens").start()
-  end, {
-    desc = "Search"
-  })
-  map("g*", function()
+  end, "Search")
+  keymap("g*", function()
     require("hlslens").start()
-  end, {
-    desc = "Search"
-  })
-  map("g#", function()
+  end, "Search")
+  keymap("g#", function()
     require("hlslens").start()
-  end, {
-    desc = "Search"
-  })
+  end, "Search")
 end
 
 function M.accelerated_jk()
-  vim.keymap.set("n", "j", "<Plug>(accelerated_jk_gj)", {
-    desc = "Down"
-  })
-  vim.keymap.set("n", "k", "<Plug>(accelerated_jk_gk)", {
-    desc = "Up"
-  })
+  local keymap = require("utils.keymap.presets").mode_only("n")
+
+  keymap("j", "<Plug>(accelerated_jk_gj)", "Down")
+  keymap("k", "<Plug>(accelerated_jk_gk)", "Up")
 end
 
 function M.cinnamon()
@@ -74,7 +64,6 @@ function M.houdini()
     escape_sequences = {
       i = function(first, second)
         local seq = first .. second
-
 
         if seq == "AA" then
           return "<BS><BS><End>"
@@ -149,9 +138,11 @@ function M.trouble()
 end
 
 function M.todo_setup()
-  vim.keymap.set("n", "<leader>t", "<cmd>TodoTelescope<cr>", {
-    desc = "Todos"
-  })
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<leader>t", function()
+    vim.cmd("TodoTelescope")
+  end, "Todos")
 end
 
 function M.todo()

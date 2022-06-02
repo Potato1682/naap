@@ -92,11 +92,11 @@ function M.context()
 end
 
 function M.trevj_setup()
-  vim.keymap.set("n", "<localleader>j", function()
+  local keymap = require("utils.keymap").keymap
+
+  keymap("n", "<localleader>j", function()
     require("trevj").format_at_cursor()
-  end, {
-    desc = "Join Lines"
-  })
+  end, "Join Lines")
 end
 
 function M.trevj()
@@ -110,86 +110,56 @@ function M.refactoring()
 end
 
 function M.surf_setup()
-  vim.keymap.set("n", "<A-j>", function()
+  local keymap = require("utils.keymap.presets").mode_only("n", { silent = true })
+  local keymap_visual = require("utils.keymap.presets").mode_only("x", { silent = true })
+
+  keymap("<A-j>", function()
     require("syntax-tree-surfer").move("n", false)
-  end, {
-    silent = true,
-    desc = "Move Current Node Down"
-  })
+  end, "Move Current Node Down")
 
-  vim.keymap.set("n", "<A-k>", function()
+  keymap("<A-k>", function()
     require("syntax-tree-surfer").move("n", true)
-  end, {
-    silent = true,
-    desc = "Move Current Node Up"
-  })
+  end, "Move Current Node Up")
 
-  vim.keymap.set("n", "vx", function()
+  keymap("vx", function()
     require("syntax-tree-surfer").select()
-  end, {
-    silent = true,
-    desc = "Select Current Node"
-  })
+  end, "Select Current Node")
 
-  vim.keymap.set("n", "vn", function()
+  keymap("vn", function()
     require("syntax-tree-surfer").select_current_node()
-  end, {
-    silent = true,
-    desc = "Select Current Node"
-  })
+  end, "Select Current Node")
 
-  vim.keymap.set("n", "p", function()
+  keymap("p", function()
     require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, {
       "normal! O",
       "normal! O",
       "startinsert"
     })
-  end, {
-    silent = true,
-    desc = "Let's brain power'"
-  })
+  end, "Let's brain power'")
 
-  vim.keymap.set("x", "<A-j>", function()
+  keymap_visual("<A-j>", function()
     require("syntax-tree-surfer").surf("next", "visual", true)
-  end, {
-    silent = true,
-    desc = "Surf Down"
-  })
+  end, "Surf Down")
 
-  vim.keymap.set("x", "<A-k>", function()
+  keymap_visual("<A-k>", function()
     require("syntax-tree-surfer").surf("prev", "visual", true)
-  end, {
-    silent = true,
-    desc = "Surf Up"
-  })
+  end, "Surf Up")
 
-  vim.keymap.set("x", "H", function()
+  keymap_visual("H", function()
     require("syntax-tree-surfer").surf("parent", "visual")
-  end, {
-    silent = true,
-    desc = "Select Parent Node"
-  })
+  end, "Select Parent Node")
 
-  vim.keymap.set("x", "J", function()
+  keymap_visual("J", function()
     require("syntax-tree-surfer").surf("next", "visual")
-  end, {
-    silent = true,
-    desc = "Select Next Node"
-  })
+  end, "Select Next Node")
 
-  vim.keymap.set("x", "K", function()
+  keymap_visual("K", function()
     require("syntax-tree-surfer").surf("prev", "visual")
-  end, {
-    silent = true,
-    desc = "Select Previous Node"
-  })
+  end, "Select Previous Node")
 
-  vim.keymap.set("x", "L", function()
+  keymap_visual("L", function()
     require("syntax-tree-surfer").surf("child", "visual")
-  end, {
-    silent = true,
-    desc = "Select Child Node"
-  })
+  end, "Select Child Node")
 end
 
 return M
