@@ -105,9 +105,13 @@ function M.gitsigns()
 
   vim.defer_fn(function()
     if O.editor.cursor_highlight.line then
-      vim.cmd("hi link GitSignsCurrentLineBlame CursorLine")
+      vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
+        link = "CursorLine"
+      })
     else
-      vim.cmd("hi link GitSignsCurrentLineBlame Comment")
+      vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
+        link = "Comment"
+      })
     end
   end, 200)
 end

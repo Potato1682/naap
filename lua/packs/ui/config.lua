@@ -233,8 +233,6 @@ function M.indent_blankline()
       "operation_type"
     }
   }
-
-  vim.cmd("hi! IndentBlanklineContextChar guifg=#3d8cf0 guibg=NONE gui=nocombine")
 end
 
 return M
