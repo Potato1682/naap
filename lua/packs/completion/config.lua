@@ -43,6 +43,34 @@ function M.cmp()
   end
 
   cmp.setup {
+    enabled = function()
+      if require("cmp_dap").is_dap_buffer() then
+        return true
+      end
+
+      if vim.opt_local.buftype:get() == "prompt" then
+        return false
+      end
+
+      if vim.api.nvim_get_mode().mode == "c" then
+        return true
+      end
+
+      if context.in_treesitter_capture("Comment") or context.in_syntax_group("Comment") then
+        return false
+      end
+
+      return true
+    end,
+    snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered()
+    },
     formatting = {
       fields = {
         cmp.ItemField.Kind,
@@ -91,36 +119,12 @@ function M.cmp()
           vim_item.kind = " " .. char(0xe315) .. " "
         end
 
+        if entry.source.name == "copilot" then
+          vim_item.kind = " " .. char(0xfbd9) .. " "
+        end
+
         return vim_item
       end
-    },
-    enabled = function()
-      if require("cmp_dap").is_dap_buffer() then
-        return true
-      end
-
-      if vim.opt_local.buftype:get() == "prompt" then
-        return false
-      end
-
-      if vim.api.nvim_get_mode().mode == "c" then
-        return true
-      end
-
-      if context.in_treesitter_capture("Comment") or context.in_syntax_group("Comment") then
-        return false
-      end
-
-      return true
-    end,
-    snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end
-    },
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered()
     },
     sorting = {
       priority_weight = 2,
