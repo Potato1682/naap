@@ -27,6 +27,12 @@ function M.colorscheme()
       cursorline = O.editor.cursor_highlight.line
     },
     hlgroups = {
+      Search = {
+        fg = "NONE"
+      },
+      IncSearch = {
+        fg = "NONE"
+      },
       DiagnosticUnderlineError = {
         fg = "NONE"
       },
