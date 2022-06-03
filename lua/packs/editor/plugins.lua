@@ -1,5 +1,11 @@
 local editor = {}
 
+editor["ayosec/hltermpaste.vim"] = {
+  config = function()
+    vim.g.hltermpaste_timeout = 400
+  end
+}
+
 editor["ZhiyuanLck/smart-pairs"] = {
   event = "InsertEnter",
 
