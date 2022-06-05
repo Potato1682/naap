@@ -2,7 +2,7 @@ local M = {}
 
 local char = require("utf8").char
 
-local symbol_enabled = char(0xe34c)
+local symbol_enabled = char(0xe34c) .. " "
 local symbol_enabled_fg = "#eea825"
 local symbol_disabled = char(0xfa93)
 local symbol_disabled_fg = "#007bff"
