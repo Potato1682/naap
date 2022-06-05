@@ -8,6 +8,13 @@ function M.toggleterm_setup()
   end, "Open Terminal", {
     silent = true,
   })
+
+  vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "term://*",
+    callback = function()
+      vim.opt_local.spell = false
+    end
+  })
 end
 
 function M.toggleterm()
