@@ -13,6 +13,7 @@ function M.toggleterm_setup()
     pattern = "term://*",
     callback = function()
       vim.opt_local.spell = false
+      vim.opt_local.signcolumn = "no"
     end
   })
 end
