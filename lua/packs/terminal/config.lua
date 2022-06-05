@@ -3,12 +3,6 @@ local M = {}
 function M.toggleterm_setup()
   local keymap = require("utils.keymap").keymap
 
-  keymap("n", "<C-t>", function()
-    vim.cmd("ToggleTerm")
-  end, "Open Terminal", {
-    silent = true,
-  })
-
   vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "term://*",
     callback = function()
@@ -20,8 +14,10 @@ end
 
 function M.toggleterm()
   require("toggleterm").setup {
+    open_mapping = "<C-t>",
     float_opts = {
-      border = "curved"
+      border = require("utils.border").get_border_char_and_hl("rounded"),
+      winblend = 3
     }
   }
 end
