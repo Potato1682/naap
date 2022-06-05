@@ -79,6 +79,10 @@ keymap("n", "Y", "yg$", "Yank after cursor")
 -- join lines without moving cursor
 keymap("n", "J", "mzJ`z", "Join lines")
 
+-- better searching, will be replaced with cinammon.nvim configuration
+keymap("n", "n", "nzzzv", "Next search hit")
+keymap("n", "N", "Nzzzv", "Previous search hit")
+
 -- beter indenting
 keymap("v", "<", "<gv", "Indent Left")
 keymap("v", ">", ">gv", "Indent Right")

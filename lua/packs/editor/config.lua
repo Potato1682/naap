@@ -17,12 +17,22 @@ function M.hlslens_setup()
 
   keymap(
     "n",
-    "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>",
+    function()
+      require("cinnamon.scroll").scroll(vim.v.count1 .. "n", 1, 0, 3)
+      vim.api.nvim_feedkeys("zzzv", "n", true)
+
+      require("hlslens").start()
+    end,
     "Next search hit"
   )
   keymap(
     "N",
-    "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>",
+    function()
+      require("cinnamon.scroll").scroll(vim.v.count1 .. "N", 1, 0, 3)
+      vim.api.nvim_feedkeys("zzzv", "n", true)
+
+      require("hlslens").start()
+    end,
     "Previous search hit"
   )
 
