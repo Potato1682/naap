@@ -90,6 +90,18 @@ keymap("v", ">", ">gv", "Indent Right")
 -- better terminal esc
 keymap("t", "<Esc>", [[<C-\><C-n>]], "Escape from Terminal")
 
+-- split undo with
+local function split_undo_keymap(key)
+  keymap("i", key, key .. "<C-g>u")
+end
+
+split_undo_keymap(",")
+split_undo_keymap("!")
+split_undo_keymap(".")
+split_undo_keymap("?")
+split_undo_keymap("_")
+split_undo_keymap("<cr>")
+
 for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = filetype,
