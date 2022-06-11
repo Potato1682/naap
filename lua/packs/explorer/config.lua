@@ -8,6 +8,25 @@ function M.neotree_setup()
   keymap("n", "<leader>e", function()
     vim.cmd("Neotree toggle position=float")
   end, "Open Explorer")
+
+  local group = vim.api.nvim_create_augroup("hijack_netrw", {
+    clear = true
+  })
+
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = group,
+    pattern = "*",
+    callback = function()
+      local dir = vim.api.nvim_buf_get_name(0)
+      local stat = vim.loop.fs_stat(dir)
+
+      if not stat or stat.type ~= "directory" then
+        return
+      end
+
+      _G.PLoader("neo-tree.nvim")
+    end
+  })
 end
 
 function M.neotree()
@@ -47,6 +66,9 @@ function M.neotree()
     },
 
     default_component_configs = {
+      container = {
+        enable_character_fade = true
+      },
       icon = {
         folder_closed = char(0xf07b),
         folder_open = char(0xf114),
@@ -112,6 +134,7 @@ function M.neotree()
 
     filesystem = {
       group_empty_dirs = true,
+      hijack_netrw_behavior = "open_current",
       use_libuv_file_watcher = true,
 
       window = {
