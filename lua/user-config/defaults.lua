@@ -1,6 +1,6 @@
 return {
   appearance = {
-    colorscheme = "tokyonight"
+    transparency = false
   },
   behavior = {
     timeoutlen = 350
@@ -42,6 +42,11 @@ return {
     magit_keybindings = false,
     github_hostname = "",
     word_diff = false
+  },
+  extras = {
+    toggle = {
+      toggle_chars = {}
+    }
   },
   lang = {
     insert_comma_after_final_obj = false,

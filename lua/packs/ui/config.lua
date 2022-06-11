@@ -24,6 +24,7 @@ function M.colorscheme()
       bold = false,
       italic = true,
       undercurl = true,
+      transparency = O.appearance.transparency,
       cursorline = O.editor.cursor_highlight.line
     },
     hlgroups = {
