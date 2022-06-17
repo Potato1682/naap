@@ -190,12 +190,11 @@ function M.common_on_attach(client, bufnr)
     utils.list_workspace_folders()
   end, "Workspace Folders")
 
-  if cap.workspace_folder_properties.supported then
-    command("LspAddWorkspaceFolder", function(args)
-      vim.lsp.buf.add_workspace_folder(args.args ~= "" and vim.fn.fnamemodify(args.args, ":p"))
-    end, "Add Workspace Folder", { nargs = "?", complete = "dir" })
+  command("LspAddWorkspaceFolder", function(args)
+    vim.lsp.buf.add_workspace_folder(args.args ~= "" and vim.fn.fnamemodify(args.args, ":p"))
+  end, "Add Workspace Folder", { nargs = "?", complete = "dir" })
 
-    command("LspRemoveWorkspaceFolder", function(args)
+  command("LspRemoveWorkspaceFolder", function(args)
       vim.lsp.buf.remove_workspace_folder(unpack(args.fargs))
     end, "Remove Workspace Folder", {
       nargs = "?",
@@ -204,18 +203,17 @@ function M.common_on_attach(client, bufnr)
       end
     })
 
-    keymap("<leader>lwf", function()
-      utils.list_workspace_folders()
-    end, "Workspace Folders")
+  keymap("<leader>lwf", function()
+    utils.list_workspace_folders()
+  end, "Workspace Folders")
 
-    keymap("<leader>lwa", function()
-      vim.lsp.buf.add_workspace_folder()
-    end, "Add Workspace Folder")
+  keymap("<leader>lwa", function()
+    vim.lsp.buf.add_workspace_folder()
+  end, "Add Workspace Folder")
 
-    keymap("<leader>lwr", function()
-      vim.lsp.buf.remove_workspace_folder()
-    end, "Remove Workspace Folder")
-  end
+  keymap("<leader>lwr", function()
+    vim.lsp.buf.remove_workspace_folder()
+  end, "Remove Workspace Folder")
 
   command("LspLog", "execute '<mods> pedit +$' v:lua.vim.lsp.get_log_path()", "LSP Log")
 
