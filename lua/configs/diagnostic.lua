@@ -39,6 +39,31 @@ function M.config()
     },
     signs = true
   }
+
+  local ns = vim.api.nvim_create_namespace("worst_diagnostics")
+  local original_signs_handler = vim.diagnostic.handlers.signs
+
+  vim.diagnostic.handlers.signs = {
+    show = function(_, bufnr, _, opts)
+      local diagnostics = vim.diagnostic.get(bufnr)
+      local max_severity_per_line = {}
+
+      for _, diagnostic in pairs(diagnostics) do
+        local max = max_severity_per_line[diagnostic.lnum]
+
+        if not max or diagnostic.severity < max.severity then
+          max_severity_per_line[diagnostic.lnum] = diagnostic
+        end
+      end
+
+      local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
+
+      original_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
+    end,
+    hide = function(_, bufnr)
+      original_signs_handler.hide(ns, bufnr)
+    end
+  }
 end
 
 function M.define_signs()
