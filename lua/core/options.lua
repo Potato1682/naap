@@ -103,8 +103,6 @@ vim.opt.shortmess = {
   x = true
 }
 
-vim.opt.terse = true
-
 vim.opt.pumheight = 10
 vim.opt.winblend = 17
 vim.opt.winfixheight = true
