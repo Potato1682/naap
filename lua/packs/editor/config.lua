@@ -48,6 +48,15 @@ function M.hlslens_setup()
   keymap("g#", function()
     require("hlslens").start()
   end, "Search")
+
+  keymap("<leader>h", function()
+    vim.cmd("nohlsearch")
+
+    local hlslens = require("hlslens")
+
+    hlslens.disable()
+    hlslens.enable()
+  end, "nohlsearch")
 end
 
 function M.accelerated_jk()
