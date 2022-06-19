@@ -31,6 +31,9 @@ vim.opt.titlestring = "%<%F%=%l/%L - nvim"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --hidden --vimgrep --smart-case --"
 
+-- screen flicker workaround
+vim.opt.winbar = " "
+
 vim.opt.wrapscan = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
