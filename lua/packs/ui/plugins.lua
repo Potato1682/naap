@@ -10,10 +10,6 @@ ui["vimpostor/vim-lumen"] = {
 
   cond = function()
     require("packs.ui.config").lumen_cond()
-  end,
-
-  setup = function()
-    require("packs.ui.config").lumen_setup()
   end
 }
 
