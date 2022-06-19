@@ -67,8 +67,6 @@ local setup = function()
   prepare_needed_dirs()
   pack.disable_builtin_plugins()
 
-  pcall(require, "impatient")
-
   require("core.options-before-pack")
 
   require("user-config.helper")
