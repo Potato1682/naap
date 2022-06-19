@@ -117,6 +117,10 @@ function M.cmp()
 
         if entry.source.name == "cmp_tabnine" then
           vim_item.kind = " " .. char(0xe315) .. " "
+
+          if entry.completion_item.data and entry.completion_item.data.detail then
+            vim_item.menu = entry.completion_item.data.detail
+          end
         end
 
         if entry.source.name == "copilot" then
