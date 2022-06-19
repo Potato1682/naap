@@ -100,7 +100,7 @@ completion["github/copilot.vim"] = {
 }
 
 completion["zbirenbaum/copilot.lua"] = {
-  module = "copilot",
+  event = "InsertEnter",
 
   config = function()
     require("packs.completion.config").copilot()

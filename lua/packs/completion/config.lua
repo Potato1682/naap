@@ -133,6 +133,8 @@ function M.cmp()
     sorting = {
       priority_weight = 2,
       comparators = {
+        require("copilot_cmp.comparators").prioritize,
+        require("copilot_cmp.comparators").score,
         require("cmp_tabnine.compare"),
         cmp.config.compare.offset,
         cmp.config.compare.exact,
