@@ -120,7 +120,7 @@ vim.opt.relativenumber = O.editor.relative_number
 vim.opt.cursorline = O.editor.cursor_highlight.line
 vim.opt.cursorcolumn = O.editor.cursor_highlight.column
 vim.opt.concealcursor = "nc"
-vim.opt.signcolumn = "auto:2-3"
+vim.opt.signcolumn = "auto:3-4"
 vim.opt.virtualedit = "onemore"
 vim.opt.formatoptions = {
   ["1"] = true,
@@ -145,9 +145,17 @@ vim.opt.matchpairs = {
   "“:”"
 }
 
+vim.opt.foldcolumn = "auto"
 vim.opt.foldlevelstart = O.editor.folding.starting_level
 
 vim.opt.jumpoptions = "stack"
+
+vim.opt.fillchars = {
+  eob = " ",
+  foldopen = "",
+  foldsep = " ",
+  foldclose = ""
+}
 
 vim.opt.list = O.editor.listchars
 vim.opt.listchars = {
