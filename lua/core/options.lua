@@ -197,6 +197,7 @@ vim.opt.sh = O.terminal.shell
 
 vim.opt.errorbells = false
 
+vim.opt.exrc = true
 vim.opt.secure = true
 
 vim.opt.undodir = join_paths(data_dir, "undos")
