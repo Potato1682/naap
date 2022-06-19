@@ -8,6 +8,8 @@ core["nvim-lua/plenary.nvim"] = {}
 -- lua 5.3
 core["uga-rosa/utf8.nvim"] = {}
 
+core["kevinhwang91/promise-async"] = {}
+
 core["antoinemadec/FixCursorHold.nvim"] = {
   event = "BufEnter",
 

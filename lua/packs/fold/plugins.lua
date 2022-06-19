@@ -12,17 +12,11 @@ fold["jghauser/fold-cycle.nvim"] = {
   end
 }
 
-fold["anuvyklack/pretty-fold.nvim"] = {
-  requires = {
-    "anuvyklack/nvim-keymap-amend",
-
-    module = "keymap-amend"
-  },
-
+fold["kevinhwang91/nvim-ufo"] = {
   event = "BufReadPost",
 
   config = function()
-    require("packs.fold.config").pretty()
+    require("packs.fold.config").ufo()
   end
 }
 
