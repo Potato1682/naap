@@ -15,10 +15,10 @@ function M.add_margin()
 end
 
 function M.setup()
-  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost" }, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile", "BufWritePost", "TextChanged", "TextChangedI" }, {
     pattern = "*",
-    callback = function(bufnr)
-      M.add_margin(bufnr)
+    callback = function()
+      M.add_margin()
     end
   })
 end
