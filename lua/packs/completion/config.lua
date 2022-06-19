@@ -42,6 +42,12 @@ function M.cmp()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
 
+  local window_config = cmp.config.window.bordered({
+    border = "rounded"
+  })
+
+  window_config.col_offset = -5
+
   cmp.setup {
     enabled = function()
       if require("cmp_dap").is_dap_buffer() then
@@ -68,8 +74,8 @@ function M.cmp()
       end
     },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered()
+      completion = window_config,
+      documentation = window_config
     },
     formatting = {
       fields = {
