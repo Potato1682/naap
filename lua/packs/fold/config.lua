@@ -66,6 +66,16 @@ function M.ufo()
       return new_virtual_text
     end
   }
+
+  vim.schedule(function()
+    vim.api.nvim_set_hl(0, "Folded", {
+      foreground = "#5c6370",
+      background = "#342f50"
+    })
+    vim.api.nvim_set_hl(0, "UfoFoldedBg", {
+      background = "#342f50"
+    })
+  end)
 end
 
 return M

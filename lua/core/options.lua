@@ -148,7 +148,7 @@ vim.opt.matchpairs = {
   "“:”"
 }
 
-vim.opt.foldcolumn = "auto"
+vim.opt.foldcolumn = "2"
 vim.opt.foldlevelstart = O.editor.folding.starting_level
 
 vim.opt.jumpoptions = "stack"
