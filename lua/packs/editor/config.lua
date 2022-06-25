@@ -175,4 +175,109 @@ function M.pqf()
   }
 end
 
+function M.dial_setup()
+  local keymap_n = require("utils.keymap").omit("insert", "n", "<C-^%>", { noremap = true, expr = true })
+  local keymap_v = require("utils.keymap.presets").mode_only("v", { noremap = true, expr = true })
+
+  keymap_n("a", function()
+    return require("dial.map").inc_normal()
+  end, "Increment")
+  keymap_n("x", function()
+    return require("dial.map").dec_normal()
+  end, "Decrement")
+
+  keymap_v("<C-a>", function()
+    return require("dial.map").inc_visual()
+  end, "Increment")
+  keymap_v("<C-x>", function()
+    return require("dial.map").dec_visual()
+  end, "Decrement")
+  keymap_v("g<C-a>", function()
+    return require("dial.map").inc_gvisual()
+  end, "Increment")
+  keymap_v("g<C-x>", function()
+    return require("dial.map").dec_gvisual()
+  end, "Decrement")
+end
+
+function M.dial()
+  local augend = require("dial.augend")
+
+  require("dial.config").augends:register_group {
+    default = {
+      augend.integer.alias.decimal,
+      augend.integer.alias.hex,
+      augend.integer.alias.octal,
+      augend.integer.alias.binary,
+      augend.semver.alias.semver,
+      augend.constant.alias.bool,
+      augend.constant.new {
+        elements = {
+          "yes",
+          "no"
+        },
+        word = true,
+        cyclic = true
+      },
+      augend.constant.new {
+        elements = {
+          "Yes",
+          "No"
+        },
+        word = true,
+        cyclic = true
+      },
+      augend.constant.new {
+        elements = {
+          "YES",
+          "NO"
+        },
+        word = true,
+        cyclic = true
+      },
+      augend.constant.new {
+        elements = {
+          "let",
+          "const"
+        },
+        word = true,
+        cyclic = true
+      },
+      augend.constant.new {
+        elements = {
+          "and",
+          "or"
+        },
+        word = true,
+        cyclic = true
+      },
+      augend.constant.new {
+        elements = {
+          "&&",
+          "||"
+        },
+        word = false,
+        cyclic = true
+      },
+      augend.case.new {
+        types = {
+          "camelCase",
+          "snake_case"
+        }
+      },
+      augend.date.alias["%Y/%m/%d"],
+      augend.date.alias["%Y-%m-%d"],
+      augend.date.alias["%Y年%-m月%-d日"],
+      augend.date.alias["%Y年%-m月%-d日(%ja)"],
+      augend.constant.alias.ja_weekday,
+      augend.constant.alias.ja_weekday_full,
+      augend.paren.alias.quote,
+      augend.paren.alias.brackets,
+      augend.paren.lua_str_literal,
+      augend.paren.rust_str_literal,
+      augend.misc.markdown_header
+    }
+  }
+end
+
 return M

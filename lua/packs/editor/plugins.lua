@@ -160,7 +160,7 @@ editor["folke/trouble.nvim"] = {
   },
 
   config = function()
-    require("packs.editor.config").trouble()
+    require{"packs.editor.config"}.trouble()
   end
 }
 
@@ -189,6 +189,18 @@ editor["https://gitlab.com/yorickpeterse/nvim-pqf"] = {
 
 editor["kevinhwang91/nvim-bqf"] = {
   ft = "qf"
+}
+
+editor["monaqa/dial.nvim"] = {
+  module = "dial",
+
+  setup = function()
+    require("packs.editor.config").dial_setup()
+  end,
+
+  config = function()
+    require("packs.editor.config").dial()
+  end
 }
 
 return editor
