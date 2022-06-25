@@ -107,7 +107,7 @@ for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
     pattern = filetype,
     callback = function()
       keymap("n", "q", function()
-        vim.cmd("q")
+        vim.cmd("close")
       end, "Quit", {
         buffer = true
       })
@@ -121,7 +121,7 @@ for _, buftype in ipairs(constants.window.quit_with_q.buftypes) do
     callback = function()
       if vim.opt_local.buftype:get() == buftype then
         keymap("n", "q", function()
-          vim.cmd("q")
+          vim.cmd("close")
         end, "Quit", {
           buffer = true
         })

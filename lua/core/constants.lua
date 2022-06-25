@@ -24,6 +24,9 @@ local quit_with_q = {
     "quickfix"
   },
   filetypes = {
+    --help
+    "help",
+
     -- vim-dadbod
     "dbout",
 
