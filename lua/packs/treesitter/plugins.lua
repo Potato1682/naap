@@ -57,6 +57,8 @@ treesitter["lewis6991/spellsitter.nvim"] = {
 treesitter["SmiteshP/nvim-gps"] = {
   after = "nvim-treesitter",
 
+  disable = vim.fn.has("nvim-0.8") == 1,
+
   config = function()
     require("packs.treesitter.config").gps()
   end
@@ -64,6 +66,8 @@ treesitter["SmiteshP/nvim-gps"] = {
 
 treesitter["lewis6991/nvim-treesitter-context"] = {
   after = "nvim-treesitter",
+
+  disable = vim.fn.has("nvim-0.8") == 1,
 
   config = function()
     require("packs.treesitter.config").context()

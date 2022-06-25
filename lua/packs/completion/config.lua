@@ -1,40 +1,13 @@
 local M = {}
 
 function M.cmp()
+  local kind = require("utils.lsp.kind")
   local cmp = require("cmp")
   local types = require("cmp.types")
   local str = require("cmp.utils.str")
   local context = require("cmp.config.context")
   local luasnip = require("luasnip")
   local char = require("utf8").char
-
-  local kind_mapping = {
-    Class = "   ",
-    Color = "   ",
-    Constant = "   ",
-    Constructor = "   ",
-    Enum = "   ",
-    EnumMember = "   ",
-    Event = "   ",
-    Field = " ﰠ  ",
-    File = "   ",
-    Folder = "   ",
-    Function = "   ",
-    Interface = "ﰮ  ",
-    Keyword = "   ",
-    Method = "   ",
-    Module = " {} ",
-    Operator = "   ",
-    Property = "   ",
-    Reference = "  ",
-    Snippet = "  ",
-    Struct = "  ",
-    Text = "   ",
-    TypeParameter = "<T>",
-    Unit = " 塞 ",
-    Value = "   ",
-    Variable = "   ",
-  }
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -84,7 +57,7 @@ function M.cmp()
         cmp.ItemField.Menu
       },
       format = function(entry, vim_item)
-        vim_item.kind = kind_mapping[vim_item.kind] or vim_item.kind
+        vim_item.kind = kind[vim_item.kind] or vim_item.kind
 
         -- Code from max397574/ignis-nvim
         local word = entry:get_insert_text()

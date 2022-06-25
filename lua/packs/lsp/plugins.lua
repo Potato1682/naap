@@ -71,6 +71,16 @@ lsp["ray-x/lsp_signature.nvim"] = {
   module = "lsp_signature"
 }
 
+lsp["SmiteshP/nvim-navic"] = {
+  disable = vim.fn.has("nvim-0.8") == 0,
+
+  module = "nvim-navic",
+
+  config = function()
+    require("packs.lsp.config").navic()
+  end
+}
+
 lsp["lukas-reineke/lsp-format.nvim"] = {
   after = "nvim-lspconfig"
 }

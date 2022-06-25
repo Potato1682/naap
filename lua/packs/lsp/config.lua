@@ -63,7 +63,7 @@ function M.hover_setup()
     require("hover").hover_select()
   end, "hover.nvim (select provider)")
 
-  vim.api.nvim_create_user_command("Hover", function(args)
+  vim.api.nvim_create_user_command("Hover", function()
     require("hover").hover()
   end, {
     nargs = "*",
@@ -82,6 +82,48 @@ function M.hover()
     },
     title = false
   }
+end
+
+function M.navic()
+  require("nvim-navic").setup {
+    icons = require("utils.lsp.kind"),
+    highlight = true
+  }
+
+  -- enabled to suppress annoying errors
+  vim.g.navic_silence = true
+
+  -- define hl
+  vim.api.nvim_set_hl(0, "NavicArray",         { link = "Special" })
+  vim.api.nvim_set_hl(0, "NavicBoolean",       { link = "Boolean" })
+  vim.api.nvim_set_hl(0, "NavicClass",         { link = "CmpItemKindClass" })
+  vim.api.nvim_set_hl(0, "NavicConstant",      { link = "CmpItemKindConstant" })
+  vim.api.nvim_set_hl(0, "NavicConstructor",   { link = "CmpItemKindConstructor" })
+  vim.api.nvim_set_hl(0, "NavicEnum",          { link = "CmpItemKindEnum" })
+  vim.api.nvim_set_hl(0, "NavicEnumMember",    { link = "CmpItemKindEnumMember" })
+  vim.api.nvim_set_hl(0, "NavicEvent",         { link = "Special" })
+  vim.api.nvim_set_hl(0, "NavicField",         { link = "CmpItemKindField" })
+  vim.api.nvim_set_hl(0, "NavicFile",          { link = "CmpItemKindFile" })
+  vim.api.nvim_set_hl(0, "NavicFunction",      { link = "CmpItemKindFunction" })
+  vim.api.nvim_set_hl(0, "NavicInterface",     { link = "CmpItemKindInterface" })
+  vim.api.nvim_set_hl(0, "NavicKey",           { link = "Tag" })
+  vim.api.nvim_set_hl(0, "NavicMethod",        { link = "CmpItemKindMethod" })
+  vim.api.nvim_set_hl(0, "NavicModule",        { link = "CmpItemKindModule" })
+  vim.api.nvim_set_hl(0, "NavicNamespace",     { link = "TSNamespace" })
+  vim.api.nvim_set_hl(0, "NavicNull",          { link = "TSConstBuiltin" })
+  vim.api.nvim_set_hl(0, "NavicNumber",        { link = "Number" })
+  vim.api.nvim_set_hl(0, "NavicObject",        { link = "Special" })
+  vim.api.nvim_set_hl(0, "NavicOperator",      { link = "Operator" })
+  vim.api.nvim_set_hl(0, "NavicPackage",       { link = "Special" })
+  vim.api.nvim_set_hl(0, "NavicProperty",      { link = "CmpItemKindProperty" })
+  vim.api.nvim_set_hl(0, "NavicSeparator",     { link = "LineNr" })
+  vim.api.nvim_set_hl(0, "NavicString",        { link = "CmpItemKindKeyword" })
+  vim.api.nvim_set_hl(0, "NavicStruct",        { link = "CmpItemKindStruct" })
+  vim.api.nvim_set_hl(0, "NavicText",          { link = "Normal" })
+  vim.api.nvim_set_hl(0, "NavicTypeParameter", { link = "Type" })
+  vim.api.nvim_set_hl(0, "NavicVariable",      { link = "TSVariable" })
+
+  vim.opt.winbar = [[ %{%v:lua.require("nvim-navic").get_location()%}]]
 end
 
 return M

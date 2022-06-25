@@ -231,6 +231,12 @@ function M.common_on_attach(client, bufnr)
   require("illuminate").on_attach(client)
 
   require("inlay-hints").on_attach(client, bufnr)
+
+  local ok, navic = pcall(require, "nvim-navic")
+
+  if ok and client.config.name ~= "null-ls" then
+    navic.attach(client, bufnr)
+  end
 end
 
 function M.without_server_formatting(client, bufnr)
