@@ -94,6 +94,8 @@ function M.setup()
   M.toggle_enable()
 end
 
-M.setup()
+vim.schedule(function()
+  M.setup()
+end)
 
 return M
