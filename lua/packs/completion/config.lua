@@ -282,10 +282,10 @@ function M.copilot()
 end
 
 function M.dadbod()
-  local augroup = vim.api.nvim_create_augroup("dadbod-completion", {})
+  local group = vim.api.nvim_create_augroup("dadbod-completion", {})
 
   vim.api.nvim_create_autocmd("FileType", {
-    group = augroup,
+    group = group,
     pattern = "sql,mysql,plsql",
     callback = function()
       require("cmp").setup_buffer {

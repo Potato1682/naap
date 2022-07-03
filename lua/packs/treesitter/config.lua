@@ -50,13 +50,6 @@ function M.autotag()
 end
 
 function M.hlargs()
-  vim.api.nvim_create_autocmd("Colorscheme", {
-    pattern = "*",
-    callback = function()
-      vim.cmd("highlight! link HlArgs TSParameter")
-    end
-  })
-
   require("hlargs").setup()
 end
 

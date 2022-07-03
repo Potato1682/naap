@@ -47,6 +47,7 @@ function M.common_on_attach(client, bufnr)
       require("telescope.builtin").lsp_definitions()
     end, "Defenition")
     command("LspPreviewDefinition", function()
+      -- TODO: Replace with lspsaga
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
 
@@ -170,7 +171,10 @@ function M.common_on_attach(client, bufnr)
   end
 
   if cap.code_lens or cap.codeLensProvider then
+    local group = vim.api.nvim_create_augroup("codelens", {})
+
     vim.api.nvim_create_autocmd({ "TextChanged" }, {
+      group = group,
       buffer = 0,
       callback = function()
         vim.lsp.codelens.refresh()

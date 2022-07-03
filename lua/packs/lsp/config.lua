@@ -5,6 +5,7 @@ local M = {}
 function M.lightbulb_setup()
   local augroup = vim.api.nvim_create_augroup("lightbulb", {})
 
+  -- TODO: Replace with lspsaga
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     group = augroup,
     callback = function()
