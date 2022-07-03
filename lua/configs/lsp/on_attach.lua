@@ -153,19 +153,19 @@ function M.common_on_attach(client, bufnr)
 
   if cap.call_hierarchy or cap.callHierarchyProvider then
     command("LspIncomingCalls", function()
-      vim.lsp.buf.incoming_calls()
+      require("telescope.builtin").lsp_incoming_calls()
     end, "Incoming Calls")
 
     command("LspOutgoingCalls", function()
-      vim.lsp.buf.outgoing_calls()
+      require("telescope.builtin").lsp_outgoing_calls()
     end, "Outgoing Calls")
 
     keymap("<leader>lci", function()
-      vim.lsp.buf.incoming_calls()
+      require("telescope.builtin").lsp_incoming_calls()
     end, "Incoming Calls")
 
     keymap("<leader>lco", function()
-      vim.lsp.buf.outgoing_calls()
+      require("telescope.builtin").lsp_outgoing_calls()
     end, "Outgoing Calls")
   end
 
