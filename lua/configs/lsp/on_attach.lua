@@ -50,10 +50,10 @@ function M.common_on_attach(client, bufnr)
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
 
-    keymap("gD", function()
+    keymap("gd", function()
       require("telescope.builtin").lsp_definitions()
     end, "Definition")
-    keymap("gpD", function()
+    keymap("gpd", function()
       require("goto-preview").goto_preview_definition()
     end, "Preview Definition")
   end
