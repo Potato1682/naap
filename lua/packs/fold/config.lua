@@ -22,6 +22,12 @@ function M.ufo()
   local char = require("utf8").char
 
   require("ufo").setup {
+    preview = {
+      win_config = {
+        border = require("utils.border").get_border_chars("rounded"),
+        winblend = 0
+      }
+    },
     fold_virt_text_handler = function(virtual_text, lnum, endlnum, width, truncate)
       local new_virtual_text = {}
       local foldlnum = endlnum - lnum

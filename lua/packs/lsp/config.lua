@@ -58,7 +58,11 @@ function M.hover_setup()
   local keymap = require("utils.keymap.presets").mode_only("n")
 
   keymap("K", function()
-    require("hover").hover()
+    local winid = require("ufo").peekFoldedLinesUnderCursor()
+
+    if not winid then
+      require("hover").hover()
+    end
   end, "hover.nvim")
   keymap("gK", function()
     require("hover").hover_select()

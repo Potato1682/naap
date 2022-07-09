@@ -298,6 +298,8 @@ pack.setup = function()
       nargs = "+"
     }
   )
+
+  require("editor.events.pack").setup()
 end
 
 return pack
