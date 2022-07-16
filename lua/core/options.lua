@@ -32,7 +32,9 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --hidden --vimgrep --smart-case --"
 
 -- screen flicker workaround
-vim.opt.winbar = " "
+if vim.fn.has("nvim-0.8") == 1 then
+  vim.opt.winbar = " "
+end
 
 vim.opt.wrapscan = true
 vim.opt.ignorecase = true
