@@ -1,5 +1,4 @@
 local treesitter = {}
-local conf = require("packs.treesitter.config")
 
 treesitter["nvim-treesitter/nvim-treesitter"] = {
   opt = true,
