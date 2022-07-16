@@ -78,9 +78,6 @@ function M.ufo()
       foreground = "#5c6370",
       background = "#342f50"
     })
-    vim.api.nvim_set_hl(0, "UfoFoldedBg", {
-      background = "#342f50"
-    })
   end)
 end
 
