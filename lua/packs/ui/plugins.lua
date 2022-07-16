@@ -10,6 +10,10 @@ ui["vimpostor/vim-lumen"] = {
 
   cond = function()
     require("packs.ui.config").lumen_cond()
+  end,
+
+  setup = function()
+    vim.g.lumen_startup_overwrite = 0
   end
 }
 
