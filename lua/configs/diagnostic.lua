@@ -1,7 +1,13 @@
 local M = {}
 
 local severity = vim.diagnostic.severity
-local char = require("utf8").char
+local ok, utf8 = pcall(require, "utf8")
+
+if not ok then
+  return {}
+end
+
+local char = utf8.char
 
 function M.config()
   vim.diagnostic.config {
