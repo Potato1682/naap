@@ -220,7 +220,7 @@ pack.setup = function()
         Pack:load_plugin_manager()
       end
 
-      packer[method](opts)
+      packer[method](unpack(opts.fargs))
     end
 
     return cb
@@ -268,11 +268,11 @@ pack.setup = function()
   vim.api.nvim_create_user_command("PackerUpdate", run_packer "update", { desc = "[Packer] Update plugins" })
   vim.api.nvim_create_user_command("PackerClean", run_packer "clean", { desc = "[Packer] Clean plugins" })
   vim.api.nvim_create_user_command("PackerStatus", run_packer "status", { desc = "[Packer] Show plugins status" })
-  vim.api.nvim_create_user_command("PackerCompile", run_packer "compile", { desc = "[Packer] Compile plugins detail" })
+  vim.api.nvim_create_user_command("PackerCompile", run_packer "compile", { desc = "[Packer] Compile plugins detail", nargs = "*" })
   vim.api.nvim_create_user_command("PackerSync", run_packer "sync", { desc = "[Packer] Sync plugins" })
-  vim.api.nvim_create_user_command("PackerLoad", run_packer "loader", { desc = "[Packer] Load a plugin" })
+  vim.api.nvim_create_user_command("PackerLoad", run_packer "loader", { desc = "[Packer] Load a plugin", nargs = "+" })
   vim.api.nvim_create_user_command("PackerProfile", run_packer "profile_output", { desc = "[Packer] Show plugins profiling result" })
-  vim.api.nvim_create_user_command("PackerSnapshot", run_packer "snapshot", { desc = "[Packer] Create a snapshot of plugins" })
+  vim.api.nvim_create_user_command("PackerSnapshot", run_packer "snapshot", { desc = "[Packer] Create a snapshot of plugins", nargs = "*" })
   vim.api.nvim_create_user_command("PackerSnapshotRollback", run_packer "rollback", { desc = "[Packer] Rollback from the snapshot" })
 
   require("editor.events.pack").setup()
