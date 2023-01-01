@@ -13,7 +13,7 @@ lsp["williamboman/mason.nvim"] = {
     "mason-null-ls.nvim",
   },
 
-  event = "BufRead",
+  event = "BufReadPre",
 
   setup = function()
     require("packs.lsp.config").mason_setup()
