@@ -29,23 +29,23 @@ function M.cybu_setup()
 end
 
 function M.cybu()
-  require("cybu").setup {
+  require("cybu").setup({
     behavior = {
       mode = {
         default = {
-          view = "paging"
+          view = "paging",
         },
         last_used = {
           switch = "immediate",
-          view = "paging"
-        }
-      }
+          view = "paging",
+        },
+      },
     },
     style = {
       border = "rounded",
     },
-    exclude = require("core.constants").window.ignore_buf_change_filetypes
-  }
+    exclude = require("core.constants").window.ignore_buf_change_filetypes,
+  })
 end
 
 return M

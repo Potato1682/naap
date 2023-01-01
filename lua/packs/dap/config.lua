@@ -68,28 +68,28 @@ function M.dap()
     text = char(0xf62e) .. " ",
     texthl = "DapBreakpoint",
     linehl = "",
-    numhl = ""
+    numhl = "",
   })
 
   vim.fn.sign_define("DapBreakpointCondition", {
     text = char(0xf62e) .. " ",
     texthl = "DapBreakpointCondition",
     linehl = "",
-    numhl = ""
+    numhl = "",
   })
 
   vim.fn.sign_define("DapLogPoint", {
     text = char(0xf62e) .. " ",
     texthl = "DapLogPoint",
     linehl = "",
-    numhl = ""
+    numhl = "",
   })
 
   vim.fn.sign_define("DapStopped", {
     text = char(0x2588) .. char(0xe0b0),
     texthl = "WarningMsg",
     linehl = "",
-    numhl = ""
+    numhl = "",
   })
 
   dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -137,7 +137,7 @@ function M.dap()
     notif_data.notification = vim.notify(body.message and progress.format_message(body.message) or "Complete", "info", {
       icon = "",
       replace = notif_data.notification,
-      timeout = 3000
+      timeout = 3000,
     })
 
     notif_data.spinner = nil
@@ -146,17 +146,16 @@ function M.dap()
   require("packs.dap.adapters.vimkind")
 end
 
-function M.ui_setup()
-end
+function M.ui_setup() end
 
 function M.ui()
   require("dapui").setup()
 end
 
 function M.virtual_text()
-  require("nvim-dap-virtual-text").setup {
-    commented = O.debug.virtual_text.commented
-  }
+  require("nvim-dap-virtual-text").setup({
+    commented = O.debug.virtual_text.commented,
+  })
 end
 
 return M

@@ -1,7 +1,7 @@
 local M = {}
 
 function M.treesitter()
-  require("nvim-treesitter.configs").setup {
+  require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
     highlight = { enable = true },
     yati = { enable = true },
@@ -9,23 +9,23 @@ function M.treesitter()
     rainbow = {
       enable = true,
       extended_mode = true,
-      max_file_lines = 2000
+      max_file_lines = 2000,
     },
     endwise = {
-      enable = true
+      enable = true,
     },
     context_commentstring = {
       enable = true,
-      enable_autocmd = false
+      enable_autocmd = false,
     },
     textsubjects = {
       enable = true,
       keymaps = {
         ["."] = "textsubjects-smart",
-        [";"] = "textsubjects-big"
+        [";"] = "textsubjects-big",
       },
     },
-  }
+  })
 
   require("nvim-treesitter.install").prefer_git = true
 
@@ -40,28 +40,28 @@ end
 function M.gps()
   local char = require("utf8").char
 
-  require("nvim-gps").setup {
+  require("nvim-gps").setup({
     icons = {
       ["class-name"] = char(0xf6a5) .. " ",
       ["function-name"] = char(0xf6a6) .. " ",
       ["method-name"] = char(0xf6a7) .. " ",
       ["container-name"] = char(0xf636) .. " ",
-      ["tag-name"] = char(0xf673) .. " "
+      ["tag-name"] = char(0xf673) .. " ",
     },
 
     separator = string.format(" %s ", char(0xf641)),
 
     depth = 3,
 
-    depth_limit_indicator = ".."
-  }
+    depth_limit_indicator = "..",
+  })
 end
 
 function M.context()
-  require("treesitter-context").setup {
+  require("treesitter-context").setup({
     enable = true,
-    throttle = true
-  }
+    throttle = true,
+  })
 end
 
 function M.treesj_setup()
@@ -81,13 +81,13 @@ function M.treesj_setup()
 end
 
 function M.treesj()
-  require("treesj").setup {
-    use_default_keymaps = false
-  }
+  require("treesj").setup({
+    use_default_keymaps = false,
+  })
 end
 
 function M.refactoring()
-  require("refactoring").setup {}
+  require("refactoring").setup({})
 end
 
 function M.surf_setup()
@@ -127,7 +127,7 @@ function M.surf_setup()
     require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, {
       "normal! O",
       "normal! O",
-      "startinsert"
+      "startinsert",
     })
   end, "Let's brain power'")
 
@@ -157,4 +157,3 @@ function M.surf_setup()
 end
 
 return M
-

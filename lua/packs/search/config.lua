@@ -30,7 +30,7 @@ function M.telescope()
   local actions_layout = require("telescope.actions.layout")
   local actions_util = require("utils.telescope.actions")
 
-  require("telescope").setup {
+  require("telescope").setup({
     defaults = {
       winblend = 10,
       prompt_prefix = char(0xf002) .. " ",
@@ -38,8 +38,8 @@ function M.telescope()
       path_display = {
         shorten = {
           len = 1,
-          exclude = { 3, 4, -1 }
-        }
+          exclude = { 3, 4, -1 },
+        },
       },
       dynamic_preview_title = true,
       mappings = {
@@ -55,14 +55,14 @@ function M.telescope()
           ["<C-n>"] = actions.cycle_history_next,
           ["<C-u>"] = actions.cycle_history_prev,
           ["<Esc>"] = actions.close,
-          ["<cr>"] = actions.select_default + actions.center
-        }
-      }
+          ["<cr>"] = actions.select_default + actions.center,
+        },
+      },
     },
     pickers = {
       find_files = {
-        theme = "dropdown"
-      }
+        theme = "dropdown",
+      },
     },
     extensions = {
       -- Sorter
@@ -70,10 +70,10 @@ function M.telescope()
         fuzzy = true,
         override_generic_sorter = true,
         override_file_sorter = true,
-        case_mode = "smart_case"
+        case_mode = "smart_case",
       },
-    }
-  }
+    },
+  })
 
   require("utils.telescope").load_registered_extensions()
 end
@@ -98,19 +98,19 @@ function M.telescope_dap_setup()
   local keymap = require("utils.keymap.presets").leader("n", "")
 
   keymap("sb", function()
-    require("telescope").extensions.dap.list_breakpoints {}
+    require("telescope").extensions.dap.list_breakpoints({})
   end, "Breakpoints")
 
   keymap("dC", function()
-    require("telescope").extensions.dap.configurations {}
+    require("telescope").extensions.dap.configurations({})
   end, "Configurations")
 
   keymap("dv", function()
-    require("telescope").extensions.dap.variables {}
+    require("telescope").extensions.dap.variables({})
   end, "Variables")
 
   keymap("df", function()
-    require("telescope").extensions.dap.frames {}
+    require("telescope").extensions.dap.frames({})
   end, "Frames")
 end
 

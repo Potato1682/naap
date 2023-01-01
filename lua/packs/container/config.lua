@@ -37,23 +37,23 @@ function M.devcontainer_setup()
 end
 
 function M.devcontainer()
-  require("devcontainer").setup {
+  require("devcontainer").setup({
     autocommands = {
       clean = true,
-      update = true
+      update = true,
     },
     attach_mounts = {
       always = true,
       neovim_config = {
         enabled = true,
-        options = {}
+        options = {},
       },
       neovim_data = {
-        enabled = true
+        enabled = true,
       },
       neovim_state = {
-        enabled = true
-      }
+        enabled = true,
+      },
     },
     terminal_handler = function(command)
       local output = ""
@@ -62,7 +62,7 @@ function M.devcontainer()
       local notify = function(msg, level)
         notification = vim.notify(msg, level, {
           title = "devcontainer",
-          replace = notification
+          replace = notification,
         })
       end
 
@@ -79,10 +79,10 @@ function M.devcontainer()
           if #output == 0 then
             notify("No output of command, exit code: " .. code, "warn")
           end
-        end
+        end,
       })
-    end
-  }
+    end,
+  })
 end
 
 return M

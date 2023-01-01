@@ -1,96 +1,96 @@
 local lsp = {}
 
 lsp["williamboman/mason.nvim"] = {
-	requires = {
-		{ "neovim/nvim-lspconfig", module = "lspconfig" },
-		{ "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
-		{ "jay-babu/mason-null-ls.nvim", module = "mason-null-ls" },
-	},
+  requires = {
+    { "neovim/nvim-lspconfig", module = "lspconfig" },
+    { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" },
+    { "jay-babu/mason-null-ls.nvim", module = "mason-null-ls" },
+  },
 
-	wants = {
-		"nvim-lspconfig",
-		"mason-lspconfig.nvim",
-		"mason-null-ls.nvim",
-	},
+  wants = {
+    "nvim-lspconfig",
+    "mason-lspconfig.nvim",
+    "mason-null-ls.nvim",
+  },
 
-	event = "BufRead",
+  event = "BufRead",
 
-	setup = function()
-		require("packs.lsp.config").mason_setup()
-	end,
+  setup = function()
+    require("packs.lsp.config").mason_setup()
+  end,
 
-	config = function()
-		require("packs.lsp.config").mason()
-	end,
+  config = function()
+    require("packs.lsp.config").mason()
+  end,
 }
 
 lsp["jose-elias-alvarez/null-ls.nvim"] = {
-	module = "null-ls",
+  module = "null-ls",
 }
 
 lsp["kosayoda/nvim-lightbulb"] = {
-	module = "nvim-lightbulb",
+  module = "nvim-lightbulb",
 
-	setup = function()
-		require("packs.lsp.config").lightbulb_setup()
-	end,
+  setup = function()
+    require("packs.lsp.config").lightbulb_setup()
+  end,
 
-	config = function()
-		require("packs.lsp.config").lightbulb()
-	end,
+  config = function()
+    require("packs.lsp.config").lightbulb()
+  end,
 }
 
 lsp["dnlhc/glance.nvim"] = {
-	cmd = "Glance",
+  cmd = "Glance",
 
-	config = function()
-		require("packs.lsp.config").glance()
-	end,
+  config = function()
+    require("packs.lsp.config").glance()
+  end,
 }
 
 lsp["lvimuser/lsp-inlayhints.nvim"] = {
-	module = "lsp-inlayhints",
+  module = "lsp-inlayhints",
 
-	config = function()
-		require("packs.lsp.config").inlay_hints()
-	end,
+  config = function()
+    require("packs.lsp.config").inlay_hints()
+  end,
 }
 
 lsp["weilbith/nvim-code-action-menu"] = {
-	cmd = "CodeActionMenu",
+  cmd = "CodeActionMenu",
 
-	config = function()
-		vim.g.code_action_menu_window_border = "rounded"
-	end,
+  config = function()
+    vim.g.code_action_menu_window_border = "rounded"
+  end,
 }
 
 lsp["smjonas/inc-rename.nvim"] = {
-	cmd = "IncRename",
+  cmd = "IncRename",
 
-	config = function()
-		require("packs.lsp.config").inc_rename()
-	end,
+  config = function()
+    require("packs.lsp.config").inc_rename()
+  end,
 }
 
 lsp["utilyre/barbecue.nvim"] = {
-	requires = {
-		{ "nvim-tree/nvim-web-devicons", opt = true },
-		{ "SmiteshP/nvim-navic", module = "nvim-navic" },
-	},
+  requires = {
+    { "nvim-tree/nvim-web-devicons", opt = true },
+    { "SmiteshP/nvim-navic", module = "nvim-navic" },
+  },
 
-	wants = {
-		"nvim-web-devicons",
-	},
+  wants = {
+    "nvim-web-devicons",
+  },
 
-	event = "BufRead",
+  event = "BufRead",
 
-	config = function()
-		require("packs.lsp.config").barbecue()
-	end,
+  config = function()
+    require("packs.lsp.config").barbecue()
+  end,
 }
 
 lsp["lukas-reineke/lsp-format.nvim"] = {
-	module = "lsp-format",
+  module = "lsp-format",
 }
 
 return lsp

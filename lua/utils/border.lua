@@ -8,7 +8,7 @@ local border_double = {
   { "╝", "FloatBorder" },
   { "═", "FloatBorder" },
   { "╚", "FloatBorder" },
-  { "║", "FloatBorder" }
+  { "║", "FloatBorder" },
 }
 
 local border_rounded = {
@@ -19,7 +19,7 @@ local border_rounded = {
   { "╯", "FloatBorder" },
   { "─", "FloatBorder" },
   { "╰", "FloatBorder" },
-  { "│", "FloatBorder" }
+  { "│", "FloatBorder" },
 }
 
 function M.get_border_char_and_hl(name)

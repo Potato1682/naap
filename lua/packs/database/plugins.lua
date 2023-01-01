@@ -1,7 +1,7 @@
 local database = {}
 
 database["tpope/vim-dadbod"] = {
-  cmd = "DB"
+  cmd = "DB",
 }
 
 database["kristijanhusak/vim-dadbod-ui"] = {
@@ -13,7 +13,7 @@ database["kristijanhusak/vim-dadbod-ui"] = {
 
   config = function()
     vim.cmd("packadd vim-dadbod")
-  end
+  end,
 }
 
 return database

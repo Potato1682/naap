@@ -7,31 +7,31 @@ treesitter["nvim-treesitter/nvim-treesitter"] = {
 
   config = function()
     require("packs.treesitter.config").treesitter()
-  end
+  end,
 }
 
 treesitter["yioneko/nvim-yati"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["p00f/nvim-ts-rainbow"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["windwp/nvim-ts-autotag"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["RRethy/nvim-treesitter-endwise"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["JoosepAlviste/nvim-ts-context-commentstring"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["RRethy/nvim-treesitter-textsubjects"] = {
-  after = "nvim-treesitter"
+  after = "nvim-treesitter",
 }
 
 treesitter["m-demare/hlargs.nvim"] = {
@@ -39,7 +39,7 @@ treesitter["m-demare/hlargs.nvim"] = {
 
   config = function()
     require("packs.treesitter.config").hlargs()
-  end
+  end,
 }
 
 treesitter["Wansmer/treesj"] = {
@@ -51,7 +51,7 @@ treesitter["Wansmer/treesj"] = {
 
   config = function()
     require("packs.treesitter.config").treesj()
-  end
+  end,
 }
 
 treesitter["ziontee113/syntax-tree-surfer"] = {
@@ -59,8 +59,7 @@ treesitter["ziontee113/syntax-tree-surfer"] = {
 
   setup = function()
     require("packs.treesitter.config").surf_setup()
-  end
+  end,
 }
 
 return treesitter
-

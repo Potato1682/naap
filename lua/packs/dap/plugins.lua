@@ -9,7 +9,7 @@ dap["mfussenegger/nvim-dap"] = {
 
   config = function()
     require("packs.dap.config").dap()
-  end
+  end,
 }
 
 dap["rcarriga/nvim-dap-ui"] = {
@@ -17,7 +17,7 @@ dap["rcarriga/nvim-dap-ui"] = {
 
   config = function()
     require("packs.dap.config").ui()
-  end
+  end,
 }
 
 dap["theHamsta/nvim-dap-virtual-text"] = {
@@ -25,7 +25,7 @@ dap["theHamsta/nvim-dap-virtual-text"] = {
 
   config = function()
     require("packs.dap.config").virtual_text()
-  end
+  end,
 }
 
 -- Adapters
@@ -33,7 +33,7 @@ dap["theHamsta/nvim-dap-virtual-text"] = {
 -- TODO Pocco81/dap-buddy.nvim
 
 dap["jbyuki/one-small-step-for-vimkind"] = {
-  module = "osv"
+  module = "osv",
 }
 
 return dap

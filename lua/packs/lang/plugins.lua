@@ -2,21 +2,21 @@ local lang = {}
 
 -- Json
 lang["b0o/SchemaStore.nvim"] = {
-	module = "schemastore",
+  module = "schemastore",
 }
 
 -- Lua
 lang["folke/neodev.nvim"] = {
-	module = "neodev",
+  module = "neodev",
 
-	config = function()
-		require("packs.lang.config").neodev()
-	end,
+  config = function()
+    require("packs.lang.config").neodev()
+  end,
 }
 
 -- Python
 lang["HallerPatrick/py_lsp.nvim"] = {
-	module = "py_lsp",
+  module = "py_lsp",
 }
 
 return lang

@@ -1,9 +1,11 @@
 local editor = {}
 
 editor["ayosec/hltermpaste.vim"] = {
+  event = "CursorMoved",
+
   config = function()
     vim.g.hltermpaste_timeout = 400
-  end
+  end,
 }
 
 editor["ZhiyuanLck/smart-pairs"] = {
@@ -11,7 +13,7 @@ editor["ZhiyuanLck/smart-pairs"] = {
 
   config = function()
     require("packs.editor.config").smartpairs()
-  end
+  end,
 }
 
 editor["RRethy/vim-illuminate"] = {
@@ -19,7 +21,7 @@ editor["RRethy/vim-illuminate"] = {
 
   config = function()
     vim.g.Illuminate_delay = 300
-  end
+  end,
 }
 
 editor["folke/which-key.nvim"] = {
@@ -27,29 +29,29 @@ editor["folke/which-key.nvim"] = {
 
   config = function()
     require("editor.keymap.which-key")
-  end
+  end,
 }
 
 editor["rainbowhxch/accelerated-jk.nvim"] = {
   keys = {
     { "n", "j" },
-    { "n", "k" }
+    { "n", "k" },
   },
 
   config = function()
     require("packs.editor.config").accelerated_jk()
-  end
+  end,
 }
 
 editor["declancm/cinnamon.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   config = function()
     require("packs.editor.config").cinnamon()
-  end
+  end,
 }
 
 editor["TheBlob42/houdini.nvim"] = {
@@ -57,7 +59,7 @@ editor["TheBlob42/houdini.nvim"] = {
 
   config = function()
     require("packs.editor.config").houdini()
-  end
+  end,
 }
 
 editor["kevinhwang91/nvim-fFHighlight"] = {
@@ -70,91 +72,91 @@ editor["kevinhwang91/nvim-fFHighlight"] = {
 
   config = function()
     require("packs.editor.config").fF_highlight()
-  end
+  end,
 }
 
 editor["chentoast/marks.nvim"] = {
   keys = {
     { "n", "m" },
-    { "n", "dm" }
+    { "n", "dm" },
   },
 
   config = function()
     require("packs.editor.config").marks()
-  end
+  end,
 }
 
 editor["NvChad/nvim-colorizer.lua"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   config = function()
     require("packs.editor.config").colorizer()
-  end
+  end,
 }
 
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
-  }
+    "BufReadPost",
+  },
 }
 
 editor["numToStr/Comment.nvim"] = {
   event = {
-    "CursorMoved"
+    "CursorMoved",
   },
 
   config = function()
     require("packs.editor.config").comment()
-  end
+  end,
 }
 
 editor["0styx0/abbreinder.nvim"] = {
   requires = {
     "0styx0/abbremand.nvim",
 
-    module = "abbremand"
+    module = "abbremand",
   },
 
   event = {
     "InsertEnter",
-    "CmdlineEnter"
+    "CmdlineEnter",
   },
 
   config = function()
     require("packs.editor.config").abbreinder()
-  end
+  end,
 }
 
 editor["kevinhwang91/nvim-hclipboard"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   config = function()
     require("packs.editor.config").hclipboard()
-  end
+  end,
 }
 
 editor["folke/trouble.nvim"] = {
   cmd = {
     "Trouble",
-    "TroubleToggle"
+    "TroubleToggle",
   },
 
   config = function()
-    require{"packs.editor.config"}.trouble()
-  end
+    require({ "packs.editor.config" }).trouble()
+  end,
 }
 
 editor["folke/todo-comments.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   setup = function()
@@ -163,7 +165,7 @@ editor["folke/todo-comments.nvim"] = {
 
   config = function()
     require("packs.editor.config").todo()
-  end
+  end,
 }
 
 editor["https://gitlab.com/yorickpeterse/nvim-pqf"] = {
@@ -171,11 +173,11 @@ editor["https://gitlab.com/yorickpeterse/nvim-pqf"] = {
 
   config = function()
     require("packs.editor.config").pqf()
-  end
+  end,
 }
 
 editor["kevinhwang91/nvim-bqf"] = {
-  ft = "qf"
+  ft = "qf",
 }
 
 editor["monaqa/dial.nvim"] = {
@@ -187,7 +189,7 @@ editor["monaqa/dial.nvim"] = {
 
   config = function()
     require("packs.editor.config").dial()
-  end
+  end,
 }
 
 editor["gbprod/stay-in-place.nvim"] = {
@@ -199,7 +201,7 @@ editor["gbprod/stay-in-place.nvim"] = {
 
   config = function()
     require("packs.editor.config").stay_in_place()
-  end
+  end,
 }
 
 return editor

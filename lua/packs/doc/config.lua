@@ -9,9 +9,9 @@ function M.neogen_setup()
 end
 
 function M.neogen()
-  require("neogen").setup {
-    snippet_engine = "luasnip"
-  }
+  require("neogen").setup({
+    snippet_engine = "luasnip",
+  })
 end
 
 return M

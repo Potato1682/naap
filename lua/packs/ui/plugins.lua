@@ -8,7 +8,7 @@ ui["catppuccin/nvim"] = {
 
   config = function()
     require("packs.ui.config").colorscheme()
-  end
+  end,
 }
 
 ui["stevearc/dressing.nvim"] = {
@@ -16,7 +16,7 @@ ui["stevearc/dressing.nvim"] = {
 
   config = function()
     require("packs.ui.config").dressing()
-  end
+  end,
 }
 
 ui["folke/noice.nvim"] = {
@@ -29,8 +29,8 @@ ui["folke/noice.nvim"] = {
 
       config = function()
         require("packs.ui.config").notify()
-      end
-    }
+      end,
+    },
   },
 
   wants = { "nvim-treesitter" },
@@ -39,7 +39,7 @@ ui["folke/noice.nvim"] = {
     "BufRead",
     "BufNewFile",
     "InsertEnter",
-    "CmdlineEnter"
+    "CmdlineEnter",
   },
 
   module = "noice",
@@ -65,16 +65,16 @@ ui["folke/noice.nvim"] = {
 
   config = function()
     require("packs.ui.config").noice()
-  end
+  end,
 }
 
 ui["nvim-lualine/lualine.nvim"] = {
   requires = {
-    { "kyazdani42/nvim-web-devicons", opt = true }
+    { "kyazdani42/nvim-web-devicons", opt = true },
   },
 
   wants = {
-    "nvim-web-devicons"
+    "nvim-web-devicons",
   },
 
   event = "UIEnter",
@@ -89,17 +89,17 @@ ui["nvim-lualine/lualine.nvim"] = {
 
   config = function()
     require("configs.lualine")
-  end
+  end,
 }
 
 ui["akinsho/bufferline.nvim"] = {
   requires = {
-    { "kyazdani42/nvim-web-devicons", opt = true }
+    { "kyazdani42/nvim-web-devicons", opt = true },
   },
 
   wants = {
     "catppuccin",
-    "nvim-web-devicons"
+    "nvim-web-devicons",
   },
 
   event = "BufWinEnter",
@@ -108,13 +108,13 @@ ui["akinsho/bufferline.nvim"] = {
 
   config = function()
     require("packs.ui.config").bufferline()
-  end
+  end,
 }
 
 ui["lewis6991/satellite.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   cond = helper.in_vscode,
@@ -127,33 +127,33 @@ ui["lewis6991/satellite.nvim"] = {
 
   config = function()
     require("satellite").setup()
-  end
+  end,
 }
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
   event = {
     "BufNewFile",
-    "BufRead"
+    "BufRead",
   },
 
   cond = helper.in_vscode,
 
   config = function()
     require("packs.ui.config").indent_blankline()
-  end
+  end,
 }
 
 ui["lukas-reineke/virt-column.nvim"] = {
   event = {
     "BufNewFile",
-    "BufRead"
+    "BufRead",
   },
 
   cond = helper.in_vscode,
 
   config = function()
     require("virt-column").setup()
-  end
+  end,
 }
 
 return ui

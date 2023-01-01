@@ -9,7 +9,7 @@ doc["danymat/neogen"] = {
 
   config = function()
     require("packs.doc.config").neogen()
-  end
+  end,
 }
 
 return doc

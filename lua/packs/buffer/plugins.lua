@@ -5,7 +5,7 @@ buffer["famiu/bufdelete.nvim"] = {
 
   setup = function()
     require("packs.buffer.config").bufdelete_setup()
-  end
+  end,
 }
 
 buffer["ghillb/cybu.nvim"] = {
@@ -17,7 +17,7 @@ buffer["ghillb/cybu.nvim"] = {
 
   config = function()
     require("packs.buffer.config").cybu()
-  end
+  end,
 }
 
 return buffer

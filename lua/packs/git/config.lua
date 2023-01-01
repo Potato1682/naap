@@ -1,7 +1,7 @@
 local M = {}
 
 function M.gitsigns()
-  require("gitsigns").setup {
+  require("gitsigns").setup({
     signs = {
       add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
       change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -19,7 +19,7 @@ function M.gitsigns()
 
       local leader_visual_keymap = presets.leader({ "n", "v" }, "g", {
         buffer = bufnr,
-        silent = true
+        silent = true,
       })
 
       local leader_keymap = presets.leader("n", "g", { buffer = bufnr })
@@ -63,9 +63,9 @@ function M.gitsigns()
       leader_keymap("R", gs.reset_buffer, "Unstage Buffer")
       leader_keymap("p", gs.preview_hunk, "Preview Hunk")
       leader_keymap("B", function()
-        gs.blame_line {
-          full = true
-        }
+        gs.blame_line({
+          full = true,
+        })
       end, "Blame Line")
       leader_keymap("T", gs.toggle_current_line_blame, "Toggle Current Line Blame")
       leader_keymap("d", gs.diffthis, "Diff This")
@@ -75,51 +75,57 @@ function M.gitsigns()
       leader_keymap("t", gs.toggle_deleted, "Toggle Deleted")
 
       -- Text object
-      require("utils.keymap").keymap({ "o", "x" }, "ih", function()
-        vim.cmd("Gitsigns select_hunk")
-      end, "Select Hunk", {
-        silent = true
-      })
+      require("utils.keymap").keymap(
+        { "o", "x" },
+        "ih",
+        function()
+          vim.cmd("Gitsigns select_hunk")
+        end,
+        "Select Hunk",
+        {
+          silent = true,
+        }
+      )
     end,
     watch_gitdir = {
       interval = 1000,
-      follow_files = true
+      follow_files = true,
     },
     diff_opts = {
       algorithm = "histogram",
-      internal = true
+      internal = true,
     },
     attach_to_untracked = true,
     current_line_blame = O.git.current_line_blame,
     current_line_blame_opts = {
       virt_text = true,
-      delay = 400
+      delay = 400,
     },
     preview_config = {
       border = "rounded",
       relative = "cursor",
       row = 0,
-      col = 1
-    }
-  }
+      col = 1,
+    },
+  })
 
   vim.defer_fn(function()
     if O.editor.cursor_highlight.line then
       vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
-        link = "CursorLine"
+        link = "CursorLine",
       })
     else
       vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
-        link = "Comment"
+        link = "Comment",
       })
     end
   end, 200)
 end
 
 function M.diffview()
-  require("diffview").setup {
-    enhanced_diff_hl = true
-  }
+  require("diffview").setup({
+    enhanced_diff_hl = true,
+  })
 end
 
 function M.neogit_setup()
@@ -131,12 +137,12 @@ function M.neogit_setup()
 end
 
 function M.neogit()
-  require("neogit").setup {
+  require("neogit").setup({
     use_magit_keybindings = O.git.magit_keybindings,
     integrations = {
-      diffview = true
-    }
-  }
+      diffview = true,
+    },
+  })
 end
 
 function M.conflict_setup()
@@ -157,22 +163,22 @@ function M.conflict_setup()
 
       keymap("[x", "<Plug>(git-conflict-next-conflict)", "Next Git Conflict")
       keymap("]x", "<Plug>(git-conflict-prev-conflict)", "Previous Git Conflict")
-    end
+    end,
   })
 end
 
 function M.conflict()
-  require("git-conflict").setup {
+  require("git-conflict").setup({
     default_mappings = false,
     highlights = {
       incoming = "Visual",
-      current = "DiffAdd"
-    }
-  }
+      current = "DiffAdd",
+    },
+  })
 end
 
 function M.octo()
-  require("octo").setup {
+  require("octo").setup({
     github_hostname = O.git.github_hostname,
     mappings = {
       issue = {
@@ -283,9 +289,9 @@ function M.octo()
         select_prev_entry = "[q", -- move to next changed file
         close_review_tab = "<C-c>", -- close review tab
         toggle_viewed = "<leader><space>", -- toggle viewer viewed state
-      }
-    }
-  }
+      },
+    },
+  })
 end
 
 return M

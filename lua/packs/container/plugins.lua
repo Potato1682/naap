@@ -19,7 +19,7 @@ container["esensar/nvim-dev-container"] = {
     "DevcontainerRemoveAll",
     "DevcontainerLogs",
     "DevcontainerOpenNearestConfig",
-    "DevcontainerEditNearestConfig"
+    "DevcontainerEditNearestConfig",
   },
 
   setup = function()
@@ -28,7 +28,7 @@ container["esensar/nvim-dev-container"] = {
 
   config = function()
     require("packs.container.config").devcontainer()
-  end
+  end,
 }
 
 return container

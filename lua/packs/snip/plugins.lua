@@ -2,18 +2,18 @@ local snip = {}
 
 snip["L3MON4D3/LuaSnip"] = {
   requires = {
-    { "rafamadriz/friendly-snippets", opt = true }
+    { "rafamadriz/friendly-snippets", opt = true },
   },
 
   wants = {
-    "friendly-snippets"
+    "friendly-snippets",
   },
 
   module = "luasnip",
 
   config = function()
     require("packs.snip.config").luasnip()
-  end
+  end,
 }
 
 return snip

@@ -102,12 +102,18 @@ for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = filetype,
     callback = function()
-      keymap("n", "q", function()
-        vim.cmd("close")
-      end, "Quit", {
-        buffer = true
-      })
-    end
+      keymap(
+        "n",
+        "q",
+        function()
+          vim.cmd("close")
+        end,
+        "Quit",
+        {
+          buffer = true,
+        }
+      )
+    end,
   })
 end
 
@@ -116,12 +122,18 @@ for _, buftype in ipairs(constants.window.quit_with_q.buftypes) do
     pattern = "*",
     callback = function()
       if vim.opt_local.buftype:get() == buftype then
-        keymap("n", "q", function()
-          vim.cmd("close")
-        end, "Quit", {
-          buffer = true
-        })
+        keymap(
+          "n",
+          "q",
+          function()
+            vim.cmd("close")
+          end,
+          "Quit",
+          {
+            buffer = true,
+          }
+        )
       end
-    end
+    end,
   })
 end

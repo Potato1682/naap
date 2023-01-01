@@ -5,7 +5,7 @@ discord["andweeb/presence.nvim"] = {
 
   config = function()
     require("packs.discord.config").presence()
-  end
+  end,
 }
 
 return discord

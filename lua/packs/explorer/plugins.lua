@@ -9,7 +9,7 @@ explorer["nvim-neo-tree/neo-tree.nvim"] = {
 
   config = function()
     require("packs.explorer.config").neotree()
-  end
+  end,
 }
 
 return explorer

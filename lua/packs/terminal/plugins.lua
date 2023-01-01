@@ -1,16 +1,20 @@
 local terminal = {}
 
 terminal["akinsho/toggleterm.nvim"] = {
-  -- module = "toggleterm",
-  --
-  -- cmd = {
-  --   "ToggleTerm",
-  --   "TermExec"
-  -- },
+  module = "toggleterm",
+
+  cmd = {
+    "ToggleTerm",
+    "TermExec",
+  },
+
+  setup = function()
+    require("packs.terminal.config").toggleterm_setup()
+  end,
 
   config = function()
     require("packs.terminal.config").toggleterm()
-  end
+  end,
 }
 
 return terminal

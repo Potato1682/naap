@@ -7,7 +7,7 @@ function M.luasnip()
   local luasnip = require("luasnip")
 
   local augroup = vim.api.nvim_create_augroup("luasnip-expand", {
-    clear = true
+    clear = true,
   })
 
   vim.api.nvim_create_autocmd("ModeChanged", {
@@ -17,7 +17,7 @@ function M.luasnip()
       if luasnip.in_snippet() then
         return vim.diagnostic.disable()
       end
-    end
+    end,
   })
 
   vim.api.nvim_create_autocmd("ModeChanged", {
@@ -27,7 +27,7 @@ function M.luasnip()
       if luasnip.in_snippet() then
         return vim.diagnostic.enable()
       end
-    end
+    end,
   })
 end
 

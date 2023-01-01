@@ -9,4 +9,3 @@ core["nvim-lua/plenary.nvim"] = {}
 core["uga-rosa/utf8.nvim"] = {}
 
 return core
-

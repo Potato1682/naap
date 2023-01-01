@@ -63,14 +63,14 @@ function M.setup()
     pattern = "LumenLight",
     callback = function()
       M.toggle_enable()
-    end
+    end,
   })
 
   vim.api.nvim_create_autocmd("User", {
     pattern = "LumenDark",
     callback = function()
       M.toggle_disable()
-    end
+    end,
   })
 
   if vim.g.light_theme then

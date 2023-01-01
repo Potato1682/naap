@@ -9,7 +9,7 @@ function M.add_margin()
       priority = 1,
       sign_hl_group = "Normal",
       number_hl_group = nil,
-      line_hl_group = nil
+      line_hl_group = nil,
     })
   end
 end

@@ -9,9 +9,7 @@ function M.list_workspace_folders()
   end
 
   vim.notify(
-    "List of workspace folders:\n"
-    .. (workspace_folders ~= "" and bullet or "")
-    .. workspace_folders,
+    "List of workspace folders:\n" .. (workspace_folders ~= "" and bullet or "") .. workspace_folders,
     vim.log.levels.INFO,
     { title = "lsp" }
   )

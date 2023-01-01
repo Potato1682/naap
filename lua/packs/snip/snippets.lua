@@ -1,4 +1,4 @@
-local luasnip = require "luasnip"
+local luasnip = require("luasnip")
 
 local s = luasnip.snippet
 local sn = luasnip.snippet_node
@@ -10,129 +10,129 @@ luasnip.snippets = {
   all = {},
   lua = {
     s("module", {
-      t "local M = {}",
-      t { "", "", "" },
-      t "function M.",
+      t("local M = {}"),
+      t({ "", "", "" }),
+      t("function M."),
       i(1),
-      t "(",
+      t("("),
       i(2),
-      t ")",
-      t { "", "\t" },
+      t(")"),
+      t({ "", "\t" }),
       i(0),
-      t { "", "end" },
-      t { "", "", "" },
-      t "return M"
-    })
+      t({ "", "end" }),
+      t({ "", "", "" }),
+      t("return M"),
+    }),
   },
   java = {
     s("class", {
       c(1, {
-        t "public ",
-        t "private "
+        t("public "),
+        t("private "),
       }),
-      t "class ",
+      t("class "),
       i(2),
-      t " ",
+      t(" "),
       c(3, {
-        t "{",
+        t("{"),
         sn(nil, {
-          t "extends ",
+          t("extends "),
           i(1),
-          t " {"
+          t(" {"),
         }),
         sn(nil, {
-          t "implements ",
+          t("implements "),
           i(1),
-          t " {"
-        })
+          t(" {"),
+        }),
       }),
-      t { "", "\t" },
+      t({ "", "\t" }),
       i(0),
-      t { "", "}" }
+      t({ "", "}" }),
     }),
     s("class-allman", {
       c(1, {
-        t "public ",
-        t "private "
+        t("public "),
+        t("private "),
       }),
-      t "class ",
+      t("class "),
       i(2),
-      t " ",
+      t(" "),
       c(3, {
-        t "",
+        t(""),
         sn(nil, {
-          t "extends ",
-          i(1)
+          t("extends "),
+          i(1),
         }),
         sn(nil, {
-          t "implements ",
-          i(1)
-        })
+          t("implements "),
+          i(1),
+        }),
       }),
-      t { "", "{" },
-      t { "", "\t" },
+      t({ "", "{" }),
+      t({ "", "\t" }),
       i(0),
-      t { "", "}" }
+      t({ "", "}" }),
     }),
     s("fn", {
       c(1, {
-        t "public ",
-        t "private "
+        t("public "),
+        t("private "),
       }),
       c(2, {
-        t "void",
+        t("void"),
         i(nil, { "" }),
-        t "String",
-        t "char",
-        t "int",
-        t "double",
-        t "boolean"
+        t("String"),
+        t("char"),
+        t("int"),
+        t("double"),
+        t("boolean"),
       }),
-      t " ",
+      t(" "),
       i(3),
-      t "(",
+      t("("),
       i(4),
-      t ")",
+      t(")"),
       c(5, {
-        t "",
+        t(""),
         sn(nil, {
-          t { "", " throws " },
-          i(1)
-        })
+          t({ "", " throws " }),
+          i(1),
+        }),
       }),
-      t { " {", "\t" },
+      t({ " {", "\t" }),
       i(0),
-      t { "", "}" },
+      t({ "", "}" }),
     }),
     s("fn-allman", {
       c(1, {
-        t "public ",
-        t "private "
+        t("public "),
+        t("private "),
       }),
       c(2, {
-        t "void",
+        t("void"),
         i(nil, { "" }),
-        t "String",
-        t "char",
-        t "int",
-        t "double",
-        t "boolean"
+        t("String"),
+        t("char"),
+        t("int"),
+        t("double"),
+        t("boolean"),
       }),
-      t " ",
+      t(" "),
       i(3),
-      t "(",
+      t("("),
       i(4),
-      t ")",
+      t(")"),
       c(5, {
-        t "",
+        t(""),
         sn(nil, {
-          t { "", " throws " },
-          i(1)
-        })
+          t({ "", " throws " }),
+          i(1),
+        }),
       }),
-      t { "", " {", "", "\t" },
+      t({ "", " {", "", "\t" }),
       i(0),
-      t { "", "}" }
-    })
-  }
+      t({ "", "}" }),
+    }),
+  },
 }

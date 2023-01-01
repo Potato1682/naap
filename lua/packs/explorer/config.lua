@@ -10,7 +10,7 @@ function M.neotree_setup()
   end, "Open Explorer")
 
   local group = vim.api.nvim_create_augroup("hijack_netrw", {
-    clear = true
+    clear = true,
   })
 
   vim.api.nvim_create_autocmd("BufEnter", {
@@ -25,14 +25,14 @@ function M.neotree_setup()
       end
 
       _G.PLoader("neo-tree.nvim")
-    end
+    end,
   })
 end
 
 function M.neotree()
   local char = require("utf8").char
 
-  require("neo-tree").setup {
+  require("neo-tree").setup({
     close_if_last_window = true,
     popup_border_style = "rounded",
 
@@ -53,47 +53,47 @@ function M.neotree()
             arguments = {
               {
                 sourceUri = vim.uri_from_fname(source),
-                targetUri = vim.uri_from_fname(target)
-              }
-            }
+                targetUri = vim.uri_from_fname(target),
+              },
+            },
           })
 
           if not ok then
             vim.notify("Failed to refactor rename: tsserver request failed", vim.log.levels.WARN, { title = "lsp" })
           end
-        end
-      }
+        end,
+      },
     },
 
     default_component_configs = {
       container = {
-        enable_character_fade = true
+        enable_character_fade = true,
       },
       icon = {
         folder_closed = char(0xf07b),
         folder_open = char(0xf114),
-        folder_empty = char(0xf115)
+        folder_empty = char(0xf115),
       },
       name = {
         trailing_slash = false,
         use_git_status_colors = true,
-        highlight = "NeoTreeFileName"
+        highlight = "NeoTreeFileName",
       },
       git_status = {
         symbols = {
           -- Change type
-          added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted   = "✖", -- this can only be used in the git_status source
-          renamed   = "", -- this can only be used in the git_status source
+          added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted = "✖", -- this can only be used in the git_status source
+          renamed = "", -- this can only be used in the git_status source
           -- Status type
           untracked = "",
-          ignored   = "",
-          unstaged  = "",
-          staged    = "",
-          conflict  = ""
-        }
-      }
+          ignored = "",
+          unstaged = "",
+          staged = "",
+          conflict = "",
+        },
+      },
     },
 
     window = {
@@ -128,8 +128,8 @@ function M.neotree()
 
             vim.cmd("Neotree reveal")
           end
-        end
-      }
+        end,
+      },
     },
 
     filesystem = {
@@ -141,7 +141,7 @@ function M.neotree()
         popup = {
           position = {
             col = "100%",
-            row = "2"
+            row = "2",
           },
           size = function(state)
             local root_name = vim.fn.fnamemodify(state.path, ":~")
@@ -149,9 +149,9 @@ function M.neotree()
 
             return {
               width = math.max(root_len, 50),
-              height = vim.opt_local.lines:get() - 6
+              height = vim.opt_local.lines:get() - 6,
             }
-          end
+          end,
         },
         mappings = {
           ["<BS>"] = function(state)
@@ -164,8 +164,8 @@ function M.neotree()
             end
           end,
           ["i"] = "run_command",
-          ["O"] = "system_open"
-        }
+          ["O"] = "system_open",
+        },
       },
 
       commands = {
@@ -195,10 +195,10 @@ function M.neotree()
             -- elseif constants.is_macos then
             --   vim.api.nvim_command("silent !open -g " .. path)
           end
-        end
-      }
-    }
-  }
+        end,
+      },
+    },
+  })
 end
 
 return M

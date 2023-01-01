@@ -9,32 +9,20 @@ local prepare_needed_dirs = function()
     constants.data_dir .. path_sep .. "backups",
     constants.cache_dir .. path_sep .. "sessions",
     constants.cache_dir .. path_sep .. "swap",
-    constants.cache_dir .. path_sep .. "undos"
+    constants.cache_dir .. path_sep .. "undos",
   }
 
   for _, needed_dir in pairs(needed_dirs) do
     local needed_dir_stat, err, err_signature = uv.fs_stat(needed_dir)
 
     if needed_dir_stat == nil and err_signature ~= "ENOENT" then
-      vim.notify(
-        "Cannot stat directory: "
-        .. needed_dir
-        .. "\n"
-        .. err,
-        log_levels.ERROR, {
-        title = "core"
-      }
-      )
+      vim.notify("Cannot stat directory: " .. needed_dir .. "\n" .. err, log_levels.ERROR, {
+        title = "core",
+      })
     elseif err == nil and needed_dir_stat.type ~= "directory" then
-      vim.notify(
-        "Error while preparing "
-        .. needed_dir
-        .. ": This is a "
-        .. needed_dir_stat.type,
-        log_levels.ERROR, {
-        title = "core"
-      }
-      )
+      vim.notify("Error while preparing " .. needed_dir .. ": This is a " .. needed_dir_stat.type, log_levels.ERROR, {
+        title = "core",
+      })
 
       return
     end
@@ -74,5 +62,5 @@ end
 
 return {
   setup = setup,
-  finalize = finalize
+  finalize = finalize,
 }

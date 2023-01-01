@@ -16,12 +16,12 @@ function M.cmp()
   end
 
   local window_config = cmp.config.window.bordered({
-    border = "rounded"
+    border = "rounded",
   })
 
   window_config.col_offset = -5
 
-  cmp.setup {
+  cmp.setup({
     enabled = function()
       if require("cmp_dap").is_dap_buffer() then
         return true
@@ -44,17 +44,17 @@ function M.cmp()
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
-      end
+      end,
     },
     window = {
       completion = window_config,
-      documentation = window_config
+      documentation = window_config,
     },
     formatting = {
       fields = {
         cmp.ItemField.Kind,
         cmp.ItemField.Abbr,
-        cmp.ItemField.Menu
+        cmp.ItemField.Menu,
       },
       format = function(entry, vim_item)
         vim_item.kind = kind[vim_item.kind] or vim_item.kind
@@ -71,17 +71,15 @@ function M.cmp()
         local max = 50
 
         if string.len(word) >= max then
-          local before = string.sub(
-            word,
-            1,
-            math.floor((max - 3) / 2)
-          )
+          local before = string.sub(word, 1, math.floor((max - 3) / 2))
 
           word = before .. "..."
         end
 
-        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-            and vim_item.abbr:sub(-1, -1) == "~" then
+        if
+          entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+          and vim_item.abbr:sub(-1, -1) == "~"
+        then
           word = word .. "~"
         end
 
@@ -91,7 +89,7 @@ function M.cmp()
         vim_item.dup = ({
           buffer = 1,
           path = 1,
-          nvim_lsp = 0
+          nvim_lsp = 0,
         })[entry.source.name] or 0
 
         if entry.source.name == "cmp_tabnine" then
@@ -107,7 +105,7 @@ function M.cmp()
         end
 
         return vim_item
-      end
+      end,
     },
     sorting = {
       priority_weight = 2,
@@ -123,8 +121,8 @@ function M.cmp()
         cmp.config.compare.kind,
         cmp.config.compare.sort_text,
         cmp.config.compare.length,
-        cmp.config.compare.order
-      }
+        cmp.config.compare.order,
+      },
     },
     mapping = {
       ["<C-j>"] = cmp.mapping(function(fallback)
@@ -161,10 +159,10 @@ function M.cmp()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping(function()
-        if not cmp.confirm { select = false } then
+        if not cmp.confirm({ select = false }) then
           require("pairs.enter").type()
         end
-      end)
+      end),
     },
     sources = {
       -- Copilot
@@ -180,12 +178,12 @@ function M.cmp()
       { name = "cmp_tabnine" },
 
       -- DAP
-      { name = "dap" }
+      { name = "dap" },
     },
     experimental = {
-      ghost_text = true
-    }
-  }
+      ghost_text = true,
+    },
+  })
 
   local kind = cmp.lsp.CompletionItemKind
 
@@ -198,17 +196,17 @@ function M.cmp()
     cmp.config.compare.kind,
     cmp.config.compare.sort_text,
     cmp.config.compare.length,
-    cmp.config.compare.order
+    cmp.config.compare.order,
   }
 
   if vim.fn.executable("fd") == 1 then
-    vim.cmd.packadd "cmp-fuzzy-path"
+    vim.cmd.packadd("cmp-fuzzy-path")
 
     table.insert(cmd_comparators, 1, require("cmp_fuzzy_path.compare"))
 
     path_extension = "fuzzy_path"
   else
-    vim.cmd.packadd "cmp-path"
+    vim.cmd.packadd("cmp-path")
 
     path_extension = "path"
   end
@@ -216,15 +214,15 @@ function M.cmp()
   cmp.setup.cmdline(":", {
     sorting = {
       priority_weight = 2,
-      comparators = cmd_comparators
+      comparators = cmd_comparators,
     },
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = path_extension }
+      { name = path_extension },
     }, {
       { name = "cmdline" },
-      { name = "cmdline_history" }
-    })
+      { name = "cmdline_history" },
+    }),
   })
 
   for _, cmd_type in ipairs({ "/", "?" }) do
@@ -240,39 +238,39 @@ function M.cmp()
           cmp.config.compare.kind,
           cmp.config.compare.sort_text,
           cmp.config.compare.length,
-          cmp.config.compare.order
-        }
+          cmp.config.compare.order,
+        },
       },
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = "nvim_lsp_document_symbol" }
+        { name = "nvim_lsp_document_symbol" },
       }, {
         { name = "fuzzy_buffer" },
-        { name = "cmdline_history" }
+        { name = "cmdline_history" },
       }),
       view = {
-        entries = { name = "wildmenu", separator = " · " }
+        entries = { name = "wildmenu", separator = " · " },
       },
     })
   end
 
   cmp.setup.cmdline("@", {
     sources = {
-      { name = "cmdline_history" }
-    }
+      { name = "cmdline_history" },
+    },
   })
 end
 
 function M.tabnine()
   local tabnine = require("cmp_tabnine.config")
 
-  tabnine:setup {
-    show_prediction_strength = true
-  }
+  tabnine:setup({
+    show_prediction_strength = true,
+  })
 end
 
 function M.cmp_git()
-  require("cmp_git").setup {}
+  require("cmp_git").setup({})
 end
 
 function M.copilot()
@@ -288,12 +286,12 @@ function M.dadbod()
     group = group,
     pattern = "sql,mysql,plsql",
     callback = function()
-      require("cmp").setup_buffer {
+      require("cmp").setup_buffer({
         sources = { {
-          name = "vim-dadbod-completion"
-        } }
-      }
-    end
+          name = "vim-dadbod-completion",
+        } },
+      })
+    end,
   })
 end
 

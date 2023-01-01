@@ -21,12 +21,12 @@ end
 function M.ufo()
   local char = require("utf8").char
 
-  require("ufo").setup {
+  require("ufo").setup({
     preview = {
       win_config = {
         border = require("utils.border").get_border_chars("rounded"),
-        winblend = 0
-      }
+        winblend = 0,
+      },
     },
     close_fold_kinds = { "comment", "imports" },
     fold_virt_text_handler = function(virtual_text, lnum, endlnum, width, truncate)
@@ -71,13 +71,13 @@ function M.ufo()
       })
 
       return new_virtual_text
-    end
-  }
+    end,
+  })
 
   vim.schedule(function()
     vim.api.nvim_set_hl(0, "Folded", {
       foreground = "#5c6370",
-      background = "#342f50"
+      background = "#342f50",
     })
   end)
 end

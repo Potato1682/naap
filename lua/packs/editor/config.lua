@@ -1,40 +1,32 @@
 local M = {}
 
 function M.smartpairs()
-  require("pairs"):setup {
+  require("pairs"):setup({
     enter = {
-      enable_mapping = false
+      enable_mapping = false,
     },
     autojump_strategy = {
-      unbalanced = "all"
+      unbalanced = "all",
     },
-    enable_smart_space = true
-  }
+    enable_smart_space = true,
+  })
 end
 
 function M.hlslens_setup()
   local keymap = require("utils.keymap.presets").mode_only("n", { silent = true })
 
-  keymap(
-    "n",
-    function()
-      require("cinnamon.scroll").scroll(vim.v.count1 .. "n", 1, 0, 3)
-      vim.api.nvim_feedkeys("zzzv", "n", true)
+  keymap("n", function()
+    require("cinnamon.scroll").scroll(vim.v.count1 .. "n", 1, 0, 3)
+    vim.api.nvim_feedkeys("zzzv", "n", true)
 
-      require("hlslens").start()
-    end,
-    "Next search hit"
-  )
-  keymap(
-    "N",
-    function()
-      require("cinnamon.scroll").scroll(vim.v.count1 .. "N", 1, 0, 3)
-      vim.api.nvim_feedkeys("zzzv", "n", true)
+    require("hlslens").start()
+  end, "Next search hit")
+  keymap("N", function()
+    require("cinnamon.scroll").scroll(vim.v.count1 .. "N", 1, 0, 3)
+    vim.api.nvim_feedkeys("zzzv", "n", true)
 
-      require("hlslens").start()
-    end,
-    "Previous search hit"
-  )
+    require("hlslens").start()
+  end, "Previous search hit")
 
   keymap("*", [[*<cmd>lua require("hlslens").start()<cr>]], "Search")
   keymap("#", [[#<cmd>lua require("hlslens").start()<cr>]], "Search")
@@ -59,18 +51,18 @@ function M.accelerated_jk()
 end
 
 function M.cinnamon()
-  require("cinnamon").setup {
+  require("cinnamon").setup({
     extra_keymaps = true,
-    scroll_limit = 100
-  }
+    scroll_limit = 100,
+  })
 end
 
 function M.houdini()
-  require("houdini").setup {
+  require("houdini").setup({
     mappings = {
       "jk",
       "AA",
-      "II"
+      "II",
     },
     escape_sequences = {
       i = function(first, second)
@@ -85,9 +77,9 @@ function M.houdini()
         end
 
         return "<BS><BS><ESC>"
-      end
-    }
-  }
+      end,
+    },
+  })
 end
 
 function M.fF_highlight()
@@ -95,9 +87,9 @@ function M.fF_highlight()
 end
 
 function M.marks()
-  require("marks").setup {
-    force_write_shada = true
-  }
+  require("marks").setup({
+    force_write_shada = true,
+  })
 end
 
 function M.colorizer()
@@ -105,7 +97,7 @@ function M.colorizer()
 end
 
 function M.comment()
-  require("Comment").setup {
+  require("Comment").setup({
     pre_hook = function(context)
       local utils = require("Comment.utils")
 
@@ -119,12 +111,12 @@ function M.comment()
         location = require("ts_context_commentstring.utils").get_visual_start_location()
       end
 
-      return require("ts_context_commentstring.internal").calculate_commentstring {
+      return require("ts_context_commentstring.internal").calculate_commentstring({
         key = type,
-        location = location
-      }
-    end
-  }
+        location = location,
+      })
+    end,
+  })
 end
 
 function M.abbreinder()
@@ -136,15 +128,15 @@ function M.hclipboard()
 end
 
 function M.trouble()
-  require("trouble").setup {
-    auto_close = true
-  }
+  require("trouble").setup({
+    auto_close = true,
+  })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "Trouble",
     callback = function()
       vim.opt_local.colorcolumn = ""
-    end
+    end,
   })
 end
 
@@ -165,14 +157,14 @@ end
 function M.pqf()
   local char = require("utf8").char
 
-  require("pqf").setup {
+  require("pqf").setup({
     signs = {
       error = char(0xf659),
       warn = char(0xf529),
       info = char(0xf7fc),
-      hint = char(0xf835)
-    }
-  }
+      hint = char(0xf835),
+    },
+  })
 end
 
 function M.dial_setup()
@@ -203,7 +195,7 @@ end
 function M.dial()
   local augend = require("dial.augend")
 
-  require("dial.config").augends:register_group {
+  require("dial.config").augends:register_group({
     default = {
       augend.integer.alias.decimal,
       augend.integer.alias.hex,
@@ -211,60 +203,60 @@ function M.dial()
       augend.integer.alias.binary,
       augend.semver.alias.semver,
       augend.constant.alias.bool,
-      augend.constant.new {
+      augend.constant.new({
         elements = {
           "yes",
-          "no"
+          "no",
         },
         word = true,
-        cyclic = true
-      },
-      augend.constant.new {
+        cyclic = true,
+      }),
+      augend.constant.new({
         elements = {
           "Yes",
-          "No"
+          "No",
         },
         word = true,
-        cyclic = true
-      },
-      augend.constant.new {
+        cyclic = true,
+      }),
+      augend.constant.new({
         elements = {
           "YES",
-          "NO"
+          "NO",
         },
         word = true,
-        cyclic = true
-      },
-      augend.constant.new {
+        cyclic = true,
+      }),
+      augend.constant.new({
         elements = {
           "let",
-          "const"
+          "const",
         },
         word = true,
-        cyclic = true
-      },
-      augend.constant.new {
+        cyclic = true,
+      }),
+      augend.constant.new({
         elements = {
           "and",
-          "or"
+          "or",
         },
         word = true,
-        cyclic = true
-      },
-      augend.constant.new {
+        cyclic = true,
+      }),
+      augend.constant.new({
         elements = {
           "&&",
-          "||"
+          "||",
         },
         word = false,
-        cyclic = true
-      },
-      augend.case.new {
+        cyclic = true,
+      }),
+      augend.case.new({
         types = {
           "camelCase",
-          "snake_case"
-        }
-      },
+          "snake_case",
+        },
+      }),
       augend.date.alias["%Y/%m/%d"],
       augend.date.alias["%Y-%m-%d"],
       augend.date.alias["%Y年%-m月%-d日"],
@@ -275,9 +267,9 @@ function M.dial()
       augend.paren.alias.brackets,
       augend.paren.lua_str_literal,
       augend.paren.rust_str_literal,
-      augend.misc.markdown_header
-    }
-  }
+      augend.misc.markdown_header,
+    },
+  })
 end
 
 function M.stay_in_place_setup()
@@ -323,9 +315,9 @@ function M.stay_in_place_setup()
 end
 
 function M.stay_in_place()
-  require("stay-in-place").setup {
-    set_keymaps = false
-  }
+  require("stay-in-place").setup({
+    set_keymaps = false,
+  })
 end
 
 return M

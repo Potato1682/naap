@@ -1,20 +1,5 @@
 local window = {}
 
-window["luukvbaal/stabilize.nvim"] = {
-  events = {
-    "WinNew",
-    "WinClosed",
-    "BufWinEnter",
-    "CursorMoved",
-    "CursorMovedI",
-    "User StabilizeRestore"
-  },
-
-  config = function()
-    require("packs.window.config").stabilize()
-  end
-}
-
 window["yochem/autosplit.nvim"] = {
   cmd = "Split",
 
@@ -24,7 +9,7 @@ window["yochem/autosplit.nvim"] = {
 
   config = function()
     require("packs.window.config").split()
-  end
+  end,
 }
 
 window["tenxsoydev/size-matters.nvim"] = {
@@ -34,12 +19,12 @@ window["tenxsoydev/size-matters.nvim"] = {
     "<C-->",
     "<C-ScrollWheelUp>",
     "<C-ScrollWheelDown>",
-    "<A-C-=>"
-  }
+    "<A-C-=>",
+  },
 }
 
 window["nvim-zh/colorful-winsep.nvim"] = {
-  events = {
+  event = {
     "WinNew",
     "WinClosed",
     "BufWinEnter",
@@ -47,7 +32,7 @@ window["nvim-zh/colorful-winsep.nvim"] = {
 
   config = function()
     require("packs.window.config").colorful_winsep()
-  end
+  end,
 }
 
 return window

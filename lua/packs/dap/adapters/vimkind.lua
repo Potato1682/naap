@@ -20,16 +20,16 @@ dap.configurations.lua = {
       assert(port, "Please provide a port number")
 
       return port
-    end
-  }
+    end,
+  },
 }
 
 dap.adapters.nlua = function(callback, config)
-  callback {
+  callback({
     type = "server",
     host = config.host,
-    port = config.port
-  }
+    port = config.port,
+  })
 end
 
 vim.api.nvim_create_user_command("DebugNaaPLaunch", function()
@@ -39,4 +39,3 @@ end, {})
 vim.api.nvim_create_user_command("DebugNaaPRunThis", function()
   require("osv").run_this()
 end, {})
-

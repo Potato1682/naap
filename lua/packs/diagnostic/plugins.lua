@@ -3,23 +3,23 @@ local diagnostic = {}
 diagnostic["Mofiqul/trld.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   config = function()
     require("packs.diagnostic.config").trld()
-  end
+  end,
 }
 
 diagnostic["Kasama/nvim-custom-diagnostic-highlight"] = {
   event = {
     "BufNewFile",
-    "BufReadPost"
+    "BufReadPost",
   },
 
   config = function()
     require("packs.diagnostic.config").highlight()
-  end
+  end,
 }
 
 return diagnostic

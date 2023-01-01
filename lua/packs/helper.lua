@@ -5,4 +5,3 @@ function M.in_vscode()
 end
 
 return M
-

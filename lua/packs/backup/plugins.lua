@@ -2,12 +2,12 @@ local backup = {}
 
 backup["aiya000/aho-bakaup.vim"] = {
   event = {
-    "BufWritePre"
+    "BufWritePre",
   },
 
   setup = function()
     require("packs.backup.config").bakaup_setup()
-  end
+  end,
 }
 
 backup["mbbill/undotree"] = {
@@ -15,7 +15,7 @@ backup["mbbill/undotree"] = {
 
   setup = function()
     require("packs.backup.config").undotree_setup()
-  end
+  end,
 }
 
 return backup

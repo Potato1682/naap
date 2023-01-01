@@ -20,28 +20,28 @@ completion["hrsh7th/nvim-cmp"] = {
       "tzachar/cmp-fuzzy-buffer",
 
       requires = {
-        { "tzachar/fuzzy.nvim", opt = true }
+        { "tzachar/fuzzy.nvim", opt = true },
       },
 
       wants = {
-        "fuzzy.nvim"
+        "fuzzy.nvim",
       },
 
       module = "cmp_fuzzy_buffer",
-      event = { "InsertEnter", "CmdlineEnter" }
+      event = { "InsertEnter", "CmdlineEnter" },
     },
     {
       "tzachar/cmp-fuzzy-path",
 
       requires = {
-        { "tzachar/fuzzy.nvim", opt = true }
+        { "tzachar/fuzzy.nvim", opt = true },
       },
 
       wants = {
-        "fuzzy.nvim"
+        "fuzzy.nvim",
       },
 
-      event = { "InsertEnter", "CmdlineEnter" }
+      event = { "InsertEnter", "CmdlineEnter" },
     },
     { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdlineEnter" } },
 
@@ -65,7 +65,7 @@ completion["hrsh7th/nvim-cmp"] = {
 
       config = function()
         require("packs.completion.config").cmp_git()
-      end
+      end,
     },
 
     -- DAP
@@ -83,13 +83,15 @@ completion["hrsh7th/nvim-cmp"] = {
 
           config = function()
             require("packs.completion.config").copilot()
-          end
-        }
+          end,
+        },
       },
 
       wants = {
-        "copilot.lua"
-      }
+        "copilot.lua",
+      },
+
+      module = "copilot_cmp",
     },
 
     -- Database
@@ -100,7 +102,7 @@ completion["hrsh7th/nvim-cmp"] = {
 
       config = function()
         require("packs.completion.config").dadbod()
-      end
+      end,
     },
 
     --[[
@@ -121,15 +123,15 @@ completion["hrsh7th/nvim-cmp"] = {
 
       config = function()
         require("packs.completion.config").tabnine()
-      end
-    }
+      end,
+    },
   },
 
   module = "cmp",
 
   config = function()
     require("packs.completion.config").cmp()
-  end
+  end,
 }
 
 return completion

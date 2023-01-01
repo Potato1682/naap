@@ -1,7 +1,7 @@
 local misc = {}
 
 misc["jghauser/mkdir.nvim"] = {
-  event = "BufWritePre"
+  event = "BufWritePre",
 }
 
 return misc

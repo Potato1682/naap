@@ -3,7 +3,7 @@ local M = {}
 function M.colorscheme()
   local colorscheme = require("catppuccin")
 
-  colorscheme.setup {
+  colorscheme.setup({
     flavour = "macchiato",
     background = {
       light = "latte",
@@ -13,23 +13,23 @@ function M.colorscheme()
     custom_highlights = function(_)
       return {
         Search = {
-          fg = "NONE"
+          fg = "NONE",
         },
         IncSearch = {
-          fg = "NONE"
+          fg = "NONE",
         },
         DiagnosticUnderlineError = {
-          fg = "NONE"
+          fg = "NONE",
         },
         DiagnosticUnderlineWarn = {
-          fg = "NONE"
+          fg = "NONE",
         },
         DiagnosticUnderlineInfo = {
-          fg = "NONE"
+          fg = "NONE",
         },
         DiagnosticUnderlineHint = {
-          fg = "NONE"
-        }
+          fg = "NONE",
+        },
       }
     end,
     integrations = {
@@ -43,7 +43,7 @@ function M.colorscheme()
       cmp = true,
       dap = {
         enabled = true,
-        enable_ui = true
+        enable_ui = true,
       },
       native_lsp = {
         enabled = true,
@@ -51,12 +51,12 @@ function M.colorscheme()
           errors = { "undercurl" },
           warnings = { "undercurl" },
           information = { "undercurl" },
-          hints = { "undercurl" }
-        }
+          hints = { "undercurl" },
+        },
       },
       navic = {
-      	enabled = true,
-      	custom_bg = "NONE"
+        enabled = true,
+        custom_bg = "NONE",
       },
       notify = true,
       treesitter_context = true,
@@ -67,10 +67,10 @@ function M.colorscheme()
       which_key = true,
       indent_blankline = {
         enabled = true,
-        colored_indent_levels = true
-      }
-    }
-  }
+        colored_indent_levels = true,
+      },
+    },
+  })
 
   colorscheme.load()
 
@@ -78,11 +78,11 @@ function M.colorscheme()
 end
 
 function M.dressing()
-  require("dressing").setup {
+  require("dressing").setup({
     input = {
       enabled = true,
 
-      border = "rounded"
+      border = "rounded",
     },
     select = {
       enabled = true,
@@ -91,15 +91,15 @@ function M.dressing()
 
       nui = {
         border = {
-          style = "rounded"
-        }
-      }
-    }
-  }
+          style = "rounded",
+        },
+      },
+    },
+  })
 end
 
 function M.notify()
-  require("notify").setup {
+  require("notify").setup({
     background_colour = function()
       local group_bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Normal")), "bg#")
 
@@ -112,14 +112,14 @@ function M.notify()
       end
 
       return group_bg
-    end
-  }
+    end,
+  })
 
   require("utils.telescope").register_extension("notify")
 end
 
 function M.noice()
-  require("noice").setup {
+  require("noice").setup({
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -132,9 +132,9 @@ function M.noice()
       command_palette = true,
       long_message_to_split = true,
       inc_rename = true,
-      lsp_doc_border = true
-    }
-  }
+      lsp_doc_border = true,
+    },
+  })
 end
 
 function M.bufferline()
@@ -142,17 +142,17 @@ function M.bufferline()
   local groups = require("bufferline.groups")
   local char = require("utf8").char
 
-  vim.cmd [[
+  vim.cmd([[
     function! Toggle_light_dark(a, b, c, d)
       lua require("utils.colors").toggle_light_dark()
     endfunction
-  ]]
+  ]])
 
-  bufferline.setup {
+  bufferline.setup({
     options = {
-      highlights = require("catppuccin.groups.integrations.bufferline").get {
-        styles = { "italic", "bold" }
-      },
+      highlights = require("catppuccin.groups.integrations.bufferline").get({
+        styles = { "italic", "bold" },
+      }),
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = true,
       diagnostics_indicator = function(count, level)
@@ -180,20 +180,20 @@ function M.bufferline()
           filetype = "neo-tree",
           text = "Neo Tree",
           highlight = "Keyword",
-          text_align = "center"
+          text_align = "center",
         },
         {
           filetype = "DiffviewFiles",
           text = "Diff",
           highlight = "Function",
-          text_align = "center"
+          text_align = "center",
         },
         {
           filetype = "dbui",
           text = "DBUI",
           highlight = "Keyword",
-          text_align = "center"
-        }
+          text_align = "center",
+        },
       },
       show_close_icon = false,
       custom_areas = {
@@ -202,20 +202,20 @@ function M.bufferline()
 
           table.insert(result, {
             text = "%@Toggle_light_dark@ " .. vim.g.symbol_icon .. " %X",
-            guifg = vim.g.symbol_icon_fg
+            guifg = vim.g.symbol_icon_fg,
           })
 
           table.insert(result, {
             text = "%@Toggle_light_dark@" .. vim.g.toggle_icon .. " %X ",
-            guifg = vim.g.toggle_icon_fg
+            guifg = vim.g.toggle_icon_fg,
           })
 
           return result
-        end
+        end,
       },
       groups = {
         options = {
-          toggle_hidden_on_enter = true
+          toggle_hidden_on_enter = true,
         },
         items = {
           {
@@ -224,7 +224,7 @@ function M.bufferline()
             icon = char(0xfb8e) .. " ",
             matcher = function(buf)
               return buf.filename:match("%_test") or buf.filename:match("%_spec")
-            end
+            end,
           },
           groups.builtin.ungrouped,
           {
@@ -236,14 +236,14 @@ function M.bufferline()
                 "mdx",
                 "rst",
                 "txt",
-                "wiki"
+                "wiki",
               }, vim.fn.fnamemodify(buf.path, ":e"))
-            end
-          }
-        }
-      }
-    }
-  }
+            end,
+          },
+        },
+      },
+    },
+  })
 
   local keymap = require("utils.keymap").keymap
 
@@ -253,7 +253,7 @@ function M.bufferline()
 end
 
 function M.indent_blankline()
-  require("indent_blankline").setup {
+  require("indent_blankline").setup({
     buftype_exclude = { "terminal", "nofile" },
     filetype_exclude = { "man", "help", "python" },
     disable_with_nolist = false,
@@ -291,9 +291,9 @@ function M.indent_blankline()
       "try_statement",
       "catch_clause",
       "import_statement",
-      "operation_type"
-    }
-  }
+      "operation_type",
+    },
+  })
 end
 
 return M

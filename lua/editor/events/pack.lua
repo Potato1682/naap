@@ -11,9 +11,8 @@ function M.setup()
     callback = function()
       vim.notify("compile: done", vim.log.levels.INFO, { title = "Pack" })
     end,
-    desc = "Send notification when packer compilations are done"
+    desc = "Send notification when packer compilations are done",
   })
 end
 
 return M
-

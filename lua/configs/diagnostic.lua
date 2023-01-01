@@ -10,7 +10,7 @@ end
 local char = utf8.char
 
 function M.config()
-  vim.diagnostic.config {
+  vim.diagnostic.config({
     float = {
       focusable = false,
       border = require("utils.border").get_border_char_and_hl(),
@@ -34,17 +34,17 @@ function M.config()
         end
 
         return i .. "/" .. total .. " " .. icon .. "  ", highlight
-      end
+      end,
     },
     severity_sort = true,
     virtual_text = false,
     underline = {
       severity = {
-        min = vim.diagnostic.severity.INFO
-      }
+        min = vim.diagnostic.severity.INFO,
+      },
     },
-    signs = true
-  }
+    signs = true,
+  })
 
   local ns = vim.api.nvim_create_namespace("worst_diagnostics")
   local original_signs_handler = vim.diagnostic.handlers.signs
@@ -68,29 +68,29 @@ function M.config()
     end,
     hide = function(_, bufnr)
       original_signs_handler.hide(ns, bufnr)
-    end
+    end,
   }
 end
 
 function M.define_signs()
   vim.fn.sign_define("DiagnosticSignError", {
     text = char(0xf659),
-    texthl = "DiagnosticSignError"
+    texthl = "DiagnosticSignError",
   })
 
   vim.fn.sign_define("DiagnosticSignWarn", {
     text = char(0xf529),
-    texthl = "DiagnosticSignWarn"
+    texthl = "DiagnosticSignWarn",
   })
 
   vim.fn.sign_define("DiagnosticSignInfo", {
     text = char(0xf7fc),
-    texthl = "DiagnosticSignInfo"
+    texthl = "DiagnosticSignInfo",
   })
 
   vim.fn.sign_define("DiagnosticSignHint", {
     text = char(0xf835),
-    texthl = "DiagnosticSignHint"
+    texthl = "DiagnosticSignHint",
   })
 end
 
@@ -120,7 +120,7 @@ function M.set_keymaps()
   end, "Previous Diagnostics")
 
   keymap("n", "<leader>ld", "<cmd>TroubleToggle<cr>", {
-    desc = "Workspace Diagnostics"
+    desc = "Workspace Diagnostics",
   })
 end
 

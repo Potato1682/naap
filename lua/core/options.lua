@@ -4,7 +4,7 @@ local data_dir = constants.data_dir
 
 vim.opt.mouse = "a"
 vim.opt.clipboard = {
-  "unnamedplus"
+  "unnamedplus",
 }
 
 vim.opt.shada = {
@@ -13,7 +13,7 @@ vim.opt.shada = {
   "<50",
   "@100",
   "s10",
-  "h"
+  "h",
 }
 
 vim.opt.updatetime = 100
@@ -68,7 +68,7 @@ vim.opt.whichwrap = {
   ["["] = true,
   ["]"] = true,
   h = true,
-  l = true
+  l = true,
 }
 
 vim.opt.fileencoding = "UTF-8"
@@ -102,7 +102,7 @@ vim.opt.shortmess = {
   o = true,
   s = true,
   t = true,
-  x = true
+  x = true,
 }
 
 vim.opt.pumheight = 10
@@ -134,17 +134,23 @@ vim.opt.formatoptions = {
   n = true,
   o = false,
   q = true,
-  r = false
+  r = false,
 }
 
 vim.opt.matchpairs = {
-  "(:)", "{:}",
-  "[:]", "「:」",
-  "（:）", "【:】",
-  "『:』", "［:］",
-  "｛:｝", "《:》",
-  "〈:〉", "‘:’",
-  "“:”"
+  "(:)",
+  "{:}",
+  "[:]",
+  "「:」",
+  "（:）",
+  "【:】",
+  "『:』",
+  "［:］",
+  "｛:｝",
+  "《:》",
+  "〈:〉",
+  "‘:’",
+  "“:”",
 }
 
 vim.opt.foldcolumn = "1"
@@ -156,7 +162,7 @@ vim.opt.fillchars = {
   eob = " ",
   foldopen = "",
   foldsep = " ",
-  foldclose = ""
+  foldclose = "",
 }
 
 vim.opt.list = O.editor.listchars
@@ -164,7 +170,7 @@ vim.opt.listchars = {
   eol = "¬",
   precedes = "<",
   extends = ">",
-  nbsp = "•"
+  nbsp = "•",
 }
 
 vim.opt.viewoptions = {
@@ -172,7 +178,7 @@ vim.opt.viewoptions = {
   "folds",
   "curdir",
   "slash",
-  "unix"
+  "unix",
 }
 
 vim.opt.synmaxcol = 2500
@@ -192,7 +198,7 @@ vim.opt.sessionoptions = {
   "help",
   "winsize",
   "winpos",
-  "terminal"
+  "terminal",
 }
 
 vim.opt.sh = O.terminal.shell

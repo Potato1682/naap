@@ -10,24 +10,23 @@ fold["jghauser/fold-cycle.nvim"] = {
 
   config = function()
     require("packs.fold.config").cycle()
-  end
+  end,
 }
 
 fold["kevinhwang91/nvim-ufo"] = {
   requires = {
-    { "kevinhwang91/promise-async", opt = true }
+    { "kevinhwang91/promise-async", opt = true },
   },
 
   wants = {
-    "promise-async"
+    "promise-async",
   },
 
   event = "BufReadPost",
 
   config = function()
     require("packs.fold.config").ufo()
-  end
+  end,
 }
 
 return fold
-

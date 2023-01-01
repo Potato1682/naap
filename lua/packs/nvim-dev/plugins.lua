@@ -7,15 +7,15 @@ nvim_dev["dstein64/vim-startuptime"] = {
 
   config = function()
     vim.g.startuptime_tries = 10
-  end
+  end,
 }
 
 nvim_dev["tamton-aquib/keys.nvim"] = {
   cmd = "KeysToggle",
 
   config = function()
-    require("keys").setup {}
-  end
+    require("keys").setup({})
+  end,
 }
 
 nvim_dev["milisims/nvim-luaref"] = {}

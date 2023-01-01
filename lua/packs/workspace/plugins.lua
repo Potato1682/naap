@@ -1,34 +1,34 @@
 local workspace = {}
 
 workspace["vladdoster/remember.nvim"] = {
-	event = "BufWinEnter",
+  event = "BufWinEnter",
 
-	config = function()
-		require("packs.workspace.config").remember()
-	end,
+  config = function()
+    require("packs.workspace.config").remember()
+  end,
 }
 
 workspace["rgroli/other.nvim"] = {
-	module = "other-nvim",
-	cmd = {
-		"Other",
-		"OtherSplit",
-		"OtherVSplit",
-	},
+  module = "other-nvim",
+  cmd = {
+    "Other",
+    "OtherSplit",
+    "OtherVSplit",
+  },
 
-	setup = function()
-		require("packs.workspace.config").other_setup()
-	end,
+  setup = function()
+    require("packs.workspace.config").other_setup()
+  end,
 
-	config = function()
-		require("packs.workspace.config").other()
-	end,
+  config = function()
+    require("packs.workspace.config").other()
+  end,
 }
 
 workspace["olimorris/persisted.nvim"] = {
-	config = function()
-		require("packs.workspace.config").persisted()
-	end,
+  config = function()
+    require("packs.workspace.config").persisted()
+  end,
 }
 
 return workspace

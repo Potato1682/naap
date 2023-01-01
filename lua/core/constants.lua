@@ -21,7 +21,7 @@ local data_dir = vim.fn.stdpath("data")
 
 local quit_with_q = {
   buftypes = {
-    "quickfix"
+    "quickfix",
   },
   filetypes = {
     --help
@@ -34,8 +34,8 @@ local quit_with_q = {
     "lspinfo",
 
     -- vim-startuptime
-    "startuptime"
-  }
+    "startuptime",
+  },
 }
 
 local ignore_buf_change_filetypes = vim.tbl_extend("force", quit_with_q, {
@@ -46,7 +46,7 @@ local ignore_buf_change_filetypes = vim.tbl_extend("force", quit_with_q, {
   "neo-tree",
 
   -- quickfix
-  "qf"
+  "qf",
 })
 
 return {
@@ -59,6 +59,6 @@ return {
   data_dir = data_dir,
   window = {
     quit_with_q = quit_with_q,
-    ignore_buf_change_filetypes = ignore_buf_change_filetypes
-  }
+    ignore_buf_change_filetypes = ignore_buf_change_filetypes,
+  },
 }

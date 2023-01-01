@@ -32,6 +32,5 @@ return {
   TypeParameter = "   ",
   Unit = " 塞 ",
   Value = "   ",
-  Variable = "   "
+  Variable = "   ",
 }
-
