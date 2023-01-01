@@ -25,10 +25,4 @@ workspace["rgroli/other.nvim"] = {
   end,
 }
 
-workspace["olimorris/persisted.nvim"] = {
-  config = function()
-    require("packs.workspace.config").persisted()
-  end,
-}
-
 return workspace

@@ -92,6 +92,10 @@ completion["hrsh7th/nvim-cmp"] = {
       },
 
       module = "copilot_cmp",
+
+      config = function()
+        require("packs.completion.config").copilot_cmp()
+      end,
     },
 
     -- Database
