@@ -11,8 +11,6 @@ local conditions = {
 
 local refreshable_color = function(fg, bg)
 	return function()
-		local bg
-
 		if vim.g.colors_name == "catppuccin" then
 			local colors = require("catppuccin.palettes").get_palette()
 
@@ -151,6 +149,9 @@ ins_left_a({
 	end,
 	color = refreshable_color(colors.blue),
 	padding = { left = 2, right = 1 },
+	on_click = function()
+		vim.cmd("Neotree toggle float")
+	end,
 })
 
 -- current working directory
@@ -159,6 +160,9 @@ ins_left_a({
 		return vim.fn.fnamemodify(vim.loop.cwd(), ":t")
 	end,
 	color = refreshable_color(),
+	on_click = function()
+		vim.cmd("Neotree toggle float")
+	end,
 })
 
 -- git branch icon
@@ -169,6 +173,9 @@ ins_left_a({
 	color = refreshable_color(colors.orange),
 	cond = conditions.check_git_workspace,
 	padding = { left = 1, right = 0 },
+	on_click = function()
+		require("telescope.builtin").git_branches()
+	end,
 })
 
 -- git branch
@@ -177,6 +184,9 @@ ins_left_a({
 	icon = "",
 	color = refreshable_color(),
 	padding = { left = 0, right = 1 },
+	on_click = function()
+		require("telescope.builtin").git_branches()
+	end,
 })
 
 -- diff
@@ -193,29 +203,46 @@ ins_left({
 		removed = { fg = colors.red },
 	},
 	cond = conditions.hide_in_width,
+	on_click = function()
+		require("neogit").open()
+	end,
 })
 
--- breadcrumb
-ins_left({
+local format_on_save_enabled = true
+
+-- toggle format on save using lsp-format.nvim
+ins_right({
 	function()
-		local ok, gps = pcall(require, "nvim-gps")
+		return " " .. char(0xfac7) .. " "
+	end,
+	color = function()
+		local color = refreshable_color()()
 
-		if not ok then
-			return ""
+		if format_on_save_enabled then
+			color.fg = "bg"
+			color.bg = colors.green
 		end
 
-		return gps.get_location()
+		return color
 	end,
-	cond = function()
-		local ok, gps = pcall(require, "nvim-gps")
+	on_click = function()
+		require("lsp-format").toggle({ args = "" })
 
-		if not ok then
-			return false
-		end
+		format_on_save_enabled = not format_on_save_enabled
 
-		return gps.is_available()
+		vim.notify(
+			(format_on_save_enabled and "Enabled " or "Disabled ") .. "formatting on save",
+			"info",
+			{ title = "Formatter" }
+		)
 	end,
-	color = { fg = colors.blue },
+})
+
+-- spacer
+ins_right({
+	function()
+		return "   "
+	end,
 })
 
 -- lsp diagnostics
@@ -234,6 +261,9 @@ ins_right({
 		color_warn = { fg = colors.yellow },
 		color_info = { fg = colors.blue },
 	},
+	on_click = function()
+		require("telescope.builtin").diagnostics()
+	end,
 })
 
 -- lsp no any diagnostics
@@ -284,6 +314,9 @@ ins_right({
 	end,
 	icon = char(0xf085) .. " ",
 	color = { fg = colors.blue },
+	on_click = function()
+		vim.cmd("LspInfo")
+	end,
 })
 
 -- line column icon
