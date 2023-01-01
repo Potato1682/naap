@@ -32,9 +32,7 @@ vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.grepprg = "rg --hidden --vimgrep --smart-case --"
 
 -- screen flicker workaround
-if vim.fn.has("nvim-0.8") == 1 then
-  vim.opt.winbar = " "
-end
+vim.opt.winbar = " "
 
 vim.opt.wrapscan = true
 vim.opt.ignorecase = true
@@ -93,7 +91,6 @@ vim.opt.softtabstop = -1
 vim.opt.shortmess = {
   F = true,
   O = true,
-  S = true,
   T = true,
   W = true,
   c = true,
@@ -151,7 +148,7 @@ vim.opt.matchpairs = {
 }
 
 vim.opt.foldcolumn = "1"
-vim.opt.foldlevelstart = O.editor.folding.starting_level
+vim.opt.foldlevel = 9999
 
 vim.opt.jumpoptions = "stack"
 

@@ -7,13 +7,7 @@ function M.common_on_attach(client, bufnr)
 
   local command = require("utils.command").current_buf_command
 
-  local cap
-
-  if vim.fn.has("nvim-0.8.0") == 1 then
-    cap = client.server_capabilities
-  else
-    cap = client.resolved_capabilities
-  end
+  local cap = client.server_capabilities
 
   if cap.code_action or cap.codeActionProvider then
     keymap("<leader>la", function()
@@ -244,10 +238,10 @@ function M.common_on_attach(client, bufnr)
 end
 
 function M.without_server_formatting(client, bufnr)
-  (client.server_capabilities or client.resolved_capabilities).document_formatting = false
-  (client.server_capabilities or client.resolved_capabilities).document_range_formatting = false
-  (client.server_capabilities or client.resolved_capabilities).documentFormattingProvider = false
-  (client.server_capabilities or client.resolved_capabilities).documentRangeFormattingProvider = false
+  client.server_capabilities.document_formatting = false
+  client.server_capabilities.document_range_formatting = false
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
 
   M.common_on_attach(client, bufnr)
 end

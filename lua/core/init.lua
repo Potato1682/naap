@@ -56,7 +56,6 @@ local setup = function()
 
   require("core.helper")
   require("core.options")
-  require("core.filetype").setup()
   require("editor.keymap.before")
   require("editor.events.before")
   require("editor.abbreviations")
