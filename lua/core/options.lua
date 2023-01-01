@@ -214,3 +214,7 @@ vim.opt.undofile = true
 vim.opt.spell = O.editor.spell_check
 
 vim.opt.guifont = string.format("%s %d", O.editor.gui.font_family, O.editor.gui.font_size)
+
+if vim.fn.has("nvim-0.9") == 1 then
+  vim.opt.splitkeep = "screen"
+end
