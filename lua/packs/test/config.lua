@@ -1,9 +1,11 @@
 local M = {}
 
 function M.test()
-  require("nvim-test").setup {
-    term = "toggleterm"
-  }
+	require("neotest").setup({
+		adapters = {
+			require("neotest-vim-test")({}),
+		},
+	})
 end
 
 return M

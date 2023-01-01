@@ -11,9 +11,6 @@ return {
       line = true,
       column = false
     },
-    folding = {
-      starting_level = 4
-    },
     gui = {
       font_family = "Monospace",
       font_size = 13

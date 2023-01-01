@@ -202,13 +202,13 @@ function M.cmp()
   }
 
   if vim.fn.executable("fd") == 1 then
-    PLoader("cmp-fuzzy-path")
+    vim.cmd.packadd "cmp-fuzzy-path"
 
-    table.insert(cmd_comparators, require("cmp_fuzzy_path.compare"))
+    table.insert(cmd_comparators, 1, require("cmp_fuzzy_path.compare"))
 
     path_extension = "fuzzy_path"
   else
-    PLoader("cmp-path")
+    vim.cmd.packadd "cmp-path"
 
     path_extension = "path"
   end

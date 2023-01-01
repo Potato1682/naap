@@ -45,7 +45,7 @@ function Pack:load_plugins()
         break
       end
 
-      if typ ~= "directory" then
+      if typ ~= "directory" or name:sub(1, 1) == "_" then
         goto continue
       end
 
@@ -106,7 +106,11 @@ function Pack:load_plugin_manager()
   self:load_plugins()
 
   -- Plugin manager
-  use { plugin_manager_repo, opt = true }
+  use {
+    plugin_manager_repo,
+
+    module = plugin_manager_name
+  }
 
   for _, plugin in ipairs(self.plugins) do
     use(plugin)
@@ -163,13 +167,7 @@ function Pack:load_snapshot(snapshot_file)
   packer.rollback(snapshot_file, unpack(self.plugins))
 end
 
-local pack = setmetatable({}, {
-  __index = function(_, key)
-    Pack:load_plugin_manager()
-
-    return packer[key]
-  end
-})
+local pack = {}
 
 pack.disable_builtin_plugins = function()
   vim.g.loaded_man = 1
@@ -216,88 +214,66 @@ pack.setup = function()
     end
   end
 
-  api.nvim_create_user_command(
-    "PackerSnapshot",
-    function(args)
-      require("core.pack").snapshot(unpack(args.fargs))
-    end, {
-      nargs = "+"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerSnapshotRollback",
-    function(args)
-      require("core.pack").rollback(unpack(args.fargs))
-    end, {
-      nargs = "+"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerSnapshotDelete",
-    function(args)
-      require("packer.snapshot").delete(unpack(args.fargs))
-    end, {
-      nargs = "+"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerInstall",
-    function(args)
-      require("core.pack").install(unpack(args.fargs))
-    end, {
-      nargs = "*"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerUpdate",
-    function(args)
-      require("core.pack").update(unpack(args.fargs))
-    end, {
-      nargs = "*"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerSync",
-    function(args)
-      require("core.pack").sync(unpack(args.fargs))
-    end, {
-      nargs = "*"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerClean",
-    function()
-      require("core.pack").clean()
-    end, {}
-  )
-  api.nvim_create_user_command(
-    "PackerCompile",
-    function(args)
-      require("core.pack").compile(args.args)
-    end, {
-      nargs = "*"
-    }
-  )
-  api.nvim_create_user_command(
-    "PackerStatus",
-    function()
-      require("core.pack").status()
-    end, {}
-  )
-  api.nvim_create_user_command(
-    "PackerProfile",
-    function()
-      require("core.pack").profile_output()
-    end, {}
-  )
-  api.nvim_create_user_command(
-    "PackerLoad",
-    function(args)
-      require("core.pack").loader(unpack(args.fargs), args.bang == true)
-    end, {
-      nargs = "+"
-    }
-  )
+  local function run_packer(method)
+    local function cb(opts)
+      if not packer then
+        Pack:load_plugin_manager()
+      end
+
+      packer[method](opts)
+    end
+
+    return cb
+  end
+
+  local keymap = require("utils.keymap").omit("append", "n", "<leader>p", { noremap = true })
+
+  keymap("i", function()
+    vim.cmd("PackerInstall")
+  end, "Install plugins")
+
+  keymap("u", function()
+    vim.cmd("PackerUpdate")
+  end, "Update plugins")
+
+  keymap("l", function()
+    vim.cmd("PackerClean")
+  end, "Clean plugins")
+
+  keymap("p", function()
+    vim.cmd("PackerStatus")
+  end, "Show plugins status")
+
+  keymap("c", function()
+    vim.cmd("PackerCompile")
+  end, "Compile plugins detail")
+
+  keymap("C", function()
+    vim.cmd("PackerCompile profile=true")
+  end, "Compile plugins detail with profiling")
+
+  keymap("s", function()
+    vim.cmd("PackerSync")
+  end, "Sync plugins")
+
+  keymap("P", function()
+    vim.cmd("PackerProfile")
+  end, "Show plugins profiling result")
+
+  keymap("S", function()
+    vim.cmd("PackerSnapshot")
+  end, "Create a snapshot of plugins")
+
+  vim.api.nvim_create_user_command("PackerInstall", run_packer "install", { desc = "[Packer] Install plugins" })
+  vim.api.nvim_create_user_command("PackerUpdate", run_packer "update", { desc = "[Packer] Update plugins" })
+  vim.api.nvim_create_user_command("PackerClean", run_packer "clean", { desc = "[Packer] Clean plugins" })
+  vim.api.nvim_create_user_command("PackerStatus", run_packer "status", { desc = "[Packer] Show plugins status" })
+  vim.api.nvim_create_user_command("PackerCompile", run_packer "compile", { desc = "[Packer] Compile plugins detail" })
+  vim.api.nvim_create_user_command("PackerSync", run_packer "sync", { desc = "[Packer] Sync plugins" })
+  vim.api.nvim_create_user_command("PackerLoad", run_packer "loader", { desc = "[Packer] Load a plugin" })
+  vim.api.nvim_create_user_command("PackerProfile", run_packer "profile_output", { desc = "[Packer] Show plugins profiling result" })
+  vim.api.nvim_create_user_command("PackerSnapshot", run_packer "snapshot", { desc = "[Packer] Create a snapshot of plugins" })
+  vim.api.nvim_create_user_command("PackerSnapshotRollback", run_packer "rollback", { desc = "[Packer] Rollback from the snapshot" })
 
   require("editor.events.pack").setup()
 end

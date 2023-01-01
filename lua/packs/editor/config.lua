@@ -280,4 +280,52 @@ function M.dial()
   }
 end
 
+function M.stay_in_place_setup()
+  local keymap = require("utils.keymap").omit("append", "n", "", { noremap = true })
+  local keymap_visual = require("utils.keymap").omit("append", "v", "", { noremap = true })
+  local keymap_expr = require("utils.keymap").omit("append", "n", "", { noremap = true, expr = true })
+
+  keymap_expr("<", function()
+    require("stay-in-place").shift_left()
+  end, "Shift Left")
+
+  keymap_expr(">", function()
+    require("stay-in-place").shift_right()
+  end, "Shift Right")
+
+  keymap_expr("=", function()
+    require("stay-in-place").filter()
+  end, "Filter")
+
+  keymap("<<", function()
+    require("stay-in-place").shift_left_line()
+  end, "Shift Left (Line wise)")
+
+  keymap(">>", function()
+    require("stay-in-place").shift_right_line()
+  end, "Shift Right (Line wise)")
+
+  keymap("==", function()
+    require("stay-in-place").filter_line()
+  end, "Filter (Line wise)")
+
+  keymap_visual("<", function()
+    require("stay-in-place").shift_left_visual()
+  end, "Shift Left")
+
+  keymap_visual(">", function()
+    require("stay-in-place").shift_right_visual()
+  end, "Shift Right")
+
+  keymap_visual("=", function()
+    require("stay-in-place").filter_visual()
+  end, "Filter")
+end
+
+function M.stay_in_place()
+  require("stay-in-place").setup {
+    set_keymaps = false
+  }
+end
+
 return M

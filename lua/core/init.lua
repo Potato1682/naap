@@ -44,23 +44,17 @@ local prepare_needed_dirs = function()
 end
 
 local finalize = function()
+  require("configs.diagnostic")
+
   require("core.lazy")
 end
 
 local setup = function()
-  local ok, notify = pcall(require, "notify")
-
-  if ok then
-    vim.notify = notify
-  end
-
   require("core.helper")
   require("core.options")
   require("editor.keymap.before")
   require("editor.events.before")
   require("editor.abbreviations")
-
-  require("configs.diagnostic")
 
   local pack = require("core.pack")
 

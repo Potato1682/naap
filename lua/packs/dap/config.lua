@@ -66,21 +66,21 @@ function M.dap()
 
   vim.fn.sign_define("DapBreakpoint", {
     text = char(0xf62e) .. " ",
-    texthl = "Error",
+    texthl = "DapBreakpoint",
     linehl = "",
     numhl = ""
   })
 
   vim.fn.sign_define("DapBreakpointCondition", {
     text = char(0xf62e) .. " ",
-    texthl = "WarningMsg",
+    texthl = "DapBreakpointCondition",
     linehl = "",
     numhl = ""
   })
 
   vim.fn.sign_define("DapLogPoint", {
     text = char(0xf62e) .. " ",
-    texthl = "DiagnosticSignInfo",
+    texthl = "DapLogPoint",
     linehl = "",
     numhl = ""
   })

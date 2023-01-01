@@ -1,19 +1,27 @@
 local test = {}
 
-test["klen/nvim-test"] = {
-  cmd = {
-    "TestSuite",
-    "TestFile",
-    "TestEdit",
-    "TestNearest",
-    "TestLast",
-    "TestVisit",
-    "TestInfo"
-  },
+test["nvim-neotest/neotest"] = {
+	requires = {
+		{
+			"nvim-neotest/neotest-vim-test",
 
-  config = function()
-    require("packs.test.config").test()
-  end
+			requires = {
+				{ "vim-test/vim-test", opt = true },
+			},
+
+			wants = {
+				"vim-test",
+			},
+
+			module = "neotest-vim-test",
+		},
+	},
+
+	module = "neotest",
+
+	config = function()
+		require("packs.test.config").test()
+	end,
 }
 
 return test

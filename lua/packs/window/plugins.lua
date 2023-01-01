@@ -38,4 +38,16 @@ window["tenxsoydev/size-matters.nvim"] = {
   }
 }
 
+window["nvim-zh/colorful-winsep.nvim"] = {
+  events = {
+    "WinNew",
+    "WinClosed",
+    "BufWinEnter",
+  },
+
+  config = function()
+    require("packs.window.config").colorful_winsep()
+  end
+}
+
 return window

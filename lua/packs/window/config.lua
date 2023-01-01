@@ -21,4 +21,11 @@ function M.split()
   abbrev("c", "split", "Split")
 end
 
+function M.colorful_winsep()
+  require("colorful-winsep").setup {
+    create_event = function()
+    end
+  }
+end
+
 return M

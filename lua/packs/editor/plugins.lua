@@ -190,4 +190,16 @@ editor["monaqa/dial.nvim"] = {
   end
 }
 
+editor["gbprod/stay-in-place.nvim"] = {
+  module = "stay-in-place",
+
+  setup = function()
+    require("packs.editor.config").stay_in_place_setup()
+  end,
+
+  config = function()
+    require("packs.editor.config").stay_in_place()
+  end
+}
+
 return editor

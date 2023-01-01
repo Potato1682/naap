@@ -83,10 +83,6 @@ keymap("n", "J", "mzJ`z", "Join lines")
 keymap("n", "n", "nzzzv", "Next search hit")
 keymap("n", "N", "Nzzzv", "Previous search hit")
 
--- beter indenting
-keymap("v", "<", "<gv", "Indent Left")
-keymap("v", ">", ">gv", "Indent Right")
-
 -- better terminal esc
 keymap("t", "<Esc>", [[<C-\><C-n>]], "Escape from Terminal")
 

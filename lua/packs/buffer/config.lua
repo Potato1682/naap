@@ -8,50 +8,6 @@ function M.bufdelete_setup()
   end, "Close Buffer")
 end
 
-function M.incline()
-  local char = require("utf8").char
-  local icons = require("nvim-web-devicons")
-
-  require("incline").setup {
-    render = function(props)
-      local name = vim.api.nvim_buf_get_name(props.buf)
-      local icon, hl
-
-      if name == "" then
-        name = "[No Name]"
-        icon = char(0xf723)
-        hl = "black"
-      else
-        name = vim.fn.fnamemodify(name, ":t")
-        icon, hl = icons.get_icon_color(name, vim.fn.fnamemodify(name, ":e"))
-      end
-
-      local result = {
-        { icon .. " ", guifg = hl },
-        { name, group = "CursorLine" },
-        vim.bo[props.buf].modified
-            and { " " .. char(0x25cf), guifg = "green" }
-            or { "  " }
-      }
-
-      return result
-    end,
-    hide = {
-      cursorline = true
-    },
-    window = {
-      margin = {
-        horizontal = 3,
-        vertical = 0
-      },
-      winhighlight = {
-        Normal = "CursorLine"
-      },
-      zindex = 100
-    },
-  }
-end
-
 function M.cybu_setup()
   local keymap_n = require("utils.keymap").omit("prepend", "n", "b", { silent = true })
   local keymap = require("utils.keymap").omit("insert", { "n", "v" }, "<^%Tab>", { silent = true })

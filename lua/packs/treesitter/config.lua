@@ -1,17 +1,15 @@
 local M = {}
 
 function M.treesitter()
-  local options = {
+  require("nvim-treesitter.configs").setup {
     ensure_installed = "all",
     highlight = { enable = true },
     yati = { enable = true },
+    indent = { enable = false },
     rainbow = {
       enable = true,
-      disable = {
-        "html",
-        "svelte",
-        "vue"
-      }
+      extended_mode = true,
+      max_file_lines = 2000
     },
     endwise = {
       enable = true
@@ -29,32 +27,14 @@ function M.treesitter()
     },
   }
 
-  --[[
-  local lines = vim.api.nvim_buf_line_count(0)
+  require("nvim-treesitter.install").prefer_git = true
 
-  if lines > 30000 then
-    options.highlight = false
-    options.yati = false
-    options.rainbow = false
-    options.textsubjects = false
-  ]]
-
-  require("nvim-treesitter.configs").setup(options)
-
-  vim.opt_local.foldmethod = "expr"
-  vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
-end
-
-function M.autotag()
-  require("nvim-ts-autotag").setup()
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 end
 
 function M.hlargs()
   require("hlargs").setup()
-end
-
-function M.spellsitter()
-  require("spellsitter").setup()
 end
 
 function M.gps()
@@ -84,17 +64,25 @@ function M.context()
   }
 end
 
-function M.trevj_setup()
+function M.treesj_setup()
   local keymap = require("utils.keymap").keymap
 
   keymap("n", "<localleader>j", function()
-    require("trevj").format_at_cursor()
-  end, "Join Lines")
+    require("treesj").toggle()
+  end, "Split or Join code block with autodetect")
+
+  keymap("n", "<localleader>h", function()
+    require("treesj").join()
+  end, "Join code block")
+
+  keymap("n", "<localleader>s", function()
+    require("treesj").split()
+  end, "Split code block")
 end
 
-function M.trevj()
-  require("trevj").setup {
-    final_separator = O.lang.insert_comma_after_obj
+function M.treesj()
+  require("treesj").setup {
+    use_default_keymaps = false
   }
 end
 
@@ -104,25 +92,38 @@ end
 
 function M.surf_setup()
   local keymap = require("utils.keymap.presets").mode_only("n", { silent = true })
+  local keymap_expr = require("utils.keymap.presets").mode_only("n", { silent = true, expr = true })
   local keymap_visual = require("utils.keymap.presets").mode_only("x", { silent = true })
 
-  keymap("<A-j>", function()
+  _G.STSSwapUpNormal_Dot = function()
+    require("syntax-tree-surfer").move("n", true)
+  end
+
+  _G.STSSwapDownNormal_Dot = function()
     require("syntax-tree-surfer").move("n", false)
+  end
+
+  keymap_expr("<A-j>", function()
+    vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
+
+    return "g@l"
   end, "Move Current Node Down")
 
-  keymap("<A-k>", function()
-    require("syntax-tree-surfer").move("n", true)
+  keymap_expr("<A-k>", function()
+    vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
+
+    return "g@l"
   end, "Move Current Node Up")
 
   keymap("vx", function()
     require("syntax-tree-surfer").select()
-  end, "Select Current Node")
+  end, "Select Master Node")
 
   keymap("vn", function()
     require("syntax-tree-surfer").select_current_node()
   end, "Select Current Node")
 
-  keymap("p", function()
+  keymap("<A-p>", function()
     require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, {
       "normal! O",
       "normal! O",
@@ -156,3 +157,4 @@ function M.surf_setup()
 end
 
 return M
+

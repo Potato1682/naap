@@ -1,54 +1,5 @@
 local completion = {}
 
-completion["hrsh7th/nvim-cmp"] = {
-  opt = true
-}
-
--- General
-completion["tzachar/cmp-fuzzy-buffer"] = {
-  requires = { {
-    "romgrk/fzy-lua-native",
-
-    module = "fzy-lua-native",
-
-    run = "make"
-  }, {
-    "tzachar/fuzzy.nvim",
-
-    module = "fuzzy_nvim"
-  } },
-
-  after = "nvim-cmp"
-}
-completion["tzachar/cmp-fuzzy-path"] = {
-  opt = true
-}
-completion["hrsh7th/cmp-path"] = {
-  opt = true
-}
-
--- Sorting
-completion["lukas-reineke/cmp-under-comparator"] = {
-  after = "nvim-cmp"
-}
-
--- LSP
-completion["hrsh7th/cmp-nvim-lsp"] = {
-  module = "cmp_nvim_lsp"
-}
-completion["hrsh7th/cmp-nvim-lsp-document-symbol"] = {
-  after = "nvim-cmp"
-}
-completion["onsails/lspkind.nvim"] = {
-  after = "nvim-cmp"
-}
-
--- Snippets
-completion["saadparwaiz1/cmp_luasnip"] = {
-  after = "nvim-cmp"
-}
-
--- Tabnine
 local is_windows = require("core.constants").is_windows
 local tabnine_run
 
@@ -62,60 +13,122 @@ else
   tabnine_run = "./install.sh"
 end
 
-completion["tzachar/cmp-tabnine"] = {
-  after = "nvim-cmp",
+completion["hrsh7th/nvim-cmp"] = {
+  requires = {
+    -- General
+    {
+      "tzachar/cmp-fuzzy-buffer",
 
-  run = tabnine_run,
+      requires = {
+        { "tzachar/fuzzy.nvim", opt = true }
+      },
+
+      wants = {
+        "fuzzy.nvim"
+      },
+
+      module = "cmp_fuzzy_buffer",
+      event = { "InsertEnter", "CmdlineEnter" }
+    },
+    {
+      "tzachar/cmp-fuzzy-path",
+
+      requires = {
+        { "tzachar/fuzzy.nvim", opt = true }
+      },
+
+      wants = {
+        "fuzzy.nvim"
+      },
+
+      event = { "InsertEnter", "CmdlineEnter" }
+    },
+    { "hrsh7th/cmp-path", event = { "InsertEnter", "CmdlineEnter" } },
+
+    -- LSP
+    { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
+    { "hrsh7th/cmp-nvim-lsp-document-symbol", event = { "InsertEnter", "CmdlineEnter" } },
+    { "onsails/lspkind.nvim", event = { "InsertEnter", "CmdlineEnter" } },
+
+    -- Snippets
+    { "saadparwaiz1/cmp_luasnip", event = { "InsertEnter", "CmdlineEnter" } },
+
+    -- Cmdline
+    { "hrsh7th/cmp-cmdline", event = { "InsertEnter", "CmdlineEnter" } },
+    { "dmitmel/cmp-cmdline-history", event = { "InsertEnter", "CmdlineEnter" } },
+
+    -- Git
+    {
+      "petertriho/cmp-git",
+
+      event = { "InsertEnter", "CmdlineEnter" },
+
+      config = function()
+        require("packs.completion.config").cmp_git()
+      end
+    },
+
+    -- DAP
+    { "rcarriga/cmp-dap", event = { "InsertEnter", "CmdlineEnter" } },
+
+    -- Copilot
+    {
+      "zbirenbaum/copilot-cmp",
+
+      requires = {
+        {
+          "zbirenbaum/copilot.lua",
+
+          opt = true,
+
+          config = function()
+            require("packs.completion.config").copilot()
+          end
+        }
+      },
+
+      wants = {
+        "copilot.lua"
+      }
+    },
+
+    -- Database
+    {
+      "kristijanhusak/vim-dadbod-completion",
+
+      event = { "InsertEnter", "CmdlineEnter" },
+
+      config = function()
+        require("packs.completion.config").dadbod()
+      end
+    },
+
+    --[[
+      These plugins are loaded at start / module requiring to prevent any errors
+      They have no after/**/*.lua, we have to load **before** cmp is loaded (or on-demand)
+    ]]
+
+    -- Sorting
+    { "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" },
+
+    -- Tabnine
+    {
+      "tzachar/cmp-tabnine",
+
+      event = { "InsertEnter", "CmdlineEnter" },
+
+      run = tabnine_run,
+
+      config = function()
+        require("packs.completion.config").tabnine()
+      end
+    }
+  },
+
+  module = "cmp",
 
   config = function()
-    require("packs.completion.config").tabnine()
-  end
-}
-
--- Cmdline
-completion["hrsh7th/cmp-cmdline"] = {
-  after = "nvim-cmp"
-}
-completion["dmitmel/cmp-cmdline-history"] = {
-  after = "nvim-cmp"
-}
-
--- Git
-completion["petertriho/cmp-git"] = {
-  after = "nvim-cmp",
-
-  config = function()
-    require("packs.completion.config").cmp_git()
-  end
-}
-
--- DAP
-completion["rcarriga/cmp-dap"] = {
-  after = "nvim-cmp"
-}
-
--- Copilot
-completion["github/copilot.vim"] = {
-  cmd = "Copilot"
-}
-
-completion["zbirenbaum/copilot.lua"] = {
-  event = "InsertEnter",
-
-  config = function()
-    require("packs.completion.config").copilot()
-  end
-}
-
-completion["zbirenbaum/copilot-cmp"] = {
-  after = "nvim-cmp"
-}
-
-completion["kristijanhusak/vim-dadbod-completion"] = {
-  after = "nvim-cmp",
-
-  config = function()
-    require("packs.completion.config").dadbod()
+    require("packs.completion.config").cmp()
   end
 }
 

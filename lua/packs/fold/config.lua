@@ -28,6 +28,7 @@ function M.ufo()
         winblend = 0
       }
     },
+    close_fold_kinds = { "comment", "imports" },
     fold_virt_text_handler = function(virtual_text, lnum, endlnum, width, truncate)
       local new_virtual_text = {}
       local foldlnum = endlnum - lnum

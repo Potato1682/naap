@@ -1,46 +1,73 @@
 local M = {}
 
-function M.lumen_cond()
-  return require("packs.helper").in_vscode()
-end
-
 function M.colorscheme()
-  local colorscheme = require("onedarkpro")
+  local colorscheme = require("catppuccin")
 
   colorscheme.setup {
-    plugins = {
-      native_lsp = true,
-      polyglot = false,
-      treesitter = true
+    flavour = "macchiato",
+    background = {
+      light = "latte",
+      dark = "mocha",
     },
-    styles = {
-      comments = "italic"
-    },
-    options = {
-      bold = false,
-      italic = true,
-      undercurl = true,
-      transparency = O.appearance.transparency,
-      cursorline = O.editor.cursor_highlight.line
-    },
-    hlgroups = {
-      Search = {
-        fg = "NONE"
+    transparent_background = O.appearance.transparency,
+    custom_highlights = function(_)
+      return {
+        Search = {
+          fg = "NONE"
+        },
+        IncSearch = {
+          fg = "NONE"
+        },
+        DiagnosticUnderlineError = {
+          fg = "NONE"
+        },
+        DiagnosticUnderlineWarn = {
+          fg = "NONE"
+        },
+        DiagnosticUnderlineInfo = {
+          fg = "NONE"
+        },
+        DiagnosticUnderlineHint = {
+          fg = "NONE"
+        }
+      }
+    end,
+    integrations = {
+      gitsigns = true,
+      lsp_saga = true,
+      markdown = true,
+      mason = true,
+      neotree = true,
+      neotest = true, -- TODO
+      noice = true,
+      cmp = true,
+      dap = {
+        enabled = true,
+        enable_ui = true
       },
-      IncSearch = {
-        fg = "NONE"
+      native_lsp = {
+        enabled = true,
+        underlines = {
+          errors = { "undercurl" },
+          warnings = { "undercurl" },
+          information = { "undercurl" },
+          hints = { "undercurl" }
+        }
       },
-      DiagnosticUnderlineError = {
-        fg = "NONE"
+      navic = {
+      	enabled = true,
+      	custom_bg = "NONE"
       },
-      DiagnosticUnderlineWarn = {
-        fg = "NONE"
-      },
-      DiagnosticUnderlineInfo = {
-        fg = "NONE"
-      },
-      DiagnosticUnderlineHint = {
-        fg = "NONE"
+      notify = true,
+      treesitter_context = true,
+      treesitter = true,
+      ts_rainbow = true,
+      telescope = true,
+      illuminate = true,
+      which_key = true,
+      indent_blankline = {
+        enabled = true,
+        colored_indent_levels = true
       }
     }
   }
@@ -91,6 +118,25 @@ function M.notify()
   require("utils.telescope").register_extension("notify")
 end
 
+function M.noice()
+  require("noice").setup {
+    lsp = {
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+    },
+    presets = {
+      bottom_search = true,
+      command_palette = true,
+      long_message_to_split = true,
+      inc_rename = true,
+      lsp_doc_border = true
+    }
+  }
+end
+
 function M.bufferline()
   local bufferline = require("bufferline")
   local groups = require("bufferline.groups")
@@ -104,6 +150,9 @@ function M.bufferline()
 
   bufferline.setup {
     options = {
+      highlights = require("catppuccin.groups.integrations.bufferline").get {
+        styles = { "italic", "bold" }
+      },
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = true,
       diagnostics_indicator = function(count, level)
@@ -209,6 +258,15 @@ function M.indent_blankline()
     filetype_exclude = { "man", "help", "python" },
     disable_with_nolist = false,
     space_char_blankline = " ",
+
+    char_highlight_list = {
+      "IndentBlanklineIndent1",
+      "IndentBlanklineIndent2",
+      "IndentBlanklineIndent3",
+      "IndentBlanklineIndent4",
+      "IndentBlanklineIndent5",
+      "IndentBlanklineIndent6",
+    },
 
     use_treesitter = true,
     show_current_context = true,

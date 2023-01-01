@@ -1,34 +1,8 @@
 local ui = {}
 local helper = require("packs.helper")
 
-ui["MunifTanjim/nui.nvim"] = {
-  module = "nui"
-}
-
-ui["vimpostor/vim-lumen"] = {
-  after = "onedarkpro.nvim",
-
-  cond = function()
-    require("packs.ui.config").lumen_cond()
-  end,
-
-  setup = function()
-    vim.g.lumen_startup_overwrite = 0
-  end
-}
-
-ui["olimorris/onedarkpro.nvim"] = {
-  event = "UIEnter",
-
-  run = function()
-    vim.cmd("packadd onedarkpro.nvim")
-    require("packs.ui.config").colorscheme()
-
-    if require("packs.ui.config").lumen_cond() then
-      require("packs.ui.config").lumen_setup()
-      vim.cmd("packadd vim-lumen")
-    end
-  end,
+ui["catppuccin/nvim"] = {
+  as = "catppuccin",
 
   cond = helper.in_vscode,
 
@@ -45,17 +19,62 @@ ui["stevearc/dressing.nvim"] = {
   end
 }
 
-ui["rcarriga/nvim-notify"] = {
+ui["folke/noice.nvim"] = {
+  requires = {
+    { "MunifTanjim/nui.nvim" },
+    {
+      "rcarriga/nvim-notify",
+
+      module = "notify",
+
+      config = function()
+        require("packs.ui.config").notify()
+      end
+    }
+  },
+
+  wants = { "nvim-treesitter" },
+
+  event = {
+    "BufRead",
+    "BufNewFile",
+    "InsertEnter",
+    "CmdlineEnter"
+  },
+
+  module = "noice",
+
+  setup = function()
+    if not _G.__vim_notify_overwritten then
+      vim.notify = function(...)
+        local arg = { ... }
+
+        require("notify")
+        require("noice")
+
+        vim.schedule(function()
+          if args ~= nil then
+            vim.notify(unpack(args))
+          end
+        end)
+      end
+
+      _G.__vim_notify_overwritten = true
+    end
+  end,
+
   config = function()
-    require("packs.ui.config").notify()
+    require("packs.ui.config").noice()
   end
 }
 
 ui["nvim-lualine/lualine.nvim"] = {
   requires = {
-    "kyazdani42/nvim-web-devicons",
+    { "kyazdani42/nvim-web-devicons", opt = true }
+  },
 
-    opt = true
+  wants = {
+    "nvim-web-devicons"
   },
 
   event = "UIEnter",
@@ -75,26 +94,21 @@ ui["nvim-lualine/lualine.nvim"] = {
 
 ui["akinsho/bufferline.nvim"] = {
   requires = {
-    "kyazdani42/nvim-web-devicons",
-
-    opt = true
+    { "kyazdani42/nvim-web-devicons", opt = true }
   },
 
-  tag = "*",
+  wants = {
+    "catppuccin",
+    "nvim-web-devicons"
+  },
 
-  event = "UIEnter",
-
-  run = function()
-    vim.cmd("packadd bufferline.nvim")
-
-    require("packs.ui.config").bufferline()
-  end,
+  event = "BufWinEnter",
 
   cond = helper.in_vscode,
 
   config = function()
     require("packs.ui.config").bufferline()
-  end,
+  end
 }
 
 ui["lewis6991/satellite.nvim"] = {

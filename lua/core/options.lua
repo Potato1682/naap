@@ -22,7 +22,7 @@ vim.opt.timeoutlen = O.behavior.timeoutlen
 vim.opt.ttimeoutlen = 10
 
 vim.opt.showmode = false
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.history = 10000
 
 vim.opt.title = true
