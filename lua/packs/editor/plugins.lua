@@ -15,28 +15,15 @@ editor["ZhiyuanLck/smart-pairs"] = {
 }
 
 editor["RRethy/vim-illuminate"] = {
-  event = "CursorHold",
+  event = "BufReadPost",
 
   config = function()
     vim.g.Illuminate_delay = 300
   end
 }
 
-editor["kevinhwang91/nvim-hlslens"] = {
-  event = "CmdlineEnter",
-  module = "hlslens",
-
-  setup = function()
-    require("packs.editor.config").hlslens_setup()
-  end
-
-  -- config = function()
-  --   require("packs.editor.config").hlslens()
-  -- end
-}
-
-editor["max397574/which-key.nvim"] = {
-  event = "UIEnter",
+editor["folke/which-key.nvim"] = {
+  event = { "UIEnter", "BufWinEnter" },
 
   config = function()
     require("editor.keymap.which-key")
