@@ -7,7 +7,7 @@ function M.colorscheme()
     flavour = "macchiato",
     background = {
       light = "latte",
-      dark = "mocha",
+      dark = "macchiato",
     },
     transparent_background = O.appearance.transparency,
     custom_highlights = function(_)
@@ -38,7 +38,7 @@ function M.colorscheme()
       markdown = true,
       mason = true,
       neotree = true,
-      neotest = true, -- TODO
+      neotest = true,
       noice = true,
       cmp = true,
       dap = {
