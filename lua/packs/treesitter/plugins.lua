@@ -14,7 +14,7 @@ treesitter["yioneko/nvim-yati"] = {
   after = "nvim-treesitter",
 }
 
-treesitter["p00f/nvim-ts-rainbow"] = {
+treesitter["https://sr.ht/~p00f/nvim-ts-rainbow"] = {
   after = "nvim-treesitter",
 }
 
