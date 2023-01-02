@@ -45,22 +45,7 @@ ui["folke/noice.nvim"] = {
   module = "noice",
 
   setup = function()
-    if not _G.__vim_notify_overwritten then
-      vim.notify = function(...)
-        local arg = { ... }
-
-        require("notify")
-        require("noice")
-
-        vim.schedule(function()
-          if args ~= nil then
-            vim.notify(unpack(args))
-          end
-        end)
-      end
-
-      _G.__vim_notify_overwritten = true
-    end
+    require("packs.ui.config").noice_setup()
   end,
 
   config = function()

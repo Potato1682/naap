@@ -118,6 +118,38 @@ function M.notify()
   require("utils.telescope").register_extension("notify")
 end
 
+function M.noice_setup()
+  if not _G.__vim_notify_overwritten then
+    vim.notify = function(...)
+      local args = { ... }
+
+      local ok = pcall(require, "notify")
+
+      if not ok then
+        vim.cmd.packadd("nvim-notify")
+
+        require("notify")
+      end
+
+      local ok = pcall(require, "noice")
+
+      if not ok then
+        vim.cmd.packadd("noice.nvim")
+
+        require("noice")
+      end
+
+      vim.schedule(function()
+        if args ~= nil then
+          vim.notify(unpack(args))
+        end
+      end)
+    end
+
+    _G.__vim_notify_overwritten = true
+  end
+end
+
 function M.noice()
   require("noice").setup({
     lsp = {
