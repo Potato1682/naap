@@ -98,11 +98,11 @@ completion["hrsh7th/nvim-cmp"] = {
       end,
     },
 
-    -- Database
+    -- Database table completion
     {
       "kristijanhusak/vim-dadbod-completion",
 
-      event = { "InsertEnter", "CmdlineEnter" },
+      ft = { "sql", "mysql", "plsql" },
 
       config = function()
         require("packs.completion.config").dadbod()
@@ -121,7 +121,7 @@ completion["hrsh7th/nvim-cmp"] = {
     {
       "tzachar/cmp-tabnine",
 
-      event = { "InsertEnter", "CmdlineEnter" },
+      module = "cmp_tabnine",
 
       run = tabnine_run,
 

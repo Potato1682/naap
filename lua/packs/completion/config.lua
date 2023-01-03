@@ -301,10 +301,10 @@ function M.dadbod()
     group = group,
     pattern = "sql,mysql,plsql",
     callback = function()
-      require("cmp").setup_buffer({
-        sources = { {
-          name = "vim-dadbod-completion",
-        } },
+      require("cmp").setup.buffer({
+        sources = {
+          { name = "vim-dadbod-completion" },
+        },
       })
     end,
   })
