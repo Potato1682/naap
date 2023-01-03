@@ -20,4 +20,14 @@ buffer["ghillb/cybu.nvim"] = {
   end,
 }
 
+buffer["tiagovla/scope.nvim"] = {
+  event = {
+    "BufWinEnter",
+  },
+
+  config = function()
+    require("scope").setup()
+  end,
+}
+
 return buffer
