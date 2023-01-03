@@ -1,5 +1,4 @@
 local fold = {}
-local conf = require("packs.fold.config")
 
 fold["jghauser/fold-cycle.nvim"] = {
   module = "fold-cycle",
@@ -21,6 +20,8 @@ fold["kevinhwang91/nvim-ufo"] = {
   wants = {
     "promise-async",
   },
+
+  after = "nvim-treesitter", -- It's a dependency of nvim-treesitter
 
   event = "BufReadPost",
 
