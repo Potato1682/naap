@@ -2,12 +2,13 @@
 
 ## Todo
 
-- [ ] Logger using [structlog.nvim](https://github.com/Tastyep/structlog.nvim)
-- [ ] User Config validation
-- [ ] Move `utf8.char` references to icon mappings
-- [ ] Auto compile when `lua/packs/**/*.lua` were written
-- [x] More nice UI for nvim-cmp
-- [x] Util function to omit `<leader>*` keymaps
+- [ ] Start menu
+- [ ] Logger using [structlog.nvim](https://github.com/Tastyep/structlog.nvim) 
+- [ ] User Config validation 
+- [ ] Move `utf8.char` references to icon mappings 
+- [ ] Auto compile when `lua/packs/**/*.lua` were written 
+- [x] More nice UI for nvim-cmp 
+- [x] Util function to omit `<leader>*` keymaps 
 
 ## Credits
 
