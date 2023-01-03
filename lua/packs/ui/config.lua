@@ -180,11 +180,31 @@ function M.bufferline()
     endfunction
   ]])
 
+  -- Set indicator color
+  vim.cmd.hi({ "TabLineSel guibg=#ed8796", bang = true })
+
   bufferline.setup({
+    highlights = require("catppuccin.groups.integrations.bufferline").get({
+      styles = { "italic", "bold" },
+      custom = {
+        all = {
+          fill = {
+            bg = {
+              attribute = "bg",
+              highlight = "StatusLine",
+            },
+          },
+        },
+      },
+    }),
     options = {
-      highlights = require("catppuccin.groups.integrations.bufferline").get({
-        styles = { "italic", "bold" },
-      }),
+      close_command = function(bufnr)
+        require("bufdelete").bufdelete(bufnr, true)
+      end,
+      right_mouse_command = "vertical sbuffer %d",
+      indicator = {
+        style = "underline",
+      },
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = true,
       diagnostics_indicator = function(count, level)
@@ -196,10 +216,6 @@ function M.bufferline()
 
         return ""
       end,
-      close_command = function(bufnr)
-        require("bufdelete").bufdelete(bufnr, true)
-      end,
-      right_mouse_command = "vertical sbuffer %d",
       custom_filter = function(bufnr)
         if vim.bo[bufnr].buftype == "terminal" then
           return false
@@ -273,6 +289,11 @@ function M.bufferline()
             end,
           },
         },
+      },
+      hover = {
+        enabled = true,
+        delay = 100,
+        reveal = { "close" },
       },
     },
   })
