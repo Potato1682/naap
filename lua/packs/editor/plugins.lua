@@ -100,7 +100,8 @@ editor["NvChad/nvim-colorizer.lua"] = {
 editor["gpanders/editorconfig.nvim"] = {
   event = {
     "BufNewFile",
-    "BufReadPost",
+    "BufRead",
+    "BufFilePost",
   },
 }
 
