@@ -37,26 +37,6 @@ function M.hlargs()
   require("hlargs").setup()
 end
 
-function M.gps()
-  local char = require("utf8").char
-
-  require("nvim-gps").setup({
-    icons = {
-      ["class-name"] = char(0xf6a5) .. " ",
-      ["function-name"] = char(0xf6a6) .. " ",
-      ["method-name"] = char(0xf6a7) .. " ",
-      ["container-name"] = char(0xf636) .. " ",
-      ["tag-name"] = char(0xf673) .. " ",
-    },
-
-    separator = string.format(" %s ", char(0xf641)),
-
-    depth = 3,
-
-    depth_limit_indicator = "..",
-  })
-end
-
 function M.context()
   require("treesitter-context").setup({
     enable = true,
