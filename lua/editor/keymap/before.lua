@@ -15,7 +15,7 @@ local bufnr_keymap = function(bufnr)
     local ok, bufferline = pcall(require, "bufferline")
 
     if not ok then
-      vim.cmd("b " .. bufnr)
+      vim.cmd.b(bufnr)
 
       return
     end
@@ -36,7 +36,7 @@ keymap("n", "<Tab>", function()
     return
   end
 
-  vim.cmd("bnext")
+  vim.cmd.bnext()
 end, "Next Buffer")
 
 keymap("n", "<S-Tab>", function()
@@ -46,7 +46,7 @@ keymap("n", "<S-Tab>", function()
     return
   end
 
-  vim.cmd("bprev")
+  vim.cmd.bprev()
 end, "Previous Buffer")
 
 -- nohlsearch
@@ -57,11 +57,11 @@ end, "nohlsearch")
 -- split
 keymap("n", "s", "")
 keymap("n", "ss", function()
-  vim.cmd("split")
+  vim.cmd.split()
 end, "Horizontal Split")
 
 keymap("n", "sv", function()
-  vim.cmd("vsplit")
+  vim.cmd.vsplit()
 end, "Vertical Split")
 
 -- window movement
@@ -106,7 +106,7 @@ for _, filetype in ipairs(constants.window.quit_with_q.filetypes) do
         "n",
         "q",
         function()
-          vim.cmd("close")
+          vim.cmd.close()
         end,
         "Quit",
         {
@@ -126,7 +126,7 @@ for _, buftype in ipairs(constants.window.quit_with_q.buftypes) do
           "n",
           "q",
           function()
-            vim.cmd("close")
+            vim.cmd.close()
           end,
           "Quit",
           {

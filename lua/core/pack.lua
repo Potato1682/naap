@@ -91,7 +91,7 @@ function Pack:load_plugin_manager()
   end
 
   if not packer then
-    vim.cmd("packadd " .. plugin_manager_identifier)
+    vim.cmd.packadd(plugin_manager_identifier)
 
     packer = require("packer")
 

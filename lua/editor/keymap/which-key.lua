@@ -57,18 +57,6 @@ local options = {
   nowait = false,
 }
 
-local b_goto = function(bufnr)
-  local ok, bufferline = pcall(require, "bufferline")
-
-  if not ok then
-    vim.cmd("b " .. bufnr)
-
-    return
-  end
-
-  bufferline.go_to_buffer(bufnr)
-end
-
 local mappings = {
   ["c"] = {
     name = "+Containers",
@@ -119,17 +107,6 @@ local mappings = {
   ["S"] = {
     name = "+Session",
   },
-}
-
-local mappings_local = {}
-
-local options_local = {
-  mode = "n",
-  prefix = "<localleader>",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = false,
 }
 
 wk.register(mappings, options)

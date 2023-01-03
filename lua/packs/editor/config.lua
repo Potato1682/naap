@@ -34,7 +34,7 @@ function M.hlslens_setup()
   keymap("g#", [[g#<cmd>lua require("hlslens").start()<cr>]], "Search")
 
   keymap("<leader>h", function()
-    vim.cmd("nohlsearch")
+    vim.cmd.nohlsearch()
 
     local hlslens = require("hlslens")
 
