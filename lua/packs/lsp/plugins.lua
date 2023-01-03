@@ -13,7 +13,15 @@ lsp["williamboman/mason.nvim"] = {
     "mason-null-ls.nvim",
   },
 
-  event = "BufReadPre",
+  event = {
+    "BufNewFile",
+    "BufReadPre",
+  },
+
+  cmd = {
+    "Mason",
+    "MasonLog",
+  },
 
   setup = function()
     require("packs.lsp.config").mason_setup()
@@ -25,6 +33,8 @@ lsp["williamboman/mason.nvim"] = {
 }
 
 lsp["jose-elias-alvarez/null-ls.nvim"] = {
+  cmd = "NullLsInfo",
+
   module = "null-ls",
 }
 
