@@ -12,37 +12,6 @@ function M.smartpairs()
   })
 end
 
-function M.hlslens_setup()
-  local keymap = require("utils.keymap.presets").mode_only("n", { silent = true })
-
-  keymap("n", function()
-    require("cinnamon.scroll").scroll(vim.v.count1 .. "n", 1, 0, 3)
-    vim.api.nvim_feedkeys("zzzv", "n", true)
-
-    require("hlslens").start()
-  end, "Next search hit")
-  keymap("N", function()
-    require("cinnamon.scroll").scroll(vim.v.count1 .. "N", 1, 0, 3)
-    vim.api.nvim_feedkeys("zzzv", "n", true)
-
-    require("hlslens").start()
-  end, "Previous search hit")
-
-  keymap("*", [[*<cmd>lua require("hlslens").start()<cr>]], "Search")
-  keymap("#", [[#<cmd>lua require("hlslens").start()<cr>]], "Search")
-  keymap("g*", [[g*<cmd>lua require("hlslens").start()<cr>]], "Search")
-  keymap("g#", [[g#<cmd>lua require("hlslens").start()<cr>]], "Search")
-
-  keymap("<leader>h", function()
-    vim.cmd.nohlsearch()
-
-    local hlslens = require("hlslens")
-
-    hlslens.disable()
-    hlslens.enable()
-  end, "nohlsearch")
-end
-
 function M.accelerated_jk()
   local keymap = require("utils.keymap.presets").mode_only("n")
 
@@ -50,10 +19,24 @@ function M.accelerated_jk()
   keymap("k", "<Plug>(accelerated_jk_gk)", "Up")
 end
 
-function M.cinnamon()
-  require("cinnamon").setup({
-    extra_keymaps = true,
-    scroll_limit = 100,
+function M.specs()
+  require("specs").setup({
+    show_jumps = true,
+    min_jump = 30,
+    popup = {
+      delay_ms = 0,
+      inc_ms = 10,
+      blend = 0,
+      width = 20,
+      winhl = "MasonHeader",
+      fader = require("specs").exp_fader,
+      resizer = require("specs").shrink_resizer,
+    },
+    ignore_filetypes = {},
+    ignore_buftypes = {
+      nofile = true,
+      terminal = true,
+    },
   })
 end
 

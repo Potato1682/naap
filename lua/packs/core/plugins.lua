@@ -8,8 +8,6 @@ core["nvim-lua/plenary.nvim"] = {
 }
 
 -- lua 5.3
-core["uga-rosa/utf8.nvim"] = {
-  module = "utf8",
-}
+core["uga-rosa/utf8.nvim"] = {}
 
 return core

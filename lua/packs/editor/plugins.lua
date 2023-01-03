@@ -45,14 +45,11 @@ editor["rainbowhxch/accelerated-jk.nvim"] = {
   end,
 }
 
-editor["declancm/cinnamon.nvim"] = {
-  event = {
-    "BufNewFile",
-    "BufReadPost",
-  },
+editor["edluffy/specs.nvim"] = {
+  event = "CursorMoved",
 
   config = function()
-    require("packs.editor.config").cinnamon()
+    require("packs.editor.config").specs()
   end,
 }
 

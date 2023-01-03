@@ -57,13 +57,7 @@ ui["nvim-lualine/lualine.nvim"] = {
     "nvim-web-devicons",
   },
 
-  event = "UIEnter",
-
-  run = function()
-    vim.cmd("packadd lualine.nvim")
-
-    require("configs.lualine")
-  end,
+  event = "BufWinEnter",
 
   config = function()
     require("configs.lualine")
@@ -94,8 +88,6 @@ ui["lewis6991/satellite.nvim"] = {
   },
 
   run = function()
-    vim.cmd("packadd satellite.nvim")
-
     require("satellite").setup()
   end,
 
