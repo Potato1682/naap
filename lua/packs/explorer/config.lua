@@ -24,7 +24,7 @@ function M.neotree_setup()
         return
       end
 
-      _G.PLoader("neo-tree.nvim")
+      require("neo-tree.setup.netrw").hijack()
     end,
   })
 end
