@@ -108,18 +108,6 @@ function M.gitsigns()
       col = 1,
     },
   })
-
-  vim.defer_fn(function()
-    if O.editor.cursor_highlight.line then
-      vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
-        link = "CursorLine",
-      })
-    else
-      vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", {
-        link = "Comment",
-      })
-    end
-  end, 200)
 end
 
 function M.diffview()
