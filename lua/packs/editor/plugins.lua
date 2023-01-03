@@ -26,6 +26,14 @@ editor["RRethy/vim-illuminate"] = {
   end,
 }
 
+editor["andymass/vim-matchup"] = {
+  after = "nvim-treesitter",
+
+  setup = function()
+    vim.g.matchup_matchparen_offscreen = { method = "popup" }
+  end,
+}
+
 editor["folke/which-key.nvim"] = {
   event = { "UIEnter", "BufWinEnter" },
 

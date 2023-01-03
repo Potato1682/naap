@@ -84,6 +84,9 @@ function M.treesitter()
         [";"] = "textsubjects-big",
       },
     },
+    matchup = { -- It is in lua/packs/editor
+      enable = true,
+    },
   })
 
   require("nvim-treesitter.install").prefer_git = true

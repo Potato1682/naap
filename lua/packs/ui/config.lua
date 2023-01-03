@@ -12,6 +12,9 @@ function M.colorscheme()
     transparent_background = O.appearance.transparency,
     custom_highlights = function(_)
       return {
+        MatchParen = {
+          link = "IlluminatedWordText",
+        },
         Search = {
           fg = "NONE",
         },
