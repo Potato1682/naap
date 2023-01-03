@@ -37,7 +37,7 @@ function M.config()
       end,
     },
     severity_sort = true,
-    virtual_text = false,
+    virtual_text = true,
     underline = {
       severity = {
         min = vim.diagnostic.severity.INFO,
