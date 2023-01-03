@@ -1,43 +1,23 @@
+local uv = vim.loop
+
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*",
   callback = function()
-    local fsize = vim.fn.getfsize(vim.fn.expand("%:p:f"))
+    local max_buf_size = 6 * 1024 * 1024 -- 6MiB
+    local ok, stat = pcall(uv.fs_fstat, vim.api.nvim_buf_get_name(0))
 
-    if fsize == nil or fsize < 0 then
-      fsize = 1
+    if not ok then
+      return
     end
 
-    if fsize > 6 * 1024 * 1024 then
-      vim.notify("Filesize is too large, disabling syntax highlighting", vim.log.levels.WARN, {
-        title = "Lazy (core)",
-      })
+    local buf_size = stat.size
 
-      vim.cmd("syntax off")
+    if buf_size <= max_buf_size then
+      return
     end
-  end,
-})
 
-local lazy_load = function()
-  local disable_filetypes = {
-    "packer",
-    "TelescopePrompt",
-    "csv",
-    "txt",
-  }
+    vim.notify("File size is too large, disabling syntax highlighting", "warning", { title = "Core" })
 
-  local syntax_on = not vim.tbl_contains(disable_filetypes, vim.opt_local.filetype:get())
-
-  if not syntax_on then
-    vim.cmd("syntax manual")
-  end
-end
-
-vim.defer_fn(function()
-  vim.cmd("doautocmd User LoadLazyPlugin")
-end, 30)
-
-vim.api.nvim_create_autocmd("User LoadLazyPlugin", {
-  callback = function()
-    lazy_load()
+    vim.cmd.syntax("off")
   end,
 })
