@@ -9,19 +9,6 @@ local conditions = {
   end,
 }
 
-local refreshable_color = function(fg, bg)
-  return function()
-    if vim.g.colors_name == "catppuccin" then
-      local colors = require("catppuccin.palettes").get_palette()
-
-      fg = fg or colors.subtext1
-      bg = bg or colors.mantle
-    end
-
-    return { fg = fg, bg = bg }
-  end
-end
-
 local colors = {
   yellow = "#e5c07b",
   orange = "#e6a370",
@@ -34,6 +21,20 @@ local colors = {
   blue = "#61afef",
   red = "#e06c75",
 }
+
+local refreshable_color = function(fg, bg)
+  return function()
+    local raw_bg = vim.api.nvim_get_hl_by_name("StatusLine", true).background
+
+    if raw_bg then
+      bg = bg or string.format("#%x", raw_bg)
+    end
+
+    fg = fg or colors.grey
+
+    return { fg = fg, bg = bg }
+  end
+end
 
 local config = {
   options = {
@@ -112,14 +113,14 @@ ins_left_a({
       t = colors.blue,
     }
 
-    return { fg = "bg", bg = mode_color[vim.fn.mode()] }
+    return { fg = "#1e2030", bg = mode_color[vim.fn.mode()] }
   end,
   padding = { left = 2, right = 2 },
 })
 
 -- TODO migrate to nvim-dev-container
 -- devcontainers icon
-ins_left_a({
+ins_left({
   function()
     return char(0xf636)
   end,
@@ -131,23 +132,22 @@ ins_left_a({
 })
 
 -- devcontainers
-ins_left_a({
+ins_left({
   function()
     return vim.g.currentContainer
   end,
   cond = function()
     return not not vim.g.currentContainer
   end,
-  color = refreshable_color(),
   padding = { left = 1, right = 0 },
 })
 
 -- current working directory icon
-ins_left_a({
+ins_left({
   function()
     return char(0xf74a)
   end,
-  color = refreshable_color(colors.blue),
+  color = { fg = colors.blue },
   padding = { left = 2, right = 1 },
   on_click = function()
     vim.cmd("Neotree toggle float")
@@ -155,22 +155,21 @@ ins_left_a({
 })
 
 -- current working directory
-ins_left_a({
+ins_left({
   function()
     return vim.fn.fnamemodify(vim.loop.cwd(), ":t")
   end,
-  color = refreshable_color(),
   on_click = function()
     vim.cmd("Neotree toggle float")
   end,
 })
 
 -- git branch icon
-ins_left_a({
+ins_left({
   function()
     return char(0xfb2b)
   end,
-  color = refreshable_color(colors.orange),
+  color = { fg = colors.orange },
   cond = conditions.check_git_workspace,
   padding = { left = 1, right = 0 },
   on_click = function()
@@ -179,10 +178,9 @@ ins_left_a({
 })
 
 -- git branch
-ins_left_a({
+ins_left({
   "branch",
   icon = "",
-  color = refreshable_color(),
   padding = { left = 0, right = 1 },
   on_click = function()
     require("telescope.builtin").git_branches()
