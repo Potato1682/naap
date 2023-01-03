@@ -170,17 +170,7 @@ M.lsp_handlers = {
 }
 
 function M.change_floating_border()
-  local win = require("lspconfig.ui.windows")
-  local _default_opts = win.default_opts
-
-  -- change lsp popup window border
-  win.default_opts = function(options)
-    local opts = _default_opts(options)
-
-    opts.border = "rounded"
-
-    return opts
-  end
+  require("lspconfig.ui.windows").default_options.border = "rounded"
 end
 
 M.change_floating_border()
