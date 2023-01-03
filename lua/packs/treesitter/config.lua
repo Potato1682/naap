@@ -1,17 +1,72 @@
 local M = {}
 
+local uv = vim.loop
+
 function M.treesitter()
+  if _G.__nvim_treesitter_setup_done then
+    return
+  end
+
+  local augroup = vim.api.nvim_create_augroup("treesitter-fold", {})
+
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufAdd", "BufNew", "BufNewFile", "BufWinEnter" }, {
+    group = augroup,
+    callback = function()
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    end,
+  })
+
   require("nvim-treesitter.configs").setup({
-    ensure_installed = "all",
-    highlight = { enable = true },
-    yati = { enable = true },
-    indent = { enable = false },
+    ensure_installed = {
+      -- We need this
+      "lua",
+
+      -- noice.nvim prerequisites (also lua is in them)
+      "vim",
+      "regex",
+      "bash",
+      "markdown",
+      "markdown_inline",
+    },
+    auto_install = true,
+    highlight = {
+      enable = true,
+      disable = function(_, bufnr)
+        local max_buf_size = 100 * 1024
+        local ok, stat = pcall(uv.fs_fstat, vim.api.nvim_buf_get_name(bufnr))
+
+        if not ok then
+          return false
+        end
+
+        local buf_size = stat.size
+
+        if buf_size > max_buf_size then
+          vim.notify(
+            "File size is bigger than 100KiB, disabling nvim-treesitter highlighting",
+            "warning",
+            { title = "nvim-treesitter" }
+          )
+
+          return true
+        end
+
+        return false
+      end,
+      additional_vim_regex_highlighting = false,
+    },
     rainbow = {
       enable = true,
       extended_mode = true,
       max_file_lines = 2000,
     },
+    indent = { enable = false },
+    yati = { enable = true },
     endwise = {
+      enable = true,
+    },
+    autotag = {
       enable = true,
     },
     context_commentstring = {
@@ -29,8 +84,7 @@ function M.treesitter()
 
   require("nvim-treesitter.install").prefer_git = true
 
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  _G.__nvim_treesitter_setup_done = true
 end
 
 function M.hlargs()

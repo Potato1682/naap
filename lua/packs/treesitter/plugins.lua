@@ -1,20 +1,30 @@
 local treesitter = {}
 
 treesitter["nvim-treesitter/nvim-treesitter"] = {
-  event = "BufRead",
+  event = { "BufNew", "BufRead", "BufFilePost" },
 
-  run = ":TSUpdate",
+  module = "nvim-treesitter",
+
+  run = function()
+    local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+
+    ts_update()
+  end,
 
   config = function()
+    vim.schedule(function()
+      vim.cmd("e!") -- FIXME Temporal workaround to enable highlight. It is NOT good...
+    end)
+
     require("packs.treesitter.config").treesitter()
   end,
 }
 
-treesitter["yioneko/nvim-yati"] = {
+treesitter["https://git.sr.ht/~p00f/nvim-ts-rainbow"] = {
   after = "nvim-treesitter",
 }
 
-treesitter["https://sr.ht/~p00f/nvim-ts-rainbow"] = {
+treesitter["yioneko/nvim-yati"] = {
   after = "nvim-treesitter",
 }
 
