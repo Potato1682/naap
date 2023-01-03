@@ -19,6 +19,8 @@ editor["ZhiyuanLck/smart-pairs"] = {
 editor["RRethy/vim-illuminate"] = {
   event = "BufReadPost",
 
+  module = "illuminate",
+
   config = function()
     vim.g.Illuminate_delay = 300
   end,
