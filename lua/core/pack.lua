@@ -125,40 +125,34 @@ end
 function Pack:bootstrap_plugin_manager()
   local state = uv.fs_stat(plugin_manager_path)
 
-  if not state then
-    local command = string.format("git clone https://github.com/%s --depth 1 %s", plugin_manager_repo, plugin_manager_path)
-
-    vim.notify("Bootstrapping plugin manager, please wait...", log_levels.INFO, { title = "Pack (core)" })
-    fn.system(command)
-
-    self.init_opts = {
-      compile_path = packer_compiled_file,
-      snapshot_path = packer_snapshots_dir,
-      display = {
-        open_fn = function()
-          return require("packer.util").float { border = "rounded" }
-        end
-      },
-      -- Add this property
-      snapshot = packer_default_snapshot
-    }
-
-    self:load_plugin_manager()
-
-    packer.on_complete = vim.schedule_wrap(function()
-      require("core").finalize()
-
-      vim.cmd("doautocmd User PackerComplete")
-    end)
-
-    self:load_snapshot()
-
-    packer.sync()
-
-    return "installing"
+  if state then
+    return "installed"
   end
 
-  return "installed"
+  local command = string.format("git clone https://github.com/%s --depth 1 %s", plugin_manager_repo, plugin_manager_path)
+
+  vim.notify("Bootstrapping plugin manager, please wait...", log_levels.INFO, { title = "Pack (core)" })
+  fn.system(command)
+
+  self.init_opts = {
+    compile_path = packer_compiled_file,
+    snapshot_path = packer_snapshots_dir,
+    display = {
+      open_fn = function()
+        return require("packer.util").float { border = "rounded" }
+      end
+    },
+    -- Add this property
+    snapshot = packer_default_snapshot
+  }
+
+  self:load_plugin_manager()
+
+  self:load_snapshot()
+
+  packer.sync()
+
+  return "installing"
 end
 
 function Pack:load_snapshot(snapshot_file)
@@ -194,6 +188,11 @@ pack.disable_builtin_plugins = function()
   vim.g.loaded_netrwPlugin = 1
   vim.g.loaded_netrwSettings = 1
   vim.g.loaded_netrwFileHandlers = 1
+
+  vim.g.loaded_python3_provider = 0
+  vim.g.loaded_ruby_provider = 0
+  vim.g.loaded_node_provider = 0
+  vim.g.loaded_perl_provider = 0
 end
 
 pack.bootstrap_plugin_manager = function()
