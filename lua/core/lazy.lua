@@ -4,9 +4,13 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*",
   callback = function()
     local max_buf_size = 6 * 1024 * 1024 -- 6MiB
-    local ok, stat = pcall(uv.fs_fstat, vim.api.nvim_buf_get_name(0))
+    local ok, stat = pcall(uv.fs_stat, vim.api.nvim_buf_get_name(0))
 
     if not ok then
+      return
+    end
+
+    if not stat then
       return
     end
 

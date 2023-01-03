@@ -13,7 +13,31 @@ treesitter["nvim-treesitter/nvim-treesitter"] = {
 
   config = function()
     vim.schedule(function()
-      vim.cmd("e!") -- FIXME Temporal workaround to enable highlight. It is NOT good...
+      local ok, stat = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(0))
+
+      if not ok then
+        return
+      end
+
+      if not stat then
+        return
+      end
+
+      if stat.type ~= "file" then
+        return
+      end
+
+      local ok, parser = pcall(vim.treesitter.get_parser, 0)
+
+      if not ok then
+        return
+      end
+
+      if not parser then
+        return
+      end
+
+      vim.cmd.e({ bang = true }) -- FIXME Temporal workaround to enable highlight. It is NOT good...
     end)
 
     require("packs.treesitter.config").treesitter()

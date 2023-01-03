@@ -34,9 +34,13 @@ function M.treesitter()
       enable = true,
       disable = function(_, bufnr)
         local max_buf_size = 100 * 1024
-        local ok, stat = pcall(uv.fs_fstat, vim.api.nvim_buf_get_name(bufnr))
+        local ok, stat = pcall(uv.fs_stat, vim.api.nvim_buf_get_name(bufnr))
 
         if not ok then
+          return false
+        end
+
+        if not stat then
           return false
         end
 
