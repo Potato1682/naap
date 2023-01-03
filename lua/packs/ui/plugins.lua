@@ -1,10 +1,7 @@
 local ui = {}
-local helper = require("packs.helper")
 
 ui["catppuccin/nvim"] = {
   as = "catppuccin",
-
-  cond = helper.in_vscode,
 
   config = function()
     require("packs.ui.config").colorscheme()
@@ -68,8 +65,6 @@ ui["nvim-lualine/lualine.nvim"] = {
     require("configs.lualine")
   end,
 
-  cond = helper.in_vscode,
-
   config = function()
     require("configs.lualine")
   end,
@@ -87,8 +82,6 @@ ui["akinsho/bufferline.nvim"] = {
 
   event = "BufWinEnter",
 
-  cond = helper.in_vscode,
-
   config = function()
     require("packs.ui.config").bufferline()
   end,
@@ -99,8 +92,6 @@ ui["lewis6991/satellite.nvim"] = {
     "BufNewFile",
     "BufReadPost",
   },
-
-  cond = helper.in_vscode,
 
   run = function()
     vim.cmd("packadd satellite.nvim")
@@ -138,8 +129,6 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
     "BufReadPost",
   },
 
-  cond = helper.in_vscode,
-
   config = function()
     require("packs.ui.config").indent_blankline()
   end,
@@ -150,8 +139,6 @@ ui["lukas-reineke/virt-column.nvim"] = {
     "BufNewFile",
     "BufRead",
   },
-
-  cond = helper.in_vscode,
 
   config = function()
     require("virt-column").setup()
