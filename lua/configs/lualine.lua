@@ -24,10 +24,10 @@ local colors = {
 
 local refreshable_color = function(fg, bg)
   return function()
-    local raw_bg = vim.api.nvim_get_hl_by_name("StatusLine", true).background
+    local raw_bg = require("utils.highlight").get_color_code_from_hl_name("StatusLine", "guibg")
 
-    if raw_bg then
-      bg = bg or string.format("#%x", raw_bg)
+    if raw_bg and not bg then
+      bg = "#" .. raw_bg
     end
 
     fg = fg or colors.grey
