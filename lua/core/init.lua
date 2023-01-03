@@ -39,7 +39,6 @@ end
 
 local setup = function()
   require("core.helper")
-  require("core.options")
   require("editor.keymap.before")
   require("editor.events.before")
   require("editor.abbreviations")
@@ -58,6 +57,8 @@ local setup = function()
   if pack.bootstrap_plugin_manager() == "installed" then
     finalize()
   end
+
+  require("core.options")
 end
 
 return {

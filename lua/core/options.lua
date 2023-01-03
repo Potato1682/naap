@@ -8,6 +8,7 @@ vim.opt.foldcolumn = "1"
 vim.opt.number = O.editor.number
 vim.opt.relativenumber = O.editor.relative_number
 vim.opt.winbar = " "
+vim.opt.cmdheight = 0
 
 -- Make the settings do not override editorconfig
 vim.opt.expandtab = true
@@ -268,7 +269,6 @@ local function set_options()
   vim.opt.ttimeoutlen = 10
 
   vim.opt.showmode = false
-  vim.opt.cmdheight = 0
   vim.opt.history = 10000
 
   vim.opt.title = true
