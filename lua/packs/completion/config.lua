@@ -310,4 +310,20 @@ function M.dadbod()
   })
 end
 
+function M.cmp_emoji()
+  local group = vim.api.nvim_create_augroup("cmp-emoji", {})
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = group,
+    pattern = "markdown",
+    callback = function()
+      require("cmp").setup.buffer({
+        sources = {
+          { name = "emoji" },
+        },
+      })
+    end,
+  })
+end
+
 return M

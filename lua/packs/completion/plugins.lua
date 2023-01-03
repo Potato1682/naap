@@ -109,6 +109,17 @@ completion["hrsh7th/nvim-cmp"] = {
       end,
     },
 
+    -- Emoji (markdown)
+    {
+      "hrsh7th/cmp-emoji",
+
+      ft = { "markdown" },
+
+      config = function()
+        require("packs.completion.config").cmp_emoji()
+      end,
+    },
+
     --[[
       These plugins are loaded at start / module requiring to prevent any errors
       They have no after/**/*.lua, we have to load **before** cmp is loaded (or on-demand)
