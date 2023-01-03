@@ -151,8 +151,10 @@ editor["folke/trouble.nvim"] = {
     "TroubleToggle",
   },
 
+  module = "trouble",
+
   config = function()
-    require({ "packs.editor.config" }).trouble()
+    require("packs.editor.config").trouble()
   end,
 }
 
