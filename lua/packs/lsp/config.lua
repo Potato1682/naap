@@ -105,20 +105,4 @@ function M.inc_rename()
   require("inc_rename").setup()
 end
 
-function M.barbecue()
-  require("barbecue").setup({
-    attach_navic = false,
-    theme = {
-      normal = { background = "#1e2030" },
-    },
-    symbols = {
-      separator = "  ",
-    },
-    kinds = require("utils.lsp.kind"),
-  })
-
-  -- enabled to suppress annoying errors
-  vim.g.navic_silence = true
-end
-
 return M

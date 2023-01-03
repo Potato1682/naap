@@ -82,21 +82,8 @@ lsp["smjonas/inc-rename.nvim"] = {
   end,
 }
 
-lsp["utilyre/barbecue.nvim"] = {
-  requires = {
-    { "nvim-tree/nvim-web-devicons", opt = true },
-    { "SmiteshP/nvim-navic", module = "nvim-navic" },
-  },
-
-  wants = {
-    "nvim-web-devicons",
-  },
-
-  event = "BufRead",
-
-  config = function()
-    require("packs.lsp.config").barbecue()
-  end,
+lsp["SmiteshP/nvim-navic"] = {
+  module = "nvim-navic",
 }
 
 lsp["lukas-reineke/lsp-format.nvim"] = {

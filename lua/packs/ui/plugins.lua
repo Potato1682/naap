@@ -33,8 +33,6 @@ ui["folke/noice.nvim"] = {
     },
   },
 
-  wants = { "nvim-treesitter" },
-
   event = {
     "BufRead",
     "BufNewFile",
@@ -115,10 +113,29 @@ ui["lewis6991/satellite.nvim"] = {
   end,
 }
 
-ui["lukas-reineke/indent-blankline.nvim"] = {
+ui["utilyre/barbecue.nvim"] = {
+  requires = {
+    { "nvim-tree/nvim-web-devicons", opt = true },
+  },
+
+  wants = {
+    "nvim-web-devicons",
+  },
+
   event = {
     "BufNewFile",
     "BufRead",
+  },
+
+  config = function()
+    require("packs.ui.config").barbecue()
+  end,
+}
+
+ui["lukas-reineke/indent-blankline.nvim"] = {
+  event = {
+    "BufNewFile",
+    "BufReadPost",
   },
 
   cond = helper.in_vscode,
