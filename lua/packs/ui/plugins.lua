@@ -53,7 +53,7 @@ ui["folke/noice.nvim"] = {
 
 ui["nvim-lualine/lualine.nvim"] = {
   requires = {
-    { "kyazdani42/nvim-web-devicons", opt = true },
+    { "nvim-tree/nvim-web-devicons", opt = true },
   },
 
   wants = {
@@ -77,7 +77,7 @@ ui["nvim-lualine/lualine.nvim"] = {
 
 ui["akinsho/bufferline.nvim"] = {
   requires = {
-    { "kyazdani42/nvim-web-devicons", opt = true },
+    { "nvim-tree/nvim-web-devicons", opt = true },
   },
 
   wants = {

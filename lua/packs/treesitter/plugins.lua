@@ -1,7 +1,7 @@
 local treesitter = {}
 
 treesitter["nvim-treesitter/nvim-treesitter"] = {
-  event = { "BufNew", "BufRead", "BufFilePost" },
+  event = { "BufNew", "BufRead" },
 
   module = "nvim-treesitter",
 
@@ -13,6 +13,10 @@ treesitter["nvim-treesitter/nvim-treesitter"] = {
 
   config = function()
     vim.schedule(function()
+      if vim.opt_local.buftype:get() ~= "" then
+        return
+      end
+
       local ok, stat = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(0))
 
       if not ok then

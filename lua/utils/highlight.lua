@@ -18,7 +18,7 @@ function M.get_color_code_from_hl_name(name, ns)
   end
 
   if not code then
-    error("No color code found for " .. name)
+    return
   end
 
   return string.format("%x", code)
