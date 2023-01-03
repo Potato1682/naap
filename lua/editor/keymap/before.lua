@@ -50,7 +50,7 @@ keymap("n", "<S-Tab>", function()
 end, "Previous Buffer")
 
 -- nohlsearch
-keymap("n", "<Leader>h", function()
+keymap("n", "<leader>h", function()
   vim.cmd("let @/=''")
 end, "nohlsearch")
 
